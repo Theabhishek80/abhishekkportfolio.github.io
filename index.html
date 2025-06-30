@@ -128,13 +128,17 @@
         }
         
         .hero-image img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.3);
-        }
+  max-height: 80vh;       
+  width: auto;           
+  object-fit: cover;      
+  object-position: top;   
+}
+
+@media (max-width: 768px) {
+  .hero-image img {
+    max-height: 60vh;     
+  }
+}
         
         .hero h1 {
             font-size: 3.5rem;
@@ -535,7 +539,8 @@
                     <a href="#contact" class="btn animate">Get In Touch</a>
                 </div>
                 <div class="hero-image animate">
-                    <img src="images/abhishek-profile.jpg"> alt="Abhishek Pandey">
+                    <img src="images/abhishek-profile.jpg" alt = "Abhishek Pandey" style="height: 300px; width: auto; object-fit: cover; border-radius: 50%; border: 5px solid #6e48aa;"
+>
                 </div>
             </div>
         </div>
