@@ -101,7 +101,7 @@
             width: 100%;
         }
         
-        /* Hero Section */
+        /* Hero Section - Optimized Image Display */
         .hero {
             height: 100vh;
             display: flex;
@@ -128,12 +128,19 @@
         }
         
         .hero-image img {
-            width: 300px;
             height: 300px;
-            border-radius: 50%;
+            width: auto;
             object-fit: cover;
+            object-position: center top;
+            border-radius: 50%;
             border: 5px solid var(--accent);
             box-shadow: 0 10px 30px rgba(0, 180, 216, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-image img:hover {
+            transform: scale(1.03);
+        }
         
         .hero h1 {
             font-size: 3.5rem;
@@ -343,6 +350,47 @@
             font-size: 1.3rem;
             margin: 10px 0;
         }
+
+        /* New Resume Section */
+        .resume-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.4);
+        }
+        
+        .resume-highlights {
+            margin-top: 40px;
+        }
+        
+        .resume-highlights li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .resume-highlights i {
+            color: var(--accent);
+            margin-right: 12px;
+            margin-top: 3px;
+        }
         
         /* Contact Section */
         .contact-container {
@@ -472,6 +520,10 @@
                 font-size: 1.4rem;
             }
             
+            .hero-image img {
+                height: 200px;
+            }
+            
             .about-content {
                 flex-direction: column;
             }
@@ -517,13 +569,14 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#education">Education</a></li>
+                    <li><a href="#resume">Resume</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Optimized Image -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -534,8 +587,7 @@
                     <a href="#contact" class="btn animate">Get In Touch</a>
                 </div>
                 <div class="hero-image animate">
-                    <img src="images/abhishek-profile.jpg" alt = "Abhishek Pandey" style="height: 300px; width: auto; object-fit: cover; border-radius: 50%; border: 5px solid #6e48aa;"
->
+                    <img src="images/profile.jpg" alt="Abhishek Pandey">
                 </div>
             </div>
         </div>
@@ -730,6 +782,37 @@
         </div>
     </section>
 
+    <!-- New Resume Section -->
+    <section id="resume" class="section resume-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Resume</h2>
+            </div>
+            <div class="animate">
+                <a href="resume.pdf" class="resume-btn" download>
+                    <i class="fas fa-file-pdf"></i> Download Full Resume
+                </a>
+                <div class="resume-highlights">
+                    <h3 style="color: var(--accent); margin-bottom: 20px;">Key Highlights</h3>
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            B.Tech in Computer Science (RGPV University)
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            Specialization in AI/ML
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            Expertise in TensorFlow & PyTorch
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
@@ -746,17 +829,17 @@
                         </p>
                         <p>
                             <i class="fas fa-envelope"></i>
-                            <span>abhishekpade16@gmail.com</span>
+                            <span>abhishek.pandey@example.com</span>
                         </p>
                         <p>
                             <i class="fas fa-phone"></i>
-                            <span>+91 9301708816</span>
+                            <span>+91 XXXXXXXXXX</span>
                         </p>
                     </div>
                     <h3>Follow Me</h3>
                     <div class="social-links">
-                        <a href="#"><i class="https://github.com/Theabhishek80"></i></a>
-                        <a href="#"><i class="https://www.linkedin.com/in/abhishek-pandey-5072a027a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-kaggle"></i></a>
                     </div>
