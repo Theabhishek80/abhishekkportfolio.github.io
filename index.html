@@ -917,16 +917,68 @@
   <button onclick="sendMessage()" style="background:#00b4d8;color:#fff;border:none;padding:5px 15px;border-radius:5px;">Send</button>
 </div>
 <script>
+<!-- Chat Widget Start -->
+<style>
+#chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 260px;
+  background: #f1f1f1;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  font-size: 14px;
+  padding: 0;
+}
+#chatlog {
+  height: 160px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+#chat-widget input[type="text"] {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px;
+  width: 68%;
+  font-size: 14px;
+}
+#chat-widget button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-left: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+</style>
+
+<div id="chat-widget">
+  <div id="chatlog"></div>
+  <input id="userinput" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter'){sendMessage();}">
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
 function sendMessage() {
-    const input = document.getElementById('userinput').value;
-    document.getElementById('chatlog').innerHTML += "<div>User: " + input + "</div>";
+    const inputElem = document.getElementById('userinput');
+    const chatlog = document.getElementById('chatlog');
+    const input = inputElem.value.trim();
+    if(!input) return;
+    chatlog.innerHTML += "<div><b>User:</b> " + input + "</div>";
     let botReply = "Sorry, I’m just a simple bot!";
     if (input.toLowerCase().includes("hello")) botReply = "Hello! How can I help you?";
     if (input.toLowerCase().includes("your name")) botReply = "I am your portfolio chatbot!";
-    document.getElementById('chatlog').innerHTML += "<div>Bot: " + botReply + "</div>";
-    document.getElementById('userinput').value = "";
-    document.getElementById('chatlog').scrollTop = document.getElementById('chatlog').scrollHeight;
+    chatlog.innerHTML += "<div><b>Bot:</b> " + botReply + "</div>";
+    inputElem.value = "";
+    chatlog.scrollTop = chatlog.scrollHeight;
 }
 </script>
+<!-- Chat Widget End -->
 </body>
 </html>
