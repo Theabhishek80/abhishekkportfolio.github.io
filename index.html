@@ -917,11 +917,30 @@
   <button onclick="sendMessage()" style="background:#00b4d8;color:#fff;border:none;padding:5px 15px;border-radius:5px;">Send</button>
 </div>
 <script>
-<!-- Chat Widget Start -->
+<!-- Start of Chatbot Widget -->
 <style>
-#chat-widget {
+#chatbot-toggle {
   position: fixed;
   bottom: 20px;
+  right: 20px;
+  z-index: 1001;
+  background: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chatbot-widget {
+  position: fixed;
+  bottom: 80px;
   right: 20px;
   width: 260px;
   background: #f1f1f1;
@@ -929,39 +948,86 @@
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   z-index: 1000;
   font-size: 14px;
-  padding: 0;
+  display: none;
+  flex-direction: column;
 }
+
+#chatbot-header {
+  background: #007bff;
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+  text-align: center;
+}
+
 #chatlog {
-  height: 160px;
+  height: 140px;
   overflow-y: auto;
   background: #fff;
-  border-radius: 8px 8px 0 0;
-  margin-bottom: 5px;
+  margin: 0;
   padding: 10px;
+  font-size: 13px;
 }
-#chat-widget input[type="text"] {
+
+#chatbot-widget input[type="text"] {
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 6px;
-  width: 68%;
+  padding: 5px;
+  width: 70%;
   font-size: 14px;
+  margin-right: 4px;
 }
-#chat-widget button {
+
+#chatbot-widget button.send-btn {
   background: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 6px 12px;
-  margin-left: 4px;
+  padding: 5px 10px;
   cursor: pointer;
   font-size: 14px;
 }
+
+#chatbot-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  #chatbot-widget, #chatbot-toggle {
+    right: 10px;
+    bottom: 10px;
+  }
+  #chatbot-widget {
+    width: 95vw;
+    max-width: 330px;
+  }
+}
 </style>
 
-<div id="chat-widget">
+<!-- Floating Chat Toggle Button -->
+<button id="chatbot-toggle" title="Chat">
+  💬
+</button>
+
+<!-- Chatbot Widget -->
+<div id="chatbot-widget">
+  <div id="chatbot-header">
+    ChatBot
+    <button id="chatbot-close" title="Close">&times;</button>
+  </div>
   <div id="chatlog"></div>
-  <input id="userinput" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter'){sendMessage();}">
-  <button onclick="sendMessage()">Send</button>
+  <div style="display: flex; padding: 8px; background: #f1f1f1; border-radius: 0 0 8px 8px;">
+    <input id="userinput" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter'){sendMessage();}">
+    <button class="send-btn" onclick="sendMessage()">Send</button>
+  </div>
 </div>
 
 <script>
@@ -970,7 +1036,7 @@ function sendMessage() {
     const chatlog = document.getElementById('chatlog');
     const input = inputElem.value.trim();
     if(!input) return;
-    chatlog.innerHTML += "<div><b>User:</b> " + input + "</div>";
+    chatlog.innerHTML += "<div><b>You:</b> " + input + "</div>";
     let botReply = "Sorry, I’m just a simple bot!";
     if (input.toLowerCase().includes("hello")) botReply = "Hello! How can I help you?";
     if (input.toLowerCase().includes("your name")) botReply = "I am your portfolio chatbot!";
@@ -978,7 +1044,18 @@ function sendMessage() {
     inputElem.value = "";
     chatlog.scrollTop = chatlog.scrollHeight;
 }
+
+// Show/hide chatbot widget
+document.getElementById('chatbot-toggle').onclick = function() {
+  document.getElementById('chatbot-widget').style.display = "flex";
+  document.getElementById('chatbot-toggle').style.display = "none";
+  setTimeout(() => document.getElementById('userinput').focus(), 200);
+};
+document.getElementById('chatbot-close').onclick = function() {
+  document.getElementById('chatbot-widget').style.display = "none";
+  document.getElementById('chatbot-toggle').style.display = "flex";
+};
 </script>
-<!-- Chat Widget End -->
+<!-- End of Chatbot Widget -->
 </body>
 </html>
