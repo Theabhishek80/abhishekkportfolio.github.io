@@ -901,9 +901,8 @@
         animateElements.forEach(element => {
             observer.observe(element);
         });
-        
-        // Form submission
-        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+        <!-- EmailJS SDK -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
     (function(){
         emailjs.init('-vE_ZRvX8x0Q1Lmms7');
@@ -913,16 +912,18 @@
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            emailjs.sendForm('service_62a9k44', 'YOUR_TEMPLATE_ID_HERE', this)
+            emailjs.sendForm('service_r1ed2ob', 'template_5w1dgmt', this)
             .then(function() {
                 alert('Thank you for your message! I will get back to you soon.');
                 contactForm.reset();
             }, function(error) {
                 alert('Sorry, there was an error sending your message. Please try again later.');
             });
-        
+        });
     }
 </script>
+        
+    
             
         
 </body>
