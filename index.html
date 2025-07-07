@@ -52,6 +52,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            <div class="header-container">
+    <div class="logo">...</div>
+    <nav>...</nav>
+    <button id="theme-toggle" title="Toggle dark/light mode" style="margin-left:20px; background:none; border:none; color:var(--light); font-size:1.5rem; cursor:pointer;">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
         }
         
         .logo {
@@ -230,6 +238,20 @@
         .about-text p {
             margin-bottom: 15px;
         }
+            <!-- Fun Personal Section -->
+<section id="fun" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Fun Facts & Hobbies</h2>
+        </div>
+        <ul style="font-size:1.2rem;">
+            <li>🏸 I love playing badminton and chess.</li>
+            <li>📚 My favorite book: "Deep Learning" by Ian Goodfellow.</li>
+            <li>🎧 Coding music: Lo-fi beats!</li>
+            <li>🌄 I enjoy hiking and nature photography.</li>
+        </ul>
+    </div>
+</section>
         
         /* Skills Section */
         .skills-container {
@@ -781,6 +803,25 @@
             </div>
         </div>
     </section>
+    <!-- Blog Section -->
+<section id="blog" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Blog & Articles</h2>
+        </div>
+        <div class="blog-list">
+            <article class="blog-item animate">
+                <h3 class="blog-title">How I Built My First Neural Network</h3>
+                <p class="blog-desc">A step-by-step journey through building and training a simple neural network from scratch. <a href="#">Read more</a></p>
+            </article>
+            <article class="blog-item animate">
+                <h3 class="blog-title">Top 5 AI Trends in 2025</h3>
+                <p class="blog-desc">My take on the most exciting developments in AI and ML this year. <a href="#">Read more</a></p>
+            </article>
+            <!-- Add more articles as you write them! -->
+        </div>
+    </div>
+</section>
 
     <!-- New Resume Section -->
     <section id="resume" class="section resume-section">
