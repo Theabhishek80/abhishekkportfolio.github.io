@@ -6,6 +6,15 @@
     <title>Abhishek Pandey | AI/ML Specialist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+   body.light-theme {
+    --primary: #f8f9fa;
+    --secondary: #e0e0e0;
+    --dark: #f8f9fa;
+    --light: #1a1a2e;
+    --accent: #6e48aa;
+    background-color: var(--dark);
+    color: var(--light);
+} 
     <style>
         :root {
             --primary: #6e48aa;
@@ -49,18 +58,18 @@
         }
         
         .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-            <div class="header-container">
-    <div class="logo">...</div>
-    <nav>...</nav>
-    <button id="theme-toggle" title="Toggle dark/light mode" style="margin-left:20px; background:none; border:none; color:var(--light); font-size:1.5rem; cursor:pointer;">
-        <i class="fas fa-moon"></i>
-    </button>
-</div>
-        }
+    <div class="header-container">
+        ...
+        <button id="theme-toggle" ...>
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+}
+        
         
         .logo {
             font-size: 1.8rem;
@@ -989,6 +998,29 @@
             });
         });
     }
+</script>
+    <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Optionally remember theme preference
+    if (localStorage.getItem('theme') === 'light') {
+        body.classList.add('light-theme');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    themeToggle.addEventListener('click', function() {
+        body.classList.toggle('light-theme');
+        // Change icon
+        if (body.classList.contains('light-theme')) {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            localStorage.setItem('theme', 'light');
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            localStorage.setItem('theme', 'dark');
+        }
+    });
 </script>
 
         
