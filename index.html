@@ -62,14 +62,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    <div class="header-container">
-        ...
-        <button id="theme-toggle" ...>
-            <i class="fas fa-moon"></i>
-        </button>
-    </div>
 }
+
         
         
         .logo {
@@ -591,22 +585,26 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="container header-container">
-            <div class="logo">
-                <span>A</span>bhishek
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <div class="container header-container">
+        <div class="logo">
+            <span>A</span>bhishek
         </div>
-    </header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- ADD THIS BUTTON: -->
+        <button id="theme-toggle" title="Toggle dark/light mode" style="margin-left:20px; background:none; border:none; color:var(--light); font-size:1.5rem; cursor:pointer;">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+</header>
 
     <!-- Hero Section with Optimized Image -->
     <section id="home" class="hero">
