@@ -1,627 +1,662 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhishek Pandey | Full‑Stack + AI Integrations</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abhishek Pandey — Full-Stack + AI Integrations</title>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
-  <!--
-    ✅ Renovation Notes
-    - Swapped skills to Full Stack + AI integrations (explicitly highlighted)
-    - Modern animations (transitions, hover, reveal, floating, text typing)
-    - New photo section using myimg.png (transparent), with float + tilt
-    - Blog section with localStorage + JSON import/export (no backend)
-    - Light/Dark mode toggle (remembered via localStorage)
-    - No CSS media queries; responsiveness handled by JS via body classes
-    - Clean, GitHub Pages–ready single file
-  -->
+  <meta name="description" content="Abhishek Pandey — Full Stack Developer & AI Integrations. Portfolio, skills, blog, contact." />
 
   <style>
-    /* =====================
-       THEME & TOKENS
-       ===================== */
-    :root {
+    /* -------------------------
+       THEME TOKENS (default)
+       ------------------------- */
+    :root{
       --bg: #0b0f17;
-      --bg-soft: #121826;
-      --card: #0f1629;
-      --text: #e6ebff;
-      --muted: #a9b1c7;
-      --brand: #7c4dff; /* violet */
-      --brand-2: #00d4ff; /* cyan */
-      --accent: #3de0a7; /* mint */
-      --shadow: rgba(0,0,0,.35);
-      --radius: 18px;
+      --bg-soft: #0f1724;
+      --card: #0f1624;
+      --text: #e6eef8;
+      --muted: #9aa7bf;
+      --brand: #6c5ce7; /* default accent (purple) */
+      --brand-2: #00d4ff;
+      --accent: linear-gradient(90deg,var(--brand),var(--brand-2));
+      --glass: rgba(255,255,255,0.04);
+      --radius: 16px;
+      --shadow: rgba(2,6,23,0.6);
+      --transition: 0.32s cubic-bezier(.2,.9,.3,1);
     }
-    body.light {
-      --bg: #f7f8fc;
-      --bg-soft: #ffffff;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #4b5563;
-      --brand: #6c5ce7;
-      --brand-2: #06b6d4;
-      --accent: #10b981;
-      --shadow: rgba(0,0,0,.08);
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.6;
-      overflow-x: hidden;
-      transition: background .4s ease, color .4s ease;
+    /* light theme overrides */
+    [data-theme="light"]{
+      --bg:#f7fafc;
+      --bg-soft:#ffffff;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#475569;
+      --shadow: rgba(2,6,23,0.06);
     }
 
-    a { color: inherit; text-decoration: none; }
-    .container { width: min(1180px, 92%); margin: 0 auto; }
-
-    /* =====================
-       BACKGROUND ANIMATION (blobs)
-       ===================== */
-    .bg-blobs {
-      position: fixed; inset: -10vmax; pointer-events: none; z-index: -1; filter: blur(60px);
-      opacity: .45;
+    /* global */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 700px at 10% 10%, rgba(108,92,231,0.06), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(0,212,255,0.03), transparent),
+                  var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition: background .45s ease,color .35s ease;
+      overflow-x:hidden;
     }
-    .blob {
-      position: absolute; width: 40vmax; height: 40vmax; border-radius: 50%;
-      background: radial-gradient(closest-side, var(--brand), transparent 70%);
-      animation: drift 22s infinite ease-in-out;
+    .container{width:min(1180px,94%);margin:0 auto}
+
+    /* header */
+    header{
+      position:sticky;top:12px;z-index:1200;padding:18px 0;background:transparent;
+      display:flex;align-items:center;justify-content:space-between;
     }
-    .blob.b2 { background: radial-gradient(closest-side, var(--brand-2), transparent 70%); animation-duration: 28s; }
-    .blob.b3 { background: radial-gradient(closest-side, var(--accent), transparent 70%); animation-duration: 26s; }
-    @keyframes drift {
-      0%   { transform: translate(-10vw, -8vh) scale(1); }
-      50%  { transform: translate(35vw, 18vh) scale(1.2); }
-      100% { transform: translate(-10vw, -8vh) scale(1); }
+    .brand{font-family:Poppins,Inter;font-weight:800;font-size:1.15rem;display:flex;gap:10px;align-items:center}
+    .brand .logo{color:var(--text)}
+    .brand .accent{background:var(--accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px;transition:all .2s}
+    nav a:hover{color:var(--text);background:var(--glass);transform:translateY(-3px)}
+
+    .controls{display:flex;gap:10px;align-items:center}
+    .icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--text);cursor:pointer}
+    .icon-btn:hover{transform:translateY(-3px);box-shadow:0 6px 20px var(--shadow)}
+
+    /* palette popover */
+    .palette{position:relative}
+    .palette-panel{
+      position:absolute;right:0;top:46px;padding:10px;background:var(--card);border-radius:12px;box-shadow:0 12px 40px var(--shadow);
+      display:flex;gap:10px;align-items:center;border:1px solid rgba(255,255,255,0.04);
+      transform-origin:top right;opacity:0;pointer-events:none;transform:scale(.9);
+      transition:opacity .18s, transform .2s;
     }
+    .palette-panel.show{opacity:1;pointer-events:auto;transform:scale(1)}
 
-    /* =====================
-       HEADER
-       ===================== */
-    header {
-      position: sticky; top: 0; z-index: 1000; backdrop-filter: saturate(140%) blur(10px);
-      background: color-mix(in oklab, var(--bg) 74%, transparent 26%);
-      border-bottom: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
-    }
-    .nav {
-      display: flex; align-items: center; justify-content: space-between; padding: 14px 0;
-    }
-    .brand { font-family: Poppins, Inter, sans-serif; font-weight: 800; letter-spacing: .3px; }
-    .brand span { background: linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .nav a { opacity: .9; font-weight: 600; }
-    .nav .links { display: flex; gap: 22px; align-items: center; }
-    .btn-ghost { padding: 10px 14px; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--text) 14%, transparent); transition: transform .2s ease, background .3s ease, border-color .3s ease; }
-    .btn-ghost:hover { transform: translateY(-2px); background: color-mix(in oklab, var(--text) 6%, transparent); }
+    .swatch{width:34px;height:34px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.06);box-shadow:0 6px 18px rgba(0,0,0,.18)}
+    .swatch[title]{display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.9);font-weight:700}
 
-    .theme-toggle { cursor: pointer; border: 0; background: none; font-size: 20px; width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; color: var(--text);
-      transition: background .25s ease, transform .2s ease; }
-    .theme-toggle:hover { background: color-mix(in oklab, var(--text) 8%, transparent); transform: translateY(-2px); }
+    /* hero */
+    .hero{padding:82px 0 36px;display:grid;grid-template-columns:1fr .9fr;gap:36px;align-items:center}
+    .intro-kicker{font-weight:700;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:.78rem}
+    h1{font-family:Poppins;font-size:clamp(28px,4vw,48px);line-height:1.02;margin:6px 0}
+    .lead{max-width:56ch;color:var(--muted);font-size:1.05rem}
+    .cta-row{display:flex;gap:12px;margin-top:18px}
 
-    /* =====================
-       HERO
-       ===================== */
-    .hero { padding: 90px 0 40px; position: relative; }
-    .hero-wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; }
-    .kicker { text-transform: uppercase; letter-spacing: .2em; font-weight: 600; opacity: .7; }
-    h1 { font-family: Poppins, Inter, sans-serif; font-weight: 800; font-size: clamp(28px, 4.2vw, 54px); line-height: 1.08; margin: 8px 0 14px; }
-    .grad { background: linear-gradient(90deg, var(--brand) 0%, var(--brand-2) 60%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { font-size: 1.05rem; opacity: .9; }
+    .btn{padding:12px 18px;border-radius:12px;border:0;font-weight:700;cursor:pointer;transition:all var(--transition)}
+    .btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:white;box-shadow:0 12px 30px rgba(0,0,0,.28)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
 
-    .cta-row { margin-top: 22px; display: flex; gap: 14px; align-items: center; }
-    .btn-primary { padding: 12px 18px; border-radius: 14px; font-weight: 700; background: linear-gradient(90deg, var(--brand), var(--brand-2)); color: #fff; box-shadow: 0 10px 30px var(--shadow); border: 0; cursor: pointer; transition: transform .2s ease, box-shadow .3s ease; }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 36px var(--shadow); }
+    /* photo card (only top photo) */
+    .photo-card{height:420px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);display:grid;place-items:center;box-shadow:0 28px 80px var(--shadow);position:relative;overflow:hidden}
+    .photo-card::after{content:'';position:absolute;inset:0;background:radial-gradient(60% 60% at 80% 20%, rgba(0,212,255,0.04), transparent)}
+    .profile-img{width:72%;max-width:360px;border-radius:50%;border:6px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);transform:translateY(12px) scale(.98);opacity:0;transition:transform .9s cubic-bezier(.2,.9,.3,1),opacity .9s}
+    .photo-card.revealed .profile-img{transform:none;opacity:1;filter:drop-shadow(0 34px 80px rgba(0,0,0,.45))}
 
-    /* Photo block */
-    .photo-card { position: relative; display: grid; place-items: center; height: 360px; border-radius: var(--radius);
-      background: linear-gradient(145deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--bg) 84%, transparent));
-      box-shadow: 0 16px 40px var(--shadow); overflow: hidden; }
-    .photo-card::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 80% 20%, color-mix(in oklab, var(--brand-2) 20%, transparent), transparent 60%); opacity: .35; }
-    .profile-img { width: 66%; max-width: 320px; will-change: transform; filter: drop-shadow(0 24px 35px rgba(0,0,0,.25)); opacity: 0; transform: translateY(12px) scale(.98); transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .8s ease; }
-    .photo-card.reveal .profile-img { opacity: 1; transform: translateY(0) scale(1); }
+    /* skills */
+    .section{padding:80px 0}
+    .section-title{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .skill-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 18px 40px var(--shadow);transition:transform .25s}
+    .skill-card:hover{transform:translateY(-6px)}
+    .skill-head{display:flex;align-items:center;gap:10px;font-weight:700;margin-bottom:12px}
+    .bar{height:12px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+    .bar > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-2));transition:width 1.2s cubic-bezier(.2,.9,.3,1)}
 
-    /* =====================
-       SECTION WRAPPER
-       ===================== */
-    section { padding: 84px 0; position: relative; }
-    .section-title { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-    .section-title i { color: var(--brand-2); }
-    .section-title h2 { font-family: Poppins, Inter, sans-serif; font-weight: 800; letter-spacing: .2px; margin: 0; }
-    .muted { color: var(--muted); }
+    /* blog grid */
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .post{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.04)}
+    .post h3{margin:0 0 8px}
+    .post .meta{color:var(--muted);font-size:.9rem;margin-bottom:8px}
 
-    /* =====================
-       SKILLS
-       ===================== */
-    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .skill-card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius: var(--radius); padding: 18px; box-shadow: 0 10px 28px var(--shadow); transition: transform .25s ease, background .3s ease, border-color .3s ease; }
-    .skill-card:hover { transform: translateY(-6px); background: color-mix(in oklab, var(--card) 92%, var(--brand) 8%); border-color: color-mix(in oklab, var(--text) 18%, transparent); }
-    .skill-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-weight: 700; }
+    /* contact */
+    .cards-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.04)}
 
-    .bar { height: 10px; width: 100%; background: color-mix(in oklab, var(--text) 9%, transparent); border-radius: 999px; overflow: hidden; }
-    .bar > span { display: block; height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, var(--brand), var(--brand-2)); box-shadow: inset 0 0 12px rgba(255,255,255,.2); transition: width 1.2s cubic-bezier(.22,1,.36,1); }
-    .skill-item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; margin: 12px 0; }
-    .pill { display: inline-flex; align-items: center; gap: 8px; font-size: .9rem; background: color-mix(in oklab, var(--text) 10%, transparent); padding: 6px 10px; border-radius: 999px; }
+    footer{text-align:center;padding:32px 0;color:var(--muted)}
 
-    /* =====================
-       BLOG
-       ===================== */
-    .blog-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .post { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius: var(--radius); padding: 18px; box-shadow: 0 10px 28px var(--shadow); display: grid; gap: 10px; }
-    .post h3 { margin: 0; font-size: 1.05rem; }
-    .date { font-size: .85rem; color: var(--muted); }
-    .post .read { justify-self: start; }
+    /* responsive via JS classes (no CSS media queries) */
+    body.is-mobile .hero{grid-template-columns:1fr;gap:24px}
+    body.is-mobile .grid-3{grid-template-columns:1fr}
+    body.is-tablet .grid-3{grid-template-columns:repeat(2,1fr)}
+    body.is-mobile .blog-grid{grid-template-columns:1fr}
+    body.is-tablet .blog-grid{grid-template-columns:repeat(2,1fr)}
+    body.is-mobile .cards-2{grid-template-columns:1fr}
 
-    dialog.readmore { width: min(740px, 92%); border: 1px solid color-mix(in oklab, var(--text) 20%, transparent); background: var(--bg-soft); color: var(--text); border-radius: 16px; padding: 20px; }
-    dialog::backdrop { background: rgba(0,0,0,.45); }
-
-    /* =====================
-       CONTACT/FOOTER
-       ===================== */
-    .cards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius: var(--radius); padding: 18px; box-shadow: 0 10px 28px var(--shadow); }
-    .socials { display: flex; gap: 10px; margin-top: 10px; }
-    .socials a { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; border: 1px solid color-mix(in oklab, var(--text) 14%, transparent); transition: transform .2s ease, background .3s ease; }
-    .socials a:hover { transform: translateY(-3px); background: color-mix(in oklab, var(--text) 7%, transparent); }
-
-    footer { padding: 26px 0 60px; text-align: center; color: var(--muted); border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); }
-
-    /* =====================
-       JS-DRIVEN RESPONSIVENESS (no media queries)
-       Body gets classes: is-mobile (<= 820px), is-tablet (821–1100px)
-       ===================== */
-    body.is-mobile .hero-wrap { grid-template-columns: 1fr; }
-    body.is-mobile .skills-grid { grid-template-columns: 1fr; }
-    body.is-tablet .skills-grid { grid-template-columns: repeat(2, 1fr); }
-    body.is-mobile .blog-grid { grid-template-columns: 1fr; }
-    body.is-tablet .blog-grid { grid-template-columns: repeat(2, 1fr); }
-    body.is-mobile .cards-2 { grid-template-columns: 1fr; }
-
-    /* Subtle focus styles */
-    :is(button, a, input, textarea, select):focus-visible { outline: 2px solid var(--brand-2); outline-offset: 2px; }
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .caps{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+    .hidden{display:none}
   </style>
 </head>
 <body>
-  <!-- Background animated blobs -->
-  <div class="bg-blobs" aria-hidden="true">
-    <div class="blob" style="top:10%; left:-6%;"></div>
-    <div class="blob b2" style="bottom:-2%; right:-12%;"></div>
-    <div class="blob b3" style="top:40%; right:30%;"></div>
-  </div>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand"><div class="logo">Abhishek</div><div class="accent">Pandey</div></div>
 
-  <!-- Header / Nav -->
-  <header>
-    <div class="container nav">
-      <div class="brand"><span>A</span>bhishek</div>
-      <nav class="links">
-        <a class="btn-ghost" href="#home">Home</a>
-        <a class="btn-ghost" href="#photo">Photo</a>
-        <a class="btn-ghost" href="#skills">Skills</a>
-        <a class="btn-ghost" href="#blog">Blog</a>
-        <a class="btn-ghost" href="#contact">Contact</a>
-        <button id="themeBtn" class="theme-toggle" title="Toggle light/dark"><i class="fa-solid fa-moon"></i></button>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#skills">Skills</a>
+        <a href="#blog">Blog</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
       </nav>
-    </div>
-  </header>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="container hero-wrap">
+      <div class="controls">
+        <!-- theme toggle -->
+        <button id="themeToggle" class="icon-btn" title="Toggle light/dark"><i id="themeIcon" class="fa-solid fa-moon"></i></button>
+
+        <!-- palette -->
+        <div class="palette">
+          <button id="paletteBtn" class="icon-btn" title="Change accent color"><i class="fa-solid fa-palette"></i></button>
+          <div id="palettePanel" class="palette-panel" aria-hidden="true">
+            <div class="swatch" title="Blue" style="background:linear-gradient(90deg,#3b82f6,#00d4ff)" data-brand="#3b82f6" data-brand2="#00d4ff"></div>
+            <div class="swatch" title="Purple" style="background:linear-gradient(90deg,#6c5ce7,#b892ff)" data-brand="#6c5ce7" data-brand2="#b892ff"></div>
+            <div class="swatch" title="Green" style="background:linear-gradient(90deg,#10b981,#34d399)" data-brand="#10b981" data-brand2="#34d399"></div>
+            <div class="swatch" title="Orange" style="background:linear-gradient(90deg,#f97316,#ffa94d)" data-brand="#f97316" data-brand2="#ffa94d"></div>
+            <div class="swatch" title="Red" style="background:linear-gradient(90deg,#ef4444,#ff7b7b)" data-brand="#ef4444" data-brand2="#ff7b7b"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main id="home" class="hero">
       <div>
-        <div class="kicker">Full‑Stack Engineer • <span class="muted">AI Integrations</span></div>
-        <h1>Hi, I'm <span class="grad">Abhishek Pandey</span></h1>
-        <p id="typeTarget" aria-live="polite">I build modern web apps and wire real‑world products to AI — chatbots, smart automations, and LLM‑powered features.</p>
+        <div class="intro-kicker">Full-Stack Engineer • AI Integrations</div>
+        <h1>Hi — I'm <span style="background:var(--accent);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Abhishek Pandey</span></h1>
+        <p class="lead" id="typeText">I build modern web apps and wire real-world products to AI — from RAG chatbots to automation and intelligent UI.</p>
+
         <div class="cta-row">
-          <a class="btn-primary" href="#contact"><i class="fa-regular fa-paper-plane"></i>&nbsp; Get in touch</a>
-          <a class="btn-ghost" href="#blog"><i class="fa-regular fa-newspaper"></i>&nbsp; Read my blog</a>
+          <button class="btn btn-primary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})"><i class="fa-regular fa-paper-plane"></i>&nbsp;Get in touch</button>
+          <a class="btn btn-ghost" href="#blog"><i class="fa-regular fa-newspaper"></i>&nbsp;Read my blog</a>
+        </div>
+
+        <div style="margin-top:18px;">
+          <div class="caps">Selected projects</div>
+          <ul style="margin:10px 0 0 18px;color:var(--muted)">
+            <li>Next.js + LangChain RAG Chatbot for product docs</li>
+            <li>Realtime analytics dashboard with Vector search</li>
+            <li>Full-stack marketplaces & API design</li>
+          </ul>
         </div>
       </div>
+
+      <!-- TOP PROFILE PHOTO (only one) -->
       <div class="photo-card" id="heroPhoto">
-        <!-- Transparent PNG placed in repo root as myimg.png -->
-        <img src="myimg.png" alt="Abhishek Pandey" class="profile-img" id="profileImg" />
+        <img src="myimg.png" alt="Abhishek Pandey" class="profile-img" id="profileImg">
       </div>
-    </div>
-  </section>
+    </main>
 
-  <!-- Photo Section (extra spotlight & tilt) -->
-  <section id="photo">
-    <div class="container">
-      <div class="section-title"><i class="fa-solid fa-camera"></i><h2>Photo</h2><span class="muted">floating + tilt effects</span></div>
-      <div class="photo-card" id="spotlight">
-        <img src="myimg.png" alt="Abhishek Pandey portrait" class="profile-img" />
-      </div>
-    </div>
-  </section>
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i><h2>Full-Stack Skills</h2></div>
 
-  <!-- Skills -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i><h2>Full‑Stack Skills</h2><span class="muted">with embedded AI capabilities</span></div>
-
-      <!-- AI Integrations banner -->
-      <div class="card" style="margin-bottom:14px; display:flex; align-items:center; gap:12px;">
-        <i class="fa-solid fa-robot"></i>
-        <div><strong>AI with Websites:</strong> OpenAI / Azure OpenAI, LangChain, vector search (Pinecone/FAISS), RAG chatbots, content generators, analytics copilots.</div>
+      <div class="card" style="margin-bottom:12px;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03)">
+        <strong><i class="fa-solid fa-robot"></i>&nbsp;AI Integrations</strong>
+        <div class="muted" style="margin-top:8px">OpenAI / Azure OpenAI • LangChain • Vector DB (Pinecone/FAISS) • RAG chatbots • LLM features inside web apps</div>
       </div>
 
-      <div class="skills-grid" id="skillsGrid">
-        <div class="skill-card reveal">
+      <div class="grid-3" id="skillsGrid">
+        <div class="skill-card">
           <div class="skill-head"><i class="fa-solid fa-code"></i> Frontend</div>
-          <div class="skill-item"><span class="pill"><i class="fa-brands fa-react"></i> React/Next.js</span><span data-val>90%</span></div>
-          <div class="bar"><span data-skill="90"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-layer-group"></i> TypeScript</span><span data-val>80%</span></div>
-          <div class="bar"><span data-skill="80"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-droplet"></i> Tailwind/SC</span><span data-val>85%</span></div>
-          <div class="bar"><span data-skill="85"></span></div>
+          <div class="muted">React, Next.js, TypeScript, SSR/SSG</div>
+          <div style="height:10px"></div>
+          <div>React / Next.js<div class="bar" style="margin-top:8px"><span data-skill="92"></span></div></div>
+          <div style="height:10px"></div>
+          <div>TypeScript<div class="bar" style="margin-top:8px"><span data-skill="84"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Design & CSS<div class="bar" style="margin-top:8px"><span data-skill="86"></span></div></div>
         </div>
 
-        <div class="skill-card reveal">
+        <div class="skill-card">
           <div class="skill-head"><i class="fa-solid fa-server"></i> Backend</div>
-          <div class="skill-item"><span class="pill"><i class="fa-brands fa-node"></i> Node.js / Express</span><span data-val>88%</span></div>
-          <div class="bar"><span data-skill="88"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-diagram-project"></i> REST / GraphQL</span><span data-val>78%</span></div>
-          <div class="bar"><span data-skill="78"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-shield-halved"></i> Auth & Security</span><span data-val>80%</span></div>
-          <div class="bar"><span data-skill="80"></span></div>
+          <div class="muted">Node, Express, REST, GraphQL</div>
+          <div style="height:10px"></div>
+          <div>Node.js<div class="bar" style="margin-top:8px"><span data-skill="88"></span></div></div>
+          <div style="height:10px"></div>
+          <div>GraphQL & APIs<div class="bar" style="margin-top:8px"><span data-skill="78"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Authentication<div class="bar" style="margin-top:8px"><span data-skill="80"></span></div></div>
         </div>
 
-        <div class="skill-card reveal">
-          <div class="skill-head"><i class="fa-solid fa-database"></i> Databases</div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-leaf"></i> MongoDB</span><span data-val>82%</span></div>
-          <div class="bar"><span data-skill="82"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-table"></i> PostgreSQL</span><span data-val>75%</span></div>
-          <div class="bar"><span data-skill="75"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-gauge-high"></i> Redis</span><span data-val>70%</span></div>
-          <div class="bar"><span data-skill="70"></span></div>
+        <div class="skill-card">
+          <div class="skill-head"><i class="fa-solid fa-database"></i> Data & Infra</div>
+          <div class="muted">Postgres, Mongo, Redis, Docker, CI/CD</div>
+          <div style="height:10px"></div>
+          <div>Databases<div class="bar" style="margin-top:8px"><span data-skill="82"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Docker / Infra<div class="bar" style="margin-top:8px"><span data-skill="76"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Observability<div class="bar" style="margin-top:8px"><span data-skill="70"></span></div></div>
         </div>
 
-        <div class="skill-card reveal">
-          <div class="skill-head"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Tooling</div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-brain"></i> OpenAI / Azure</span><span data-val>85%</span></div>
-          <div class="bar"><span data-skill="85"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-bezier-curve"></i> LangChain</span><span data-val>78%</span></div>
-          <div class="bar"><span data-skill="78"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-magnifying-glass"></i> Vector DB + RAG</span><span data-val>80%</span></div>
-          <div class="bar"><span data-skill="80"></span></div>
+        <div class="skill-card">
+          <div class="skill-head"><i class="fa-solid fa-brain"></i> AI Tooling</div>
+          <div class="muted">LangChain, embeddings, prompt engineering</div>
+          <div style="height:10px"></div>
+          <div>OpenAI / Azure<div class="bar" style="margin-top:8px"><span data-skill="86"></span></div></div>
+          <div style="height:10px"></div>
+          <div>LangChain<div class="bar" style="margin-top:8px"><span data-skill="80"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Vector DB & RAG<div class="bar" style="margin-top:8px"><span data-skill="82"></span></div></div>
         </div>
 
-        <div class="skill-card reveal">
-          <div class="skill-head"><i class="fa-solid fa-cubes"></i> DevOps & Quality</div>
-          <div class="skill-item"><span class="pill"><i class="fa-brands fa-docker"></i> Docker</span><span data-val>75%</span></div>
-          <div class="bar"><span data-skill="75"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-brands fa-github"></i> CI/CD (Actions)</span><span data-val>70%</span></div>
-          <div class="bar"><span data-skill="70"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-cloud-arrow-up"></i> Vercel/Render</span><span data-val>80%</span></div>
-          <div class="bar"><span data-skill="80"></span></div>
+        <div class="skill-card">
+          <div class="skill-head"><i class="fa-solid fa-cubes"></i> DevOps</div>
+          <div class="muted">CI/CD, GitHub Actions, Vercel, Docker</div>
+          <div style="height:10px"></div>
+          <div>CI/CD<div class="bar" style="margin-top:8px"><span data-skill="74"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Containers<div class="bar" style="margin-top:8px"><span data-skill="78"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Cloud Deploy<div class="bar" style="margin-top:8px"><span data-skill="80"></span></div></div>
         </div>
 
-        <div class="skill-card reveal">
-          <div class="skill-head"><i class="fa-solid fa-comments"></i> Soft Skills</div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-lightbulb"></i> Problem Solving</span><span data-val>90%</span></div>
-          <div class="bar"><span data-skill="90"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-people-group"></i> Communication</span><span data-val>85%</span></div>
-          <div class="bar"><span data-skill="85"></span></div>
-          <div class="skill-item"><span class="pill"><i class="fa-solid fa-timeline"></i> Project Delivery</span><span data-val>80%</span></div>
-          <div class="bar"><span data-skill="80"></span></div>
+        <div class="skill-card">
+          <div class="skill-head"><i class="fa-solid fa-users"></i> Soft Skills</div>
+          <div class="muted">Communication, project delivery</div>
+          <div style="height:10px"></div>
+          <div>Problem Solving<div class="bar" style="margin-top:8px"><span data-skill="92"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Teamwork<div class="bar" style="margin-top:8px"><span data-skill="86"></span></div></div>
+          <div style="height:10px"></div>
+          <div>Product Sense<div class="bar" style="margin-top:8px"><span data-skill="82"></span></div></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Blog -->
-  <section id="blog">
-    <div class="container">
-      <div class="section-title"><i class="fa-regular fa-newspaper"></i><h2>Blog</h2><span class="muted">write, import JSON, store locally</span></div>
-
-      <div class="blog-controls">
-        <button class="btn-primary" id="addDemo">Add demo posts</button>
-        <button class="btn-ghost" id="exportBtn"><i class="fa-solid fa-file-arrow-down"></i>&nbsp; Export JSON</button>
-        <label class="btn-ghost" style="cursor:pointer;">
-          <input type="file" id="importInput" accept="application/json" hidden />
-          <i class="fa-solid fa-file-arrow-up"></i>&nbsp; Import JSON
+    <!-- BLOG -->
+    <section id="blog" class="section">
+      <div class="section-title"><i class="fa-regular fa-newspaper"></i><h2>Blog & Articles</h2></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <button class="btn btn-primary" id="addDemo">Add demo posts</button>
+        <button class="btn btn-ghost" id="newPostBtn"><i class="fa-solid fa-plus"></i>&nbsp; New Post</button>
+        <button class="btn btn-ghost" id="exportBtn"><i class="fa-solid fa-file-export"></i>&nbsp; Export JSON</button>
+        <label class="btn btn-ghost" style="cursor:pointer"><i class="fa-solid fa-file-import"></i>&nbsp; Import JSON
+          <input id="importInput" type="file" accept="application/json" style="display:none" />
         </label>
-        <button class="btn-ghost" id="newPostBtn"><i class="fa-solid fa-plus"></i>&nbsp; New Post</button>
       </div>
 
-      <div id="blogGrid" class="blog-grid"></div>
+      <div id="blogGrid" class="blog-grid">
+        <!-- Posts render here -->
+      </div>
 
-      <!-- New Post Dialog -->
-      <dialog id="postDialog" class="readmore">
-        <form method="dialog" id="postForm" style="display:grid; gap:10px;">
-          <h3 style="margin:0;">New Blog Post</h3>
-          <input required name="title" placeholder="Title" />
-          <input required name="date" type="date" />
-          <textarea required name="desc" rows="4" placeholder="Short description..."></textarea>
-          <textarea name="content" rows="6" placeholder="Full content (optional)"></textarea>
-          <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:6px;">
-            <button class="btn-ghost" value="cancel">Cancel</button>
-            <button class="btn-primary" value="save">Save</button>
+      <!-- New Post dialog -->
+      <dialog id="postDialog" style="border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.06);background:var(--bg-soft);color:var(--text)">
+        <form id="postForm" method="dialog" style="display:grid;gap:8px">
+          <h3 style="margin:0">New Post</h3>
+          <input name="title" placeholder="Title" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" />
+          <input name="date" type="date" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" />
+          <textarea name="desc" placeholder="Short description" rows="3" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)"></textarea>
+          <textarea name="content" placeholder="Full content (optional)" rows="6" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)"></textarea>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn-ghost" value="cancel">Cancel</button>
+            <button class="btn btn-primary" value="save">Save</button>
           </div>
         </form>
       </dialog>
 
-      <!-- Read More Dialog -->
-      <dialog id="readDialog" class="readmore">
-        <article id="readArticle" style="display:grid; gap:6px;"></article>
-        <div style="text-align:right; margin-top:8px;"><button class="btn-ghost" id="closeRead">Close</button></div>
+      <!-- Read dialog -->
+      <dialog id="readDialog" style="border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.06);background:var(--bg-soft);color:var(--text);max-width:800px">
+        <article id="readArticle"></article>
+        <div style="text-align:right;margin-top:10px"><button id="closeRead" class="btn btn-ghost">Close</button></div>
       </dialog>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <div class="container">
-      <div class="section-title"><i class="fa-regular fa-paper-plane"></i><h2>Contact</h2><span class="muted">let's build something</span></div>
+    <!-- RESUME -->
+    <section id="resume" class="section resume-section">
+      <div class="section-title"><i class="fa-regular fa-file"></i><h2>Resume</h2></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="resume.pdf" download class="btn btn-primary"><i class="fa-regular fa-file-pdf"></i>&nbsp; Download Resume</a>
+        <div class="muted">Resume prepared (PDF). Replace <code>resume.pdf</code> in repo to update.</div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-title"><i class="fa-regular fa-paper-plane"></i><h2>Contact</h2></div>
+
       <div class="cards-2">
         <div class="card">
-          <h3>Reach me</h3>
-          <p><i class="fa-solid fa-location-dot"></i> Bhopal, Madhya Pradesh, India</p>
-          <p><i class="fa-regular fa-envelope"></i> abhishekpade16@gmail.com</p>
-          <p><i class="fa-solid fa-phone"></i> +91 9301708816</p>
-          <div class="socials">
-            <a href="https://github.com/Theabhishek80" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/abhishek-pandey-5072a027a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://x.com/theabhishek100" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://www.instagram.com/imabhishekkp" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <h3>Get in touch</h3>
+          <p class="muted">Bhopal, Madhya Pradesh, India</p>
+          <p><i class="fa-regular fa-envelope"></i>&nbsp; abhishekpade16@gmail.com</p>
+          <p><i class="fa-solid fa-phone"></i>&nbsp; +91 9301708816</p>
+          <div style="margin-top:10px">
+            <a class="icon-btn" href="https://github.com/Theabhishek80" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a class="icon-btn" href="https://www.linkedin.com/in/abhishek-pandey-5072a027a" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="icon-btn" href="https://x.com/theabhishek100" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
           </div>
         </div>
+
         <div class="card">
-          <h3>Quick message</h3>
-          <form id="contactForm" style="display:grid; gap:10px;">
-            <input required name="name" placeholder="Your name" />
-            <input required name="email" type="email" placeholder="Email" />
-            <textarea required name="message" rows="5" placeholder="Your message"></textarea>
-            <button class="btn-primary" type="submit">Send</button>
-            <small class="muted">No backend yet — form shows a success toast. Hook EmailJS later if you like.</small>
+          <h3>Send a message</h3>
+          <form id="contactForm" style="display:grid;gap:8px">
+            <input name="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" />
+            <input name="email" placeholder="Email" type="email" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" />
+            <textarea name="message" placeholder="Message" rows="5" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)"></textarea>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button type="submit" class="btn btn-primary">Send</button>
+              <small class="muted">No backend yet — a placeholder success appears. EmailJS ready (add your keys below).</small>
+            </div>
           </form>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    © <span id="year"></span> Abhishek Pandey. All rights reserved.
-  </footer>
+    <footer>
+      <div class="muted">© <span id="year"></span> Abhishek Pandey. All rights reserved.</div>
+    </footer>
+  </div>
 
+  <!-- scripts -->
   <script>
-    // =====================
-    // Theme Toggle (persist)
-    // =====================
-    const themeBtn = document.getElementById('themeBtn');
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) document.body.classList.toggle('light', storedTheme === 'light');
-    themeBtn.innerHTML = document.body.classList.contains('light') ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      const isLight = document.body.classList.contains('light');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      themeBtn.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    /* ===============================
+       Utility & Persisted Settings
+       =============================== */
+    const root = document.documentElement;
+    const YEAR = new Date().getFullYear();
+    document.getElementById('year').textContent = YEAR;
+
+    // load theme preference
+    if (localStorage.getItem('theme') === 'light') root.setAttribute('data-theme','light');
+    if (localStorage.getItem('accentBrand')) {
+      document.documentElement.style.setProperty('--brand', localStorage.getItem('accentBrand'));
+      document.documentElement.style.setProperty('--brand-2', localStorage.getItem('accentBrand2') || '#00d4ff');
+    }
+
+    // nice smooth color transition when accent changes
+    const colorTransition = (el,prop) => {
+      el.style.transition = prop + ' 0.45s cubic-bezier(.2,.9,.3,1)';
+    };
+    colorTransition(document.documentElement, 'background');
+
+    /* ===============================
+       Theme Toggle
+       =============================== */
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    function refreshThemeIcon() {
+      if (document.documentElement.getAttribute('data-theme') === 'light') themeIcon.className = 'fa-solid fa-sun';
+      else themeIcon.className = 'fa-solid fa-moon';
+    }
+    refreshThemeIcon();
+    themeToggle.addEventListener('click', () => {
+      if (document.documentElement.getAttribute('data-theme') === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme','dark');
+      } else {
+        document.documentElement.setAttribute('data-theme','light');
+        localStorage.setItem('theme','light');
+      }
+      refreshThemeIcon();
     });
 
-    // =====================
-    // Smooth Scroll for internal links
-    // =====================
+    /* ===============================
+       Palette controls
+       =============================== */
+    const paletteBtn = document.getElementById('paletteBtn');
+    const palettePanel = document.getElementById('palettePanel');
+    paletteBtn.addEventListener('click', () => palettePanel.classList.toggle('show'));
+    document.addEventListener('click', (e) => {
+      if (!palettePanel.contains(e.target) && !paletteBtn.contains(e.target)) palettePanel.classList.remove('show');
+    });
+    document.querySelectorAll('.swatch').forEach(s => {
+      s.addEventListener('click', () => {
+        const brand = s.dataset.brand;
+        const brand2 = s.dataset.brand2 || s.dataset.brand;
+        document.documentElement.style.setProperty('--brand', brand);
+        document.documentElement.style.setProperty('--brand-2', brand2);
+        localStorage.setItem('accentBrand', brand);
+        localStorage.setItem('accentBrand2', brand2);
+        // small pulse to show change
+        s.animate([{transform:'scale(1)'},{transform:'scale(0.9)'},{transform:'scale(1)'}],{duration:280});
+      });
+    });
+
+    /* ===============================
+       JS-driven responsiveness (no CSS media-queries)
+       sets body.is-mobile / is-tablet
+       =============================== */
+    function applyResponsiveClasses(){
+      const w = innerWidth;
+      document.body.classList.remove('is-mobile','is-tablet');
+      if (w <= 820) document.body.classList.add('is-mobile');
+      else if (w <= 1100) document.body.classList.add('is-tablet');
+    }
+    addEventListener('resize', applyResponsiveClasses);
+    applyResponsiveClasses();
+
+    /* ===============================
+       Smooth anchor scroll
+       =============================== */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
+      a.addEventListener('click', (e) => {
         const id = a.getAttribute('href');
         const el = document.querySelector(id);
         if (!el) return;
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({behavior:'smooth',block:'start'});
       });
     });
 
-    // =====================
-    // JS-Driven Responsiveness (no media queries)
-    // =====================
-    const applyResponsive = () => {
-      const w = window.innerWidth;
-      document.body.classList.remove('is-mobile', 'is-tablet');
-      if (w <= 820) document.body.classList.add('is-mobile');
-      else if (w <= 1100) document.body.classList.add('is-tablet');
-    };
-    applyResponsive();
-    addEventListener('resize', applyResponsive);
-
-    // =====================
-    // Intersection Reveal + Skill Bars
-    // =====================
-    const io = new IntersectionObserver(entries => {
-      for (const ent of entries) {
-        if (ent.isIntersecting) {
-          ent.target.classList.add('reveal');
-          // animate bars within
-          ent.target.querySelectorAll('.bar > span[data-skill]').forEach(span => {
-            const val = span.getAttribute('data-skill');
-            requestAnimationFrame(() => (span.style.width = val + '%'));
-          });
-          io.unobserve(ent.target);
+    /* ===============================
+       Hero typewriter for lead
+       =============================== */
+    (function typeWriter(){
+      const el = document.getElementById('typeText');
+      const full = el.textContent.trim();
+      el.textContent = '';
+      let idx = 0;
+      const tick = () => {
+        if (idx <= full.length) {
+          el.textContent = full.slice(0, idx++);
+          setTimeout(tick, 14);
         }
-      }
-    }, { threshold: 0.25 });
-    document.querySelectorAll('.reveal, .skill-card').forEach(el => io.observe(el));
-
-    // =====================
-    // Floating + Tilt for images
-    // =====================
-    const floaters = document.querySelectorAll('.photo-card');
-    floaters.forEach(card => {
-      // initial fade
-      requestAnimationFrame(() => card.classList.add('reveal'));
-      // gentle float
-      let t = 0;
-      const img = card.querySelector('.profile-img');
-      function float() {
-        t += 0.01;
-        if (img) img.style.transform = `translateY(${Math.sin(t) * 6}px)`;
-        requestAnimationFrame(float);
-      }
-      float();
-      // tilt on pointer
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(800px) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
-      });
-    });
-
-    // ensure hero image reveals once loaded
-    const heroImg = document.getElementById('profileImg');
-    if (heroImg) heroImg.addEventListener('load', () => heroImg.closest('.photo-card')?.classList.add('reveal'));
-
-    // =====================
-    // Typewriter-ish intro line
-    // =====================
-    const typeTarget = document.getElementById('typeTarget');
-    const full = typeTarget.textContent.trim();
-    typeTarget.textContent = '';
-    let i = 0; (function type(){
-      typeTarget.textContent = full.slice(0, i++);
-      if (i <= full.length) setTimeout(type, 14);
+      };
+      tick();
     })();
 
-    // =====================
-    // Blog: LocalStorage CRUD + JSON import/export
-    // =====================
-    const LS_KEY = 'abhi_blog_posts_v1';
+    /* ===============================
+       Profile image floating + tilt
+       =============================== */
+    (function profileFloat(){
+      const card = document.getElementById('heroPhoto');
+      const img = document.getElementById('profileImg');
+      // reveal when image loaded
+      img.addEventListener('load', () => card.classList.add('revealed'));
+      if (img.complete) card.classList.add('revealed');
+      // float animation
+      let t=0;
+      const loop = () => {
+        t += 0.01;
+        img.style.transform = `translateY(${Math.sin(t) * 6}px)`;
+        requestAnimationFrame(loop);
+      };
+      loop();
+      // tilt on pointer
+      card.addEventListener('mousemove', (e)=> {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left)/r.width - 0.5;
+        const y = (e.clientY - r.top)/r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
+      });
+      card.addEventListener('mouseleave', ()=> card.style.transform = 'none');
+    })();
+
+    /* ===============================
+       Animate skill bars on intersection
+       =============================== */
+    (function animateSkillBars(){
+      const observer = new IntersectionObserver((entries,obs) => {
+        for (const en of entries) {
+          if (en.isIntersecting) {
+            const card = en.target;
+            card.querySelectorAll('.bar > span').forEach(s => {
+              const v = s.getAttribute('data-skill') || '60';
+              s.style.width = v + '%';
+            });
+            obs.unobserve(card);
+          }
+        }
+      },{threshold:.18});
+      document.querySelectorAll('.skill-card').forEach(c => observer.observe(c));
+    })();
+
+    /* ===============================
+       Blog system: localStorage CRUD + import/export
+       =============================== */
+    const LS_KEY = 'abhi_blog_v2';
     const blogGrid = document.getElementById('blogGrid');
     const postDialog = document.getElementById('postDialog');
     const postForm = document.getElementById('postForm');
     const readDialog = document.getElementById('readDialog');
     const readArticle = document.getElementById('readArticle');
 
-    const readPosts = () => JSON.parse(localStorage.getItem(LS_KEY) || '[]');
-    const writePosts = (arr) => localStorage.setItem(LS_KEY, JSON.stringify(arr));
+    function readPosts(){ try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch { return []; } }
+    function writePosts(arr){ localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
 
-    function renderPosts() {
+    function renderPosts(){
       const posts = readPosts();
       blogGrid.innerHTML = '';
-      if (!posts.length) {
-        blogGrid.innerHTML = '<div class="muted">No posts yet. Click "New Post" or "Add demo posts".</div>';
-        return;
-      }
-      for (const [idx, p] of posts.entries()) {
-        const card = document.createElement('article');
-        card.className = 'post';
-        card.innerHTML = `
+      if (!posts.length) { blogGrid.innerHTML = '<div class="muted">No posts yet. Click New Post or Add demo posts to begin.</div>'; return; }
+      posts.forEach((p, i) => {
+        const el = document.createElement('article');
+        el.className = 'post';
+        el.innerHTML = `
           <h3>${escapeHTML(p.title)}</h3>
-          <div class="date">${escapeHTML(p.date || '')}</div>
-          <p>${escapeHTML(p.desc || '')}</p>
-          <div style="display:flex; gap:8px;">
-            <button class="btn-ghost read">Read More</button>
-            <button class="btn-ghost edit"><i class="fa-regular fa-pen-to-square"></i></button>
-            <button class="btn-ghost del" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+          <div class="meta">${escapeHTML(p.date || '')}</div>
+          <p class="muted">${escapeHTML(p.desc || '')}</p>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn btn-ghost read">Read</button>
+            <button class="btn btn-ghost edit"><i class="fa-regular fa-pen-to-square"></i></button>
+            <button class="btn btn-ghost del"><i class="fa-regular fa-trash-can"></i></button>
           </div>
         `;
-        card.querySelector('.read').addEventListener('click', () => openRead(p));
-        card.querySelector('.edit').addEventListener('click', () => openEdit(idx, p));
-        card.querySelector('.del').addEventListener('click', () => { if (confirm('Delete this post?')) { const arr = readPosts(); arr.splice(idx, 1); writePosts(arr); renderPosts(); } });
-        blogGrid.appendChild(card);
-      }
-    }
-
-    function openRead(p) {
-      readArticle.innerHTML = `
-        <h3 style="margin:0 0 6px;">${escapeHTML(p.title)}</h3>
-        <div class="date">${escapeHTML(p.date || '')}</div>
-        <p>${escapeHTML(p.desc || '')}</p>
-        ${p.content ? `<div style="white-space:pre-wrap;">${escapeHTML(p.content)}</div>` : ''}
-      `;
-      readDialog.showModal();
-    }
-    document.getElementById('closeRead').addEventListener('click', () => readDialog.close());
-
-    function openEdit(index, p) {
-      postDialog.returnValue = '';
-      postDialog.showModal();
-      const f = postForm;
-      f.title.value = p.title; f.date.value = p.date || ''; f.desc.value = p.desc || ''; f.content.value = p.content || '';
-      postDialog.addEventListener('close', function onClose(){
-        postDialog.removeEventListener('close', onClose);
-        if (postDialog.returnValue === 'save') {
-          const arr = readPosts();
-          arr[index] = { title: f.title.value.trim(), date: f.date.value, desc: f.desc.value.trim(), content: f.content.value };
-          writePosts(arr); renderPosts();
-        }
+        el.querySelector('.read').addEventListener('click', ()=> openRead(p));
+        el.querySelector('.edit').addEventListener('click', ()=> openEdit(i,p));
+        el.querySelector('.del').addEventListener('click', ()=> {
+          if (confirm('Delete this post?')) {
+            const arr = readPosts(); arr.splice(i,1); writePosts(arr); renderPosts();
+          }
+        });
+        blogGrid.appendChild(el);
       });
     }
 
-    document.getElementById('newPostBtn').addEventListener('click', () => {
+    function openRead(p){
+      readArticle.innerHTML = `<h3 style="margin:0">${escapeHTML(p.title)}</h3><div class="meta">${escapeHTML(p.date||'')}</div><p>${escapeHTML(p.desc||'')}</p>${p.content?'<div style="white-space:pre-wrap;margin-top:8px">'+escapeHTML(p.content)+'</div>':''}`;
+      readDialog.showModal();
+    }
+    document.getElementById('closeRead').addEventListener('click', ()=> readDialog.close());
+
+    function openEdit(index, p) {
+      postForm.title.value = p.title||'';
+      postForm.date.value = p.date||'';
+      postForm.desc.value = p.desc||'';
+      postForm.content.value = p.content||'';
+      postDialog.showModal();
+      postDialog.dataset.editIndex = index;
+    }
+
+    document.getElementById('newPostBtn').addEventListener('click', ()=>{
       postForm.reset();
-      postDialog.returnValue = '';
+      delete postDialog.dataset.editIndex;
       postDialog.showModal();
     });
 
-    postForm.addEventListener('close', (e) => {}); // dialog handles submit
-    postForm.addEventListener('submit', (e) => { e.preventDefault(); });
-    postDialog.addEventListener('close', () => {
+    postForm.addEventListener('submit', (e)=> e.preventDefault());
+    postDialog.addEventListener('close', ()=>{
       if (postDialog.returnValue === 'save') {
-        const f = postForm;
-        const newPost = { title: f.title.value.trim(), date: f.date.value, desc: f.desc.value.trim(), content: f.content.value };
-        const arr = readPosts(); arr.unshift(newPost); writePosts(arr); renderPosts();
+        const arr = readPosts();
+        const newPost = {
+          title: postForm.title.value.trim(),
+          date: postForm.date.value || new Date().toISOString().slice(0,10),
+          desc: postForm.desc.value.trim(),
+          content: postForm.content.value.trim()
+        };
+        if (postDialog.dataset.editIndex !== undefined) {
+          arr[postDialog.dataset.editIndex] = newPost;
+        } else arr.unshift(newPost);
+        writePosts(arr); renderPosts();
       }
     });
 
-    document.getElementById('addDemo').addEventListener('click', () => {
+    // Add demo posts
+    document.getElementById('addDemo').addEventListener('click', ()=>{
       const demo = [
-        { title: 'Shipping a Next.js + RAG chatbot', date: new Date().toISOString().slice(0,10), desc: 'How I embedded AI search into docs using LangChain + vector DB.', content: 'Stack: Next.js, LangChain, OpenAI, Pinecone. Steps: ingest, chunk, embed, index, query with hybrid scoring...' },
-        { title: 'Clean Node APIs with Zod', date: new Date(Date.now()-86400000).toISOString().slice(0,10), desc: 'I use Zod to validate every request. Here is a pattern I like.', content: 'Validate inbound DTOs, infer TS types, centralize error map, add E2E contract tests...' },
+        { title:'Shipping a Next.js + RAG Chatbot', date:new Date().toISOString().slice(0,10), desc:'How I embedded AI search into docs using LangChain + Pinecone.', content:'Stack: Next.js, LangChain, OpenAI, Pinecone. Steps: ingest -> chunk -> embed -> index -> query.' },
+        { title:'Building Clean Node APIs', date:new Date(Date.now()-86400000).toISOString().slice(0,10), desc:'Patterns I use for validation & maintainability.', content:'Zod for schemas, central error mapper, typed contracts between frontend/backend.' }
       ];
       const arr = readPosts(); writePosts(demo.concat(arr)); renderPosts();
     });
 
-    // Import/Export JSON
-    document.getElementById('exportBtn').addEventListener('click', () => {
-      const blob = new Blob([JSON.stringify(readPosts(), null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = Object.assign(document.createElement('a'), { href: url, download: 'blog-posts.json' });
-      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    // Export / Import
+    document.getElementById('exportBtn').addEventListener('click', ()=>{
+      const blob = new Blob([JSON.stringify(readPosts(),null,2)],{type:'application/json'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='blog-posts.json'; a.click(); a.remove();
     });
 
-    document.getElementById('importInput').addEventListener('change', (e) => {
+    document.getElementById('importInput').addEventListener('change', (e)=>{
       const file = e.target.files?.[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
+      const r = new FileReader();
+      r.onload = ()=> {
         try {
-          const json = JSON.parse(reader.result);
+          const json = JSON.parse(r.result);
           if (!Array.isArray(json)) throw new Error('JSON must be an array of posts');
-          // sanitize
-          const cleaned = json.map(p => ({ title: String(p.title||'').slice(0,160), date: String(p.date||''), desc: String(p.desc||'').slice(0,500), content: p.content? String(p.content) : '' }));
-          writePosts(cleaned); renderPosts();
-        } catch(err) { alert('Invalid JSON: ' + err.message); }
+          // basic sanitize
+          const cleaned = json.map(p=>({ title:String(p.title||'').slice(0,200), date:String(p.date||''), desc:String(p.desc||''), content: String(p.content||'') }));
+          writePosts(cleaned); renderPosts(); alert('Imported posts (replaced existing).');
+        } catch(err){ alert('Invalid JSON: '+ err.message) }
       };
-      reader.readAsText(file);
-      e.target.value = '';
+      r.readAsText(file); e.target.value='';
     });
 
-    function escapeHTML(s='') { return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[m])); }
-
+    // bootstrap render
     renderPosts();
 
-    // =====================
-    // Simple contact (no backend) -> toast
-    // =====================
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
+    /* ===============================
+       Contact form (EmailJS placeholder)
+       Replace keys to enable real sending
+       =============================== */
+    // Uncomment and set your EmailJS keys to send emails
+    /*
+    (function(){
+      const script = document.createElement('script');
+      script.src = 'https://cdn.emailjs.com/dist/email.min.js';
+      script.onload = ()=>{
+        emailjs.init('YOUR_EMAILJS_USER_ID');
+      };
+      document.head.appendChild(script);
+    })();
+    */
+    document.getElementById('contactForm').addEventListener('submit',(e)=>{
       e.preventDefault();
-      alert('Thanks! Your message was noted locally. (Hook EmailJS or a server later)');
+      // If EmailJS configured, you'd call emailjs.sendForm(...)
+      // For now: show placeholder success and clear
+      alert('Thanks! Your message was sent (placeholder). Configure EmailJS to enable real emails.');
       e.target.reset();
     });
 
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    /* ===============================
+       Utility: escape HTML
+       =============================== */
+    function escapeHTML(s=''){ return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',\"'\":'&#39;'}[ch])); }
   </script>
 </body>
 </html>
+
