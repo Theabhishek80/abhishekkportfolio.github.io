@@ -1,419 +1,434 @@
+--- FILE: README.txt ---
+Save the following files into a folder structure exactly as named. Open `index.html` in a browser. This package is a multi-page, highly animated portfolio for Abhishek Pandey.
+
+Structure:
+- index.html
+- about.html
+- work.html
+- contact.html
+- assets/styles.css
+- assets/app.js
+- assets/images/my-image.png   (copy your my image.png here)
+- assets/images/ecom-1.jpg    (placeholder images)
+- assets/images/ecom-2.jpg
+
+--- FILE: index.html ---
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Abhishek Pandey — Full-Stack Developer & Creative Technologist</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Abhishek Pandey — Portfolio</title>
+  <meta name="description" content="Abhishek Pandey — Full-Stack Developer & Creative Technologist. Student seeking internship.">
+  <meta property="og:title" content="Abhishek Pandey — Portfolio">
+  <meta property="og:description" content="Full-Stack Developer, AI-integrations, E-commerce demo.">
+  <meta property="og:image" content="assets/images/my-image.png">
 
-  <!-- SEO / Open Graph -->
-  <meta name="description" content="Abhishek Pandey — Full-Stack Developer & Creative Technologist. React, Angular, Vue, Svelte, Node.js, UI/UX & AI Automation." />
-  <meta property="og:title" content="Abhishek Pandey — Full-Stack Developer & Creative Technologist" />
-  <meta property="og:description" content="Portfolio of Abhishek Pandey — Full-Stack Developer & Creative Technologist." />
-  <meta property="og:image" content="my image.png" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Abhishek Pandey","jobTitle":"Full-Stack Developer & Creative Technologist","telephone":"+919301708816","email":"abhishekpade16@gmail.com","url":"https://your-portfolio.example.com"}
-  </script>
-
-  <!-- Fonts + Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2d9d4b7d1.js" crossorigin="anonymous"></script>
-
-  <!-- GSAP (animations) -->
+  <link rel="stylesheet" href="assets/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <style>
-    :root{
-      --bg:#0b0f14; --card:#0f1720; --muted:#98a0aa; --accent1:#7c5cff; --accent2:#00d4ff; --glass: rgba(255,255,255,0.06);
-    }
-    [data-theme="light"]{ --bg:#f6f8fb; --card:rgba(255,255,255,0.8); --muted:#52565b; --glass: rgba(255,255,255,0.6);}
-
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:'Inter',system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#07101a);color:var(--muted);-webkit-font-smoothing:antialiased}
-
-    /* Top nav */
-    header{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:92%;max-width:1200px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:14px;backdrop-filter:blur(8px);background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(2,6,23,0.6)}
-    .logo{display:flex;gap:12px;align-items:center}
-    .brand{font-weight:800;color:white;letter-spacing:0.2px}
-    nav{display:flex;gap:18px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
-    nav a.active,nav a:hover{color:white;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text}
-
-    .controls{display:flex;gap:10px;align-items:center}
-    .theme-toggle{cursor:pointer;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:10px;background:var(--glass)}
-
-    /* Hero */
-    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center;padding:120px 6vw 80px;position:relative;overflow:hidden}
-    .hero-left{max-width:780px}
-    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#021; font-weight:700}
-    h1{font-size:clamp(28px,4vw,48px);margin:18px 0 12px;color:transparent;background:linear-gradient(90deg,#fff,#cfe9ff);-webkit-background-clip:text;background-clip:text;font-weight:800}
-    p.lead{color:var(--muted);font-size:1.05rem;line-height:1.6}
-    .cta{display:flex;gap:14px;margin-top:20px}
-    .btn{padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;border:none}
-    .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#021}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
-    /* Hero card */
-    .hero-right{position:relative}
-    .profile-card{width:420px;height:480px;border-radius:18px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(3,8,20,0.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
-    .portrait{width:180px;height:180px;border-radius:50%;overflow:hidden;border:6px solid rgba(255,255,255,0.04);box-shadow:0 6px 30px rgba(124,92,255,0.12);transform:translateY(-30px)}
-    .portrait img{width:100%;height:100%;object-fit:cover}
-    .title{font-weight:800;color:white}
-    .sub{color:var(--muted)}
-
-    /* Floating shapes canvas */
-    #particles{position:absolute;inset:0;z-index:0;pointer-events:none}
-
-    /* Sections */
-    main{position:relative;z-index:2}
-    section{padding:80px 6vw}
-    .container{max-width:1200px;margin:0 auto}
-
-    /* About counters & timeline */
-    .counters{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
-    .counter{flex:1;min-width:140px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);text-align:center}
-    .counter h3{font-size:28px;margin:0;color:white}
-    .timeline{margin-top:24px;border-left:2px solid rgba(255,255,255,0.03);padding-left:18px}
-    .timeline-item{margin-bottom:18px;position:relative}
-    .timeline-item:before{content:'';position:absolute;left:-11px;top:6px;width:16px;height:16px;border-radius:50%;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 4px 14px rgba(124,92,255,0.18)}
-
-    /* Skills */
-    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .skill-card{padding:16px;border-radius:12px;background:var(--glass);backdrop-filter:blur(6px);min-height:110px}
-    .skill-name{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-weight:700;color:white}
-    .skill-bar{height:8px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
-    .skill-fill{height:100%;width:40%;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2))}
-
-    /* Portfolio */
-    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-    .project{position:relative;border-radius:12px;overflow:hidden;min-height:180px;background:#061018}
-    .project img{width:100%;height:220px;object-fit:cover;display:block}
-    .project .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.6));display:flex;flex-direction:column;justify-content:flex-end;padding:16px;transform:translateY(100%);transition:all .36s ease}
-    .project:hover .overlay{transform:translateY(0)}
-    .filters{display:flex;gap:10px;margin-bottom:18px}
-    .chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);cursor:pointer}
-    .chip.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#021}
-
-    /* Testimonials */
-    .testimonials{display:flex;gap:16px;overflow:hidden}
-    .test-item{min-width:320px;border-radius:12px;padding:18px;background:var(--glass);backdrop-filter:blur(6px)}
-
-    /* Contact */
-    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
-    form{display:flex;flex-direction:column;gap:10px}
-    input,textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted)}
-    .socials{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:12px;background:var(--glass)}
-
-    footer{padding:28px 6vw;text-align:center;color:var(--muted)}
-
-    /* Responsive */
-    @media(max-width:980px){.hero{grid-template-columns:1fr;padding-top:100px}.hero-right{order:-1}.portrait{width:140px;height:140px}.hero{padding-bottom:40px}.contact-grid{grid-template-columns:1fr}}
-
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </head>
-<body data-theme="dark">
-
-  <header>
-    <div class="logo">
-      <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:#021;font-weight:800">AP</div>
-      <div>
-        <div class="brand">Abhishek Pandey</div>
-        <div style="font-size:12px;color:var(--muted)">Full-Stack & Creative Technologist</div>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand" aria-hidden="false">AP<span class="dot">.</span></div>
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="controls">
+        <button id="themeBtn" aria-label="Toggle theme">🌙</button>
+        <a class="btn ghost" href="#contact">Hire Me</a>
       </div>
-    </div>
-    <nav>
-      <a href="#home" class="navlink">Home</a>
-      <a href="#about" class="navlink">About</a>
-      <a href="#skills" class="navlink">Skills</a>
-      <a href="#portfolio" class="navlink">Portfolio</a>
-      <a href="#contact" class="navlink">Contact</a>
-    </nav>
-
-    <div class="controls">
-      <div class="theme-toggle" id="themeToggle" title="Toggle dark/light">🌙</div>
-      <div class="get-resume btn ghost" onclick="window.open('#')">Resume</div>
     </div>
   </header>
 
-  <canvas id="particles"></canvas>
-
   <main>
-    <section id="home" class="hero">
-      <div class="hero-left container">
-        <span class="eyebrow">Featured • Engineer</span>
-        <h1>Hi, I’m Abhishek Pandey — Full-Stack Developer & Creative Technologist.</h1>
-        <p class="lead">I design and build impactful software and delightful experiences — using modern frameworks, strong engineering, and creative automation. I craft products that scale, feel premium, and are delightful to use.</p>
-        <div class="cta">
-          <button class="btn primary" onclick="document.querySelector('#portfolio').scrollIntoView({behavior:'smooth'})">View My Work</button>
-          <button class="btn ghost" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-inner container">
+        <div class="hero-left">
+          <div class="eyebrow">Featured • Student • Seeking Internship</div>
+          <h1 class="title">Hi, I’m <span class="name-gradient">Abhishek Pandey</span><br><span class="subhead">Full-Stack Developer & Creative Technologist</span></h1>
+          <p class="lead">I build premium web experiences with modern frameworks, strong engineering and AI automation. Currently a student aiming for an internship in product engineering.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="work.html">View My Work</a>
+            <a class="btn outline" href="contact.html">Hire Me / Internship</a>
+          </div>
+
+          <div class="badges">
+            <span class="badge">React</span>
+            <span class="badge">Node.js</span>
+            <span class="badge">AI Integrations</span>
+            <span class="badge">UI/UX</span>
+          </div>
         </div>
 
-        <div style="margin-top:28px;display:flex;gap:14px;align-items:center">
-          <div style="display:flex;gap:10px;align-items:center">
-            <img src="my image.png" alt="Abhishek" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.04)">
-            <div>
-              <div style="font-weight:800;color:white">Abhishek Pandey</div>
-              <div style="font-size:12px;color:var(--muted)">React • Node • UI/UX • Automation</div>
+        <div class="hero-right">
+          <!-- Big square visual (single image) -->
+          <div class="visual-wrap" id="visualWrap">
+            <div class="floating-shapes" aria-hidden="true">
+              <!-- SVG animated shapes inserted by CSS/JS -->
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-right container">
-        <div class="profile-card" id="profileCard">
-          <div class="portrait"><img src="my image.png" alt="Abhishek Pandey"></div>
-          <div style="text-align:center">
-            <div class="title">Abhishek Pandey</div>
-            <div class="sub">Full-Stack Developer & Creative Technologist</div>
-          </div>
-          <div style="display:flex;gap:12px;margin-top:8px">
-            <a href="mailto:abhishekpade16@gmail.com" class="btn ghost">Email</a>
-            <a href="tel:+919301708816" class="btn ghost">Call</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <h2 style="color:white">About Me</h2>
-        <p style="max-width:820px">I’m a passionate Full-Stack Developer and Creative Technologist focused on building performant web apps and delightful interfaces. I’ve worked across React, Angular, Vue and Svelte and build automation pipelines with Node.js and AI tools. My goal is to combine rigorous engineering with polished design to ship products that scale.</p>
-
-        <div class="counters">
-          <div class="counter"><h3 id="years">0</h3><div>Years Experience</div></div>
-          <div class="counter"><h3 id="projects">0</h3><div>Projects Completed</div></div>
-          <div class="counter"><h3 id="clients">0</h3><div>Happy Clients</div></div>
-        </div>
-
-        <div class="timeline">
-          <div class="timeline-item"><strong>2023 — Present</strong> • Senior Engineer at SomeCompany — Building scalable frontends and AI tooling.</div>
-          <div class="timeline-item"><strong>2021 — 2023</strong> • Mid-level Engineer — Focused on UI systems and automation.</div>
-          <div class="timeline-item"><strong>2019 — 2021</strong> • Early career — Projects in freelancing and clinics.</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="container">
-        <h2 style="color:white">Skills</h2>
-        <div class="skills-grid">
-          <!-- Skill cards -->
-          <div class="skill-card">
-            <div class="skill-name"><span>React</span><span>95%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name"><span>Angular</span><span>85%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name"><span>Vue</span><span>80%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name"><span>Svelte</span><span>72%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name"><span>HTML / CSS</span><span>98%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:98%"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name"><span>JavaScript / Node.js</span><span>94%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:94%"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name"><span>UI/UX & Branding</span><span>90%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-name"><span>AI Automation</span><span>78%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="portfolio">
-      <div class="container">
-        <h2 style="color:white">Selected Work</h2>
-        <div class="filters">
-          <div class="chip active" data-filter="all">All</div>
-          <div class="chip" data-filter="web">Web</div>
-          <div class="chip" data-filter="mobile">Mobile</div>
-          <div class="chip" data-filter="branding">Branding</div>
-        </div>
-
-        <div class="portfolio-grid">
-          <!-- Example projects -->
-          <div class="project" data-cat="web">
-            <img src="https://images.unsplash.com/photo-1526378726073-3b9b2f0f2d9f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1" alt="Project 1">
-            <div class="overlay"><div style="font-weight:800;color:white">Project Alpha</div><div style="font-size:13px;color:var(--muted)">React • Node • Design System</div></div>
-          </div>
-
-          <div class="project" data-cat="branding">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2" alt="Project 2">
-            <div class="overlay"><div style="font-weight:800;color:white">Brand Refresh</div><div style="font-size:13px;color:var(--muted)">Branding • Strategy</div></div>
-          </div>
-
-          <div class="project" data-cat="mobile">
-            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3" alt="Project 3">
-            <div class="overlay"><div style="font-weight:800;color:white">Mobile App</div><div style="font-size:13px;color:var(--muted)">Ionic • React Native</div></div>
-          </div>
-
-          <div class="project" data-cat="web">
-            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=4" alt="Project 4">
-            <div class="overlay"><div style="font-weight:800;color:white">Design System</div><div style="font-size:13px;color:var(--muted)">Design • Vue</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="testimonials">
-      <div class="container">
-        <h2 style="color:white">Testimonials</h2>
-        <div class="testimonials" id="testimonialsRow">
-          <div class="test-item">“Abhishek delivered an outstanding product — timely and with beautiful UX.” — Client A</div>
-          <div class="test-item">“Great communication and top engineering skills.” — Client B</div>
-          <div class="test-item">“Helped us automate workflows and saved hours per week.” — Client C</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <h2 style="color:white">Contact</h2>
-        <div class="contact-grid">
-          <form id="contactForm" onsubmit="return false;">
-            <input id="name" placeholder="Your name" required />
-            <input id="email" type="email" placeholder="you@example.com" required />
-            <textarea id="message" rows="6" placeholder="How can I help?" required></textarea>
-            <div style="display:flex;gap:10px;align-items:center">
-              <button class="btn primary" type="submit">Send Message</button>
-              <div id="formStatus" style="color:var(--muted)"></div>
+            <div class="visual-card">
+              <img src="assets/images/my-image.png" alt="Abhishek Pandey" loading="lazy">
             </div>
-          </form>
-
-          <div class="socials">
-            <div style="font-weight:800;color:white">Direct Contact</div>
-            <div>📞 <a href="tel:+919301708816">+91 9301708816</a></div>
-            <div>📧 <a href="mailto:abhishekpade16@gmail.com">abhishekpade16@gmail.com</a></div>
-            <div>📷 <a href="https://www.instagram.com/imabhishekkp/" target="_blank">Instagram</a></div>
-            <div>💼 <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank">LinkedIn</a></div>
-            <div style="margin-top:8px">Follow my socials and feel free to reach out — I usually reply within 24 hours.</div>
+            <svg class="glow-svg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <radialGradient id="g1"><stop offset="0%" stop-color="#6c5cff" stop-opacity="0.45"/><stop offset="100%" stop-color="#00d4ff" stop-opacity="0.05"/></radialGradient>
+              </defs>
+              <circle cx="400" cy="400" r="360" fill="url(#g1)"></circle>
+            </svg>
           </div>
+        </div>
+      </div>
+      <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+    </section>
+
+    <!-- FEATURES / QUICK LINKS -->
+    <section class="features container">
+      <div class="feature-card"> <h4>Full-Stack</h4><p>React • Angular • Vue • Svelte • Node.js</p></div>
+      <div class="feature-card"> <h4>AI</h4><p>OpenAI integrations, embeddings, automation pipelines</p></div>
+      <div class="feature-card"> <h4>Design</h4><p>Design systems, UI/UX, prototyping</p></div>
+      <div class="feature-card"> <h4>Commerce</h4><p>E-commerce architecture, payments, search</p></div>
+    </section>
+
+    <!-- ABOUT SUMMARY -->
+    <section class="about-preview container">
+      <div class="about-left">
+        <h3>About</h3>
+        <p>I’m a student focused on building production web apps and learning advanced engineering workflows. I’ve created demos, freelance work, and an e-commerce project with AI-enhanced features.</p>
+        <a class="link" href="about.html">Read more →</a>
+      </div>
+      <div class="about-right">
+        <div class="stats">
+          <div class="stat"><div class="num" id="statYears">0</div><div class="lbl">Years</div></div>
+          <div class="stat"><div class="num" id="statProjects">0</div><div class="lbl">Projects</div></div>
+          <div class="stat"><div class="num" id="statClients">0</div><div class="lbl">Clients</div></div>
         </div>
       </div>
     </section>
 
-    <footer>
-      <div class="container">
-        <div style="margin-bottom:12px">© <span id="year"></span> Abhishek Pandey — All rights reserved.</div>
-        <div style="font-size:13px">Built with ❤️ · Smooth animations · SEO-ready</div>
+    <!-- FOOTER PREVIEW CTA -->
+    <section class="footer-cta container">
+      <div class="cta-footer">
+        <h3>Want to collaborate or offer an internship?</h3>
+        <a class="btn primary" href="contact.html">Get in touch</a>
       </div>
-    </footer>
+    </section>
+
   </main>
 
-  <script>
-    // Utility: set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="yr"></span> Abhishek Pandey</div>
+      <div class="socials"><a href="https://www.instagram.com/imabhishekkp/" target="_blank">Instagram</a> · <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank">LinkedIn</a></div>
+    </div>
+    <button id="toTop" title="Back to top">↑</button>
+  </footer>
 
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', ()=>{
-      const el = document.body;
-      const t = el.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      el.setAttribute('data-theme', t);
-      themeToggle.textContent = t === 'dark' ? '🌙' : '☀️';
-    });
-
-    // Particles background (lightweight canvas particle system)
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let w, h, particles = [];
-    function resize(){w = canvas.width = innerWidth; h = canvas.height = innerHeight}
-    window.addEventListener('resize', resize); resize();
-
-    function rand(min,max){return Math.random()*(max-min)+min}
-    function createParticles(n=60){particles = []; for(let i=0;i<n;i++){particles.push({x:rand(0,w),y:rand(0,h),r:rand(0.6,3),vx:rand(-0.3,0.3),vy:rand(-0.6,0.6),alpha:rand(0.06,0.18)})}}
-    createParticles(70);
-    function drawParticles(){ctx.clearRect(0,0,w,h); for(const p of particles){p.x += p.vx; p.y += p.vy; if(p.x<0) p.x=w; if(p.x>w) p.x=0; if(p.y<0) p.y=h; if(p.y>h) p.y=0; ctx.beginPath(); ctx.fillStyle = 'rgba(255,255,255,'+p.alpha+')'; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();}}
-    function loop(){drawParticles(); requestAnimationFrame(loop)} loop();
-
-    // Smooth nav highlight
-    const navlinks = document.querySelectorAll('.navlink');
-    function onScroll(){
-      const pos = window.scrollY + innerHeight/3;
-      document.querySelectorAll('section').forEach(sec=>{
-        const top = sec.offsetTop; const bottom = top + sec.offsetHeight;
-        const id = sec.getAttribute('id');
-        const link = document.querySelector('nav a[href="#'+id+'"]');
-        if(link){ if(pos>=top && pos<bottom){ navlinks.forEach(n=>n.classList.remove('active')); link.classList.add('active'); }}
-      })
-    }
-    window.addEventListener('scroll', onScroll); onScroll();
-
-    // GSAP intro animations
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from('.brand',{y:-10, opacity:0, duration:0.8});
-    gsap.from('.eyebrow',{y:8,opacity:0,duration:.8,delay:.2});
-    gsap.from('h1',{y:24,opacity:0,duration:.9,delay:.4,ease:'power3.out'});
-    gsap.from('.lead',{y:12,opacity:0,duration:.9,delay:.55});
-    gsap.from('.portrait',{scale:0.92,opacity:0,duration:.9,delay:.6,ease:'back.out(1.2)'});
-
-    // Counters animation
-    function animateCounter(id,to){const el=document.getElementById(id); gsap.fromTo({val:0},{val:to,duration:1.8,ease:'power1.out',onUpdate:function(){el.textContent=Math.floor(this.targets()[0].val)}})}
-    // trigger counters when visible
-    ScrollTrigger.create({trigger:'#about',onEnter:()=>{animateCounter('years',6);animateCounter('projects',48);animateCounter('clients',28)}})
-
-    // Skills micro-interactions
-    document.querySelectorAll('.skill-card').forEach(card=>{
-      card.addEventListener('mouseenter',()=>gsap.to(card,{scale:1.02,duration:.25}))
-      card.addEventListener('mouseleave',()=>gsap.to(card,{scale:1,duration:.25}))
-    })
-
-    // Portfolio filters
-    document.querySelectorAll('.chip').forEach(chip=>chip.addEventListener('click',function(){
-      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active')); this.classList.add('active');
-      const f=this.getAttribute('data-filter'); document.querySelectorAll('.project').forEach(p=>{ if(f==='all' || p.getAttribute('data-cat')===f) p.style.display='block'; else p.style.display='none' })
-    }))
-
-    // Testimonials auto-scroll using GSAP
-    const tRow = document.getElementById('testimonialsRow'); gsap.to(tRow,{xPercent:-66,duration:18,repeat:-1,ease:'linear'});
-
-    // Contact form basic handler (no backend) — simulates sending
-    const contactForm = document.getElementById('contactForm'); const status = document.getElementById('formStatus');
-    contactForm.addEventListener('submit', async (e)=>{
-      status.textContent='Sending...';
-      await new Promise(r=>setTimeout(r,900));
-      status.textContent='Message sent — I will reply to you shortly.'; contactForm.reset();
-    })
-
-    // Sticky highlight for profile card (parallax)
-    gsap.to('#profileCard',{y: -10, scrollTrigger:{trigger:'#home',start:'top top',end:'bottom top',scrub:true}})
-
-    // Micro-interaction for projects
-    document.querySelectorAll('.project').forEach(p=>{
-      p.addEventListener('mousemove', (e)=>{
-        const b = p.getBoundingClientRect(); const rx = (e.clientX - b.left - b.width/2)/20; const ry = (e.clientY - b.top - b.height/2)/20;
-        gsap.to(p,{rotationY: rx, rotationX: -ry, transformPerspective:600, duration:0.6});
-      });
-      p.addEventListener('mouseleave', ()=> gsap.to(p,{rotationY:0, rotationX:0,duration:.6}))
-    })
-
-    // Small accessibility: allow Enter on header links
-    document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click', (e)=>{e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'})}))
-
-    // Lazy-load images (progressive friendly)
-    document.querySelectorAll('img').forEach(img=>{ if(!img.complete){img.loading='lazy'; img.style.opacity=0; img.addEventListener('load', ()=>gsap.to(img,{opacity:1,duration:.6})) } })
-
-  </script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
+
+--- FILE: about.html ---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About — Abhishek Pandey</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">AP<span class="dot">.</span></div>
+      <nav class="main-nav"><a href="index.html">Home</a><a href="about.html" class="active">About</a><a href="work.html">Work</a><a href="contact.html">Contact</a></nav>
+    </div>
+  </header>
+  <main>
+    <section class="page-header container">
+      <h1>About Me</h1>
+      <p>I’m a student and aspiring full-stack engineer. My interest lies at the intersection of robust engineering and delightful design.</p>
+    </section>
+
+    <section class="timeline container">
+      <h2>Career Timeline</h2>
+      <div class="timeline-list">
+        <div class="tl-item"><div class="tl-year">2024 — Present</div><div class="tl-body">Learning advanced web engineering, building e-commerce demos and AI prototypes.</div></div>
+        <div class="tl-item"><div class="tl-year">2022 — 2024</div><div class="tl-body">Freelance projects, UI systems, and small startups.</div></div>
+        <div class="tl-item"><div class="tl-year">2020 — 2022</div><div class="tl-body">Foundational studies and personal projects.</div></div>
+      </div>
+    </section>
+
+    <section class="skills container">
+      <h2>Skills & Tools</h2>
+      <div class="skills-grid">
+        <div class="skill">React <span class="skill-amt">95%</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+        <div class="skill">Node.js <span class="skill-amt">94%</span><div class="skill-bar"><div class="skill-fill" style="width:94%"></div></div></div>
+        <div class="skill">HTML/CSS <span class="skill-amt">98%</span><div class="skill-bar"><div class="skill-fill" style="width:98%"></div></div></div>
+        <div class="skill">AI Integrations <span class="skill-amt">78%</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container">© <span id="yr2"></span> Abhishek Pandey</div></footer>
+  <script>document.getElementById('yr2').textContent=new Date().getFullYear();</script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+
+--- FILE: work.html ---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Work — Abhishek Pandey</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner"><div class="brand">AP</div><nav class="main-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="work.html" class="active">Work</a><a href="contact.html">Contact</a></nav></div>
+  </header>
+  <main>
+    <section class="page-header container"><h1>Selected Work</h1><p>Only one primary project is showcased — an e-commerce platform with AI features.</p></section>
+
+    <section class="work-showcase container">
+      <div class="project-hero">
+        <div class="project-media">
+          <img src="assets/images/ecom-1.jpg" alt="E-commerce project" loading="lazy">
+        </div>
+        <div class="project-desc">
+          <h2>E‑Commerce Demo</h2>
+          <p>Full-stack demo with React frontend, Node.js API, Stripe payments, and AI-driven product recommendation & description generator. Designed for scalability and developer ergonomics.</p>
+          <ul>
+            <li>React + Vite</li>
+            <li>Node.js + Express</li>
+            <li>MongoDB</li>
+            <li>Stripe & Serverless functions</li>
+            <li>OpenAI for recommendations and description generation</li>
+          </ul>
+          <div class="proj-actions"><a class="btn primary" href="#">Live Demo (placeholder)</a><a class="btn outline" href="#">Source Code</a></div>
+        </div>
+      </div>
+
+      <div class="project-gallery">
+        <img src="assets/images/ecom-2.jpg" alt="shop UI" loading="lazy">
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container">© <span id="yr3"></span> Abhishek Pandey</div></footer>
+  <script>document.getElementById('yr3').textContent=new Date().getFullYear();</script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+
+--- FILE: contact.html ---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — Abhishek Pandey</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header"><div class="container header-inner"><div class="brand">AP</div><nav class="main-nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="work.html">Work</a><a href="contact.html" class="active">Contact</a></nav></div></header>
+  <main>
+    <section class="page-header container"><h1>Contact</h1><p>I'm currently a student seeking internship opportunities. Reach out for internships or collaborations.</p></section>
+
+    <section class="contact container">
+      <div class="contact-grid">
+        <form id="contactForm" onsubmit="return false">
+          <label>Name<input id="cname" required></label>
+          <label>Email<input id="cemail" type="email" required></label>
+          <label>Message<textarea id="cmsg" rows="6" required></textarea></label>
+          <div style="display:flex;gap:10px;align-items:center"><button class="btn primary" id="sendBtn">Send Message</button><div id="cstatus" style="color:var(--muted)"></div></div>
+        </form>
+
+        <aside class="contact-aside">
+          <h3>Direct Contact</h3>
+          <div>📞 <a href="tel:+919301708816">+91 9301708816</a></div>
+          <div>📧 <a href="mailto:abhishekpade16@gmail.com">abhishekpade16@gmail.com</a></div>
+          <div><a href="https://www.instagram.com/imabhishekkp/" target="_blank">Instagram</a> · <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank">LinkedIn</a></div>
+          <p style="margin-top:10px;color:var(--muted)">I typically reply within 24 hours.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container">© <span id="yr4"></span> Abhishek Pandey</div></footer>
+  <script>document.getElementById('yr4').textContent=new Date().getFullYear();</script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+
+--- FILE: assets/styles.css ---
+/* Highly detailed stylesheet with glassmorphism, gradients, layouts and responsive rules. Save as assets/styles.css */
+:root{--bg:#07101a;--panel:rgba(255,255,255,0.03);--muted:#9aa4b2;--accent1:#6c5cff;--accent2:#00d4ff;--glass:rgba(255,255,255,0.04)}
+[data-theme='light']{--bg:#f6f8fb;--muted:#333}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--muted);-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.site-header{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:94%;max-width:1300px;border-radius:12px;padding:10px 14px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));backdrop-filter:blur(8px);z-index:60}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;color:#fff;letter-spacing:0.6px}
+.brand .dot{color:var(--accent2)}
+.main-nav{display:flex;gap:14px}
+.main-nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
+.main-nav a.active{color:#fff}
+.controls{display:flex;gap:8px;align-items:center}
+.btn{padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;border:none}
+.btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#001}
+.btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+/* HERO */
+.hero{padding-top:120px;position:relative;overflow:hidden}
+.hero-inner{display:grid;grid-template-columns:1fr 540px;gap:48px;align-items:center}
+.eyebrow{display:inline-block;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#021;font-weight:700}
+.title{font-size:48px;line-height:1.02;margin:12px 0;color:transparent;background:linear-gradient(90deg,#fff,#cfe9ff);-webkit-background-clip:text}
+.subhead{font-weight:700;font-size:20px;color:rgba(255,255,255,0.9)}
+.lead{color:var(--muted);max-width:700px}
+.cta-row{display:flex;gap:12px;margin-top:18px}
+.badges{display:flex;gap:10px;margin-top:18px}
+.badge{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700}
+
+/* big visual */
+.visual-wrap{position:relative;width:520px;height:520px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));box-shadow:0 30px 80px rgba(2,6,23,0.7);overflow:hidden}
+.visual-card{position:absolute;inset:18px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.02));display:flex;align-items:center;justify-content:center}
+.visual-card img{width:92%;height:92%;object-fit:cover;border-radius:8px;display:block}
+.glow-svg{position:absolute;inset:0;mix-blend-mode:screen;pointer-events:none}
+.hero-canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+
+/* features grid */
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.feature-card{padding:20px;border-radius:12px;background:var(--panel);backdrop-filter:blur(8px)}
+
+/* about preview */
+.about-preview{display:flex;gap:20px;align-items:center;margin-top:48px}
+.about-left{flex:1}
+.about-right{width:320px}
+.stats{display:flex;gap:12px}
+.stat{background:var(--panel);padding:14px;border-radius:10px;text-align:center}
+.stat .num{font-weight:800;color:#fff;font-size:22px}
+
+/* footer CTA */
+.footer-cta{margin-top:60px;padding:36px;border-radius:12px;background:linear-gradient(90deg,rgba(108,92,255,0.06),rgba(0,212,255,0.03));display:flex;align-items:center;justify-content:space-between}
+
+/* page header */
+.page-header{padding:120px 0 40px}
+.page-header h1{font-size:36px;color:white}
+
+/* timeline */
+.timeline-list{margin-top:20px}
+.tl-item{display:flex;gap:14px;margin-bottom:14px}
+.tl-year{width:140px;color:var(--muted);font-weight:700}
+.tl-body{flex:1;background:var(--panel);padding:12px;border-radius:8px}
+
+/* skills */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.skill{padding:12px;background:var(--panel);border-radius:10px}
+.skill-bar{height:10px;background:rgba(255,255,255,0.02);border-radius:999px;margin-top:8px}
+.skill-fill{height:100%;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:999px}
+
+/* work showcase */
+.project-hero{display:flex;gap:18px;align-items:flex-start}
+.project-media{flex:1;border-radius:12px;overflow:hidden}
+.project-media img{width:100%;height:100%;object-fit:cover}
+.project-desc{width:360px}
+.project-gallery img{width:100%;border-radius:8px}
+
+/* contact grid */
+.contact-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+.contact-aside{padding:18px;background:var(--panel);border-radius:12px}
+
+/* footer */
+.site-footer{margin-top:60px;padding:28px 0;background:transparent}
+.footer-inner{display:flex;justify-content:space-between;align-items:center}
+#toTop{position:fixed;right:24px;bottom:24px;padding:10px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#001}
+
+/* responsive */
+@media(max-width:1000px){.hero-inner{grid-template-columns:1fr 1fr}.visual-wrap{width:420px;height:420px}}
+@media(max-width:780px){.hero-inner{grid-template-columns:1fr}.visual-wrap{width:92%;height:360px}.features{grid-template-columns:repeat(2,1fr)}.about-preview{flex-direction:column}.features .feature-card{min-height:120px}}
+
+/* micro-animations */
+@keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+.floating{animation:floaty 3.4s ease-in-out infinite}
+
+--- FILE: assets/app.js ---
+// Core interaction & animation script. Save as assets/app.js
+(function(){
+  // Basic DOM
+  const yr = document.getElementById('yr'); if(yr) yr.textContent = new Date().getFullYear();
+  const toTop = document.getElementById('toTop'); if(toTop) toTop.addEventListener('click', ()=>gsap.to(window,{scrollTo:0,duration:0.8}));
+
+  // Theme toggle
+  const themeBtn = document.getElementById('themeBtn');
+  themeBtn && themeBtn.addEventListener('click', ()=>{
+    const cur = document.documentElement.getAttribute('data-theme');
+    const next = cur === 'light' ? null : 'light';
+    if(next) document.documentElement.setAttribute('data-theme','light'); else document.documentElement.removeAttribute('data-theme');
+    themeBtn.textContent = next ? '☀️' : '🌙';
+  });
+
+  // HERO CANVAS PARTICLES (optimized)
+  const canvas = document.getElementById('heroCanvas');
+  if(canvas){
+    const ctx = canvas.getContext('2d'); let w,h, particles=[];
+    function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    function rand(a,b){return Math.random()*(b-a)+a}
+    for(let i=0;i<80;i++){ particles.push({x:rand(0,w),y:rand(0,h),r:rand(0.6,3.4),vx:rand(-0.3,0.3),vy:rand(-0.6,0.6),alpha:rand(0.04,0.18)}) }
+    function draw(){ ctx.clearRect(0,0,w,h); for(const p of particles){ p.x+=p.vx; p.y+=p.vy; if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0; ctx.beginPath(); ctx.fillStyle = 'rgba(255,255,255,'+p.alpha+')'; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); } requestAnimationFrame(draw); }
+    draw();
+  }
+
+  // Floating shapes animation on the visual card
+  const shapes = document.querySelectorAll('.visual-wrap .shape');
+  shapes.forEach((s,i)=> gsap.to(s,{y:-12, x: (i%2?12:-12), duration: 3+Math.random()*2, yoyo:true, repeat:-1, ease:'sine.inOut', delay:i*0.1}));
+
+  // Entrance animations
+  gsap.from('.title',{y:30,opacity:0,duration:1.1,ease:'power3.out'});
+  gsap.from('.lead',{y:18,opacity:0,duration:1.1,delay:0.12});
+  gsap.from('.visual-card',{scale:0.96,opacity:0,duration:1.3,delay:0.18,ease:'back.out(1.1)'});
+  gsap.from('.feature-card',{y:16,opacity:0,duration:.9,stagger:.08,delay:.3});
+
+  // Stats animation when scrolled into view
+  gsap.registerPlugin(ScrollTrigger);
+  const statTrigger = document.querySelector('.about-preview');
+  if(statTrigger){
+    ScrollTrigger.create({trigger:statTrigger, start:'top 80%', onEnter:()=>{ gsap.to('#statYears',{innerText:2,duration:1,roundProps:'innerText'}); gsap.to('#statProjects',{innerText:6,duration:1,roundProps:'innerText'}); gsap.to('#statClients',{innerText:3,duration:1,roundProps:'innerText'}); }});
+  }
+
+  // Nav active on scroll (simple)
+  const links = document.querySelectorAll('.main-nav a');
+  function onScroll(){ const y = window.scrollY + innerHeight/3; document.querySelectorAll('section').forEach(sec=>{ if(sec.offsetTop <= y && sec.offsetTop + sec.offsetHeight > y){ links.forEach(l=>l.classList.remove('active')); const id = sec.id; const link = document.querySelector('.main-nav a[href="#'+id+'"], .main-nav a[href$="'+location.pathname.split('/').pop()+'"]'); if(link) link.classList.add('active'); } }) }
+  window.addEventListener('scroll', onScroll);
+
+  // Simple micro-interactions for images
+  document.querySelectorAll('.visual-card img, .project-media img').forEach(img=>{
+    img.addEventListener('mousemove', (e)=>{
+      const b = img.getBoundingClientRect(); const rx = (e.clientX-b.left-b.width/2)/40; const ry = (e.clientY-b.top-b.height/2)/40; gsap.to(img,{rotationY:rx,rotationX:-ry,duration:0.8});
+    });
+    img.addEventListener('mouseleave', ()=>gsap.to(img,{rotationY:0,rotationX:0,duration:.6}));
+  });
+
+  // Contact form simulated send
+  const contact = document.getElementById('contactForm');
+  if(contact){ contact.addEventListener('submit', async (e)=>{ const status = document.getElementById('cstatus'); status.textContent='Sending...'; await new Promise(r=>setTimeout(r,1100)); status.textContent='Message sent — thank you!'; contact.reset(); }) }
+
+  // Lazy load: fade in images
+  document.querySelectorAll('img').forEach(img=>{ img.loading='lazy'; if(!img.complete){ img.style.opacity=0; img.addEventListener('load', ()=> gsap.to(img,{opacity:1,duration:.6})) } });
+
+  // small performance: stop particle canvas on small screens
+  if(innerWidth < 700 && canvas){ canvas.style.display='none'; }
+
+})();
+
+--- END OF PACKAGE ---
+
 
