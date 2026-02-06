@@ -3,901 +3,296 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abhishek Pandey — Full-Stack Developer & Creative Technologist</title>
-  <meta name="description" content="Portfolio of Abhishek Pandey — Full-Stack Developer, Creative Technologist, Student & Internship seeker. React, Node.js, AI automation and UI/UX." />
-  <meta property="og:title" content="Abhishek Pandey — Full-Stack Developer" />
-  <meta property="og:description" content="Creative technologist building beautiful, performant web apps. Available for internships." />
-  <meta property="og:image" content="my image.png" />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2"></script>
+  <title>Abhishek Pandey — Full-Stack Developer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
-    /* -----------------------------
-       Variables & base
-       ----------------------------- */
     :root{
-      --bg:#0b1020; --card: rgba(255,255,255,0.06); --glass: rgba(255,255,255,0.04);
-      --accent1: #7C3AED; --accent2:#06b6d4; --accent3:#f97316;
-      --text: #e6eef8; --muted:#9fb2cc; --glass-border: rgba(255,255,255,0.08);
-    }
-    [data-theme="light"]{
-      --bg: #f6f8fb; --card: rgba(255,255,255,0.7); --glass: rgba(255,255,255,0.75);
-      --accent1:#6b21a8; --accent2:#0ea5a4; --accent3:#ea580c;
-      --text:#071133; --muted:#3b4a6b; --glass-border: rgba(0,0,0,0.06);
-    }
-    *{box-sizing:border-box; margin:0; padding:0}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial; background:linear-gradient(180deg,var(--bg),#05060a); color:var(--text); -webkit-font-smoothing:antialiased; overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-
-    /* -----------------------------
-       Layout
-       ----------------------------- */
-    .container{max-width:1200px;margin:0 auto;padding:28px}
-    header{position:fixed;top:16px;left:0;right:0;z-index:60;padding:0 24px}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand h1{font-size:18px;margin:0;font-weight:800;letter-spacing:0.6px}
-    .brand small{display:block;font-size:11px;color:var(--muted)}
-    nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0;align-items:center}
-    nav li{padding:6px 10px;border-radius:10px; position:relative; overflow:hidden}
-    nav li a{font-weight:600;color:var(--muted); position:relative; z-index:2}
-    nav li.active a{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    nav li::before{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,var(--accent1),var(--accent2)); opacity:0.1; transition:left 0.4s ease}
-    nav li:hover::before{left:0}
-    .cta{display:flex;gap:8px}
-    .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);cursor:pointer; position:relative; overflow:hidden; transition:all 0.3s ease}
-    .btn::before{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent); transition:left 0.6s ease}
-    .btn:hover::before{left:100%}
-    .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 8px 30px rgba(124,58,237,0.18);color:#fff;border:none}
-    .btn.primary:hover{box-shadow:0 12px 40px rgba(124,58,237,0.3); transform:translateY(-2px)}
-
-    /* -----------------------------
-       Hero
-       ----------------------------- */
-    .hero{min-height:100vh;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;padding-top:70px; position:relative}
-    .hero-left{padding:48px 0; position:relative; z-index:2}
-    .eyebrow{display:inline-block;padding:6px 12px;background:linear-gradient(90deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border-radius:999px;font-weight:700;color:var(--muted);font-size:13px; position:relative; overflow:hidden}
-    .eyebrow::before{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent); transition:left 0.6s ease}
-    .eyebrow:hover::before{left:100%}
-    h2.hero-title{font-size:42px;line-height:1.02;margin:18px 0 12px;font-weight:800;letter-spacing:-0.6px; position:relative}
-    h2.hero-title .accent{background:linear-gradient(90deg,var(--accent2),var(--accent1));-webkit-background-clip:text;background-clip:text;color:transparent; position:relative}
-    p.lead{color:var(--muted);max-width:620px;margin:14px 0 20px; line-height:1.6}
-    .hero-ctas{display:flex;gap:12px}
-
-    /* -----------------------------
-       Floating card and image
-       ----------------------------- */
-    .hero-right{position:relative;display:flex;justify-content:center;align-items:center; perspective:1000px}
-    .profile-card{width:420px;height:420px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));backdrop-filter:blur(10px);border:1px solid var(--glass-border);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden; transform-style:preserve-3d; box-shadow:0 25px 50px rgba(0,0,0,0.25)}
-    .profile-card .frame{width:300px;height:300px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04);
-      box-shadow:0 10px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02); transform-style:preserve-3d}
-    .profile-card img{width:100%;height:100%;object-fit:cover;display:block; transition:transform 0.5s ease}
-    .floating-shapes{position:absolute;inset:0;pointer-events:none; z-index:1}
-    .spark{position:absolute;border-radius:50%;filter:blur(18px);opacity:0.85; animation:float 6s ease-in-out infinite}
-    .spark:nth-child(1){animation-delay:0s}
-    .spark:nth-child(2){animation-delay:2s}
-    .spark:nth-child(3){animation-delay:4s}
-
-    @keyframes float{
-      0%, 100%{transform:translateY(0) rotate(0deg)}
-      50%{transform:translateY(-20px) rotate(180deg)}
+      --bg:#0b1020;
+      --accent1:#7C3AED;
+      --accent2:#06b6d4;
+      --text:#e6eef8;
+      --muted:#9fb2cc;
     }
 
-    /* -----------------------------
-       Sections
-       ----------------------------- */
-    section{padding:90px 0; position:relative}
-    .glass{background:var(--card);border-radius:16px;padding:18px;border:1px solid var(--glass-border);backdrop-filter:blur(8px); position:relative; overflow:hidden}
-    .glass::before{content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%); opacity:0; transition:opacity 0.5s ease}
-    .glass:hover::before{opacity:1}
-
-    /* About -> counters & timeline */
-    .counters{display:flex;gap:18px;flex-wrap:wrap}
-    .counter{flex:1;min-width:150px;padding:18px;border-radius:12px;text-align:center; position:relative; overflow:hidden}
-    .counter::before{content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, var(--accent1) 0%, transparent 70%); opacity:0; transition:opacity 0.5s ease}
-    .counter:hover::before{opacity:0.1}
-    .counter h3{font-size:28px;margin:6px 0}
-    .timeline{margin-top:20px;border-left:2px solid rgba(255,255,255,0.04);padding-left:18px; position:relative}
-    .timeline::before{content:''; position:absolute; top:0; left:0; width:2px; height:100%; background:linear-gradient(to bottom, var(--accent1), var(--accent2)); transform:scaleY(0); transform-origin:top; transition:transform 1.5s ease}
-    .timeline.animated::before{transform:scaleY(1)}
-    .timeline-item{margin-bottom:18px;position:relative; opacity:0; transform:translateX(-20px)}
-    .timeline-item.animated{opacity:1; transform:translateX(0)}
-    .timeline-item::before{content:'';position:absolute;left:-11px;top:6px;width:12px;height:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:50%; box-shadow:0 0 10px var(--accent1)}
-
-    /* Skills */
-    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .skill{padding:12px;border-radius:12px; position:relative; overflow:hidden}
-    .skill::before{content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, var(--accent2) 0%, transparent 70%); opacity:0; transition:opacity 0.5s ease}
-    .skill:hover::before{opacity:0.1}
-    .skill .bar{height:10px;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);border-radius:999px;overflow:hidden; position:relative}
-    .skill .bar > i{display:block;height:100%;width:0;border-radius:999px; position:relative; overflow:hidden}
-    .skill .bar > i::after{content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transform:translateX(-100%); animation:shimmer 2s infinite}
-    
-    @keyframes shimmer{
-      100%{transform:translateX(100%)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui;
+      background:linear-gradient(180deg,var(--bg),#05060a);
+      color:var(--text);
     }
 
-    /* Portfolio grid */
-    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .project{position:relative;border-radius:12px;overflow:hidden; transform-style:preserve-3d; transition:all 0.5s ease}
-    .project .thumb{height:220px;background-size:cover;background-position:center; transition:all 0.5s ease}
-    .project .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.8));display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transform:translateY(20px); transition:all 0.5s ease}
-    .project:hover{transform:translateY(-10px) rotateX(5deg)}
-    .project:hover .thumb{transform:scale(1.1)}
-    .project:hover .overlay{opacity:1;transform:translateY(0)}
+    .container{max-width:1100px;margin:auto;padding:28px}
 
-    /* Testimonials */
-    .testimonials{display:flex;gap:12px}
-    .testimonial{padding:18px;border-radius:12px;flex:1; position:relative; overflow:hidden}
-    .testimonial::before{content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, var(--accent3) 0%, transparent 70%); opacity:0; transition:opacity 0.5s ease}
-    .testimonial:hover::before{opacity:0.1}
-
-    /* Contact */
-    form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    form input, form textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);resize:none; transition:all 0.3s ease}
-    form input:focus, form textarea:focus{outline:none; border-color:var(--accent1); box-shadow:0 0 0 2px rgba(124,58,237,0.2)}
-    form textarea{grid-column:1/3;height:140px}
-
-    footer{padding:30px 0;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
-
-    /* Background animation elements */
-    .bg-animation{position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none}
-    .floating-element{position:absolute; border-radius:50%; background:radial-gradient(circle, var(--accent1) 0%, transparent 70%); opacity:0.1; filter:blur(40px); animation:float-around 20s infinite linear}
-    
-    @keyframes float-around{
-      0%{transform:translate(0, 0) rotate(0deg)}
-      25%{transform:translate(100px, 100px) rotate(90deg)}
-      50%{transform:translate(0, 200px) rotate(180deg)}
-      75%{transform:translate(-100px, 100px) rotate(270deg)}
-      100%{transform:translate(0, 0) rotate(360deg)}
+    /* NAV */
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      background:rgba(0,0,0,0.3);
+      backdrop-filter:blur(8px);
+      z-index:100;
     }
 
-    /* responsive */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;gap:28px;padding-top:90px}
-      .hero-right{order:-1}
-      .skills-grid{grid-template-columns:repeat(2,1fr)}
-      .projects-grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:600px){
-      nav ul{display:none}
-      .profile-card{width:320px;height:320px}
-      .projects-grid{grid-template-columns:1fr}
-      form{grid-template-columns:1fr}
-      form textarea{grid-column:1/2}
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
 
-    /* small utilities */
-    .muted{color:var(--muted)}
-    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);font-weight:700; position:relative; overflow:hidden}
-    .chip::before{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent); transition:left 0.6s ease}
-    .chip:hover::before{left:100%}
-    .socials a{margin-right:12px;font-size:18px;display:inline-block; transition:all 0.3s ease; position:relative}
-    .socials a:hover{transform:translateY(-3px); color:var(--accent1)}
-    
-    /* Cursor effect */
-    .cursor{position:fixed; width:20px; height:20px; background:var(--accent1); border-radius:50%; pointer-events:none; z-index:9999; mix-blend-mode:difference; transition:transform 0.2s ease}
-    .cursor-follower{position:fixed; width:40px; height:40px; border:2px solid var(--accent2); border-radius:50%; pointer-events:none; z-index:9998; mix-blend-mode:difference; transition:transform 0.6s ease}
+    nav ul{
+      list-style:none;
+      display:flex;
+      gap:20px;
+    }
+
+    nav a{color:var(--muted);font-weight:600}
+    nav a:hover{color:white}
+
+    .btn{
+      padding:10px 16px;
+      border-radius:8px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:white;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:40px;
+      align-items:center;
+      position:relative;
+    }
+
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 70% 40%, rgba(124,58,237,0.35), transparent 40%),
+        radial-gradient(circle at 30% 70%, rgba(6,182,212,0.25), transparent 45%);
+      z-index:0;
+    }
+
+    .hero-left,
+    .hero-right{
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-title{
+      font-size:42px;
+      font-weight:800;
+      margin:15px 0;
+    }
+
+    .accent{
+      background:linear-gradient(90deg,var(--accent2),var(--accent1));
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .lead{
+      color:var(--muted);
+      margin:15px 0 25px;
+      line-height:1.6;
+    }
+
+    .hero-ctas{
+      display:flex;
+      gap:12px;
+    }
+
+    .profile-card{
+      width:350px;
+      height:350px;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .profile-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    section{padding:80px 0}
+
+    h3{margin-bottom:10px}
+
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+      margin-top:20px;
+    }
+
+    .skill{
+      padding:15px;
+      background:rgba(255,255,255,0.05);
+      border-radius:10px;
+      text-align:center;
+    }
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+      margin-top:20px;
+    }
+
+    .project{
+      background:rgba(255,255,255,0.05);
+      padding:15px;
+      border-radius:10px;
+    }
+
+    .project img{
+      width:100%;
+      border-radius:8px;
+    }
+
+    footer{
+      padding:30px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    @media(max-width:900px){
+      .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+      .skills-grid,
+      .projects-grid{
+        grid-template-columns:1fr;
+      }
+      .hero-ctas{
+        justify-content:center;
+      }
+    }
   </style>
 </head>
-<body data-theme="dark">
-  <!-- Custom cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-follower"></div>
-  
-  <!-- Background animation -->
-  <div class="bg-animation">
-    <div class="floating-element" style="width:300px; height:300px; top:10%; left:5%"></div>
-    <div class="floating-element" style="width:200px; height:200px; top:60%; left:80%"></div>
-    <div class="floating-element" style="width:400px; height:400px; top:30%; left:70%"></div>
-    <div class="floating-element" style="width:150px; height:150px; top:80%; left:10%"></div>
-  </div>
 
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:900">AP</div>
-        <div>
-          <h1>Abhishek Pandey</h1>
-          <small class="muted">Full-Stack Developer & Creative Technologist</small>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li class="active"><a href="#home" data-scroll>Home</a></li>
-          <li><a href="#about" data-scroll>About</a></li>
-          <li><a href="#skills" data-scroll>Skills</a></li>
-          <li><a href="#work" data-scroll>Work</a></li>
-          <li><a href="#contact" data-scroll>Contact</a></li>
-        </ul>
-      </nav>
-      <div class="cta">
-        <button id="themeToggle" class="btn" title="Toggle dark/light"><i class="fa-regular fa-sun"></i></button>
-        <button class="btn primary" onclick="document.querySelector('[href=\"#work\"]').click()">View My Work</button>
+<body>
+
+<header>
+  <div class="container nav">
+    <strong>Abhishek Pandey</strong>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#work">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="hero-left">
+      <h2 class="hero-title">
+        Hi, I'm <span class="accent">Abhishek Pandey</span><br>
+        Full-Stack Developer
+      </h2>
+
+      <p class="lead">
+        I build fast, modern web applications and AI-powered tools.
+        Currently a B.Tech CS student looking for internship opportunities.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#work" class="btn">View Projects</a>
+        <a href="resume.pdf" class="btn" download>Download Resume</a>
       </div>
     </div>
-  </header>
 
-  <main class="container">
-    <!-- HERO -->
-    <section id="home" class="hero">
-      <div class="hero-left">
-        <span class="eyebrow">Student • Internship Seeker • Full-Stack</span>
-        <h2 class="hero-title">Hi, I'm <span class="accent" id="animated-name">Abhishek Pandey</span> — Full-Stack Developer & Creative Technologist.</h2>
-        <p class="lead">I design and build performant web applications, combine creative design with engineering, and experiment with AI automation to build smarter user experiences. Currently a B.Tech CS student seeking internships to learn & contribute.</p>
-        <div class="hero-ctas">
-          <button class="btn primary" onclick="document.querySelector('[href=\"#work\"]').click()">View My Work</button>
-          <button class="btn" onclick="document.querySelector('[href=\"#contact\"]').click()">Hire Me</button>
-        </div>
-        <div style="margin-top:22px;display:flex;gap:10px;align-items:center">
-          <div class="chip">Open to Internship</div>
-          <div class="muted" style="font-size:13px">Available: Aug — Feb internships | Focus: Full-stack & AI integration</div>
-        </div>
+    <div class="hero-right">
+      <div class="profile-card">
+        <img src="my image.png" alt="Abhishek Pandey">
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h3>Skills</h3>
+    <p class="lead">Technologies I use to build web applications.</p>
+
+    <div class="skills-grid">
+      <div class="skill">HTML & CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">React</div>
+      <div class="skill">Node.js</div>
+      <div class="skill">Express</div>
+      <div class="skill">MongoDB / Firebase</div>
+      <div class="skill">Git & GitHub</div>
+      <div class="skill">AI API Integration</div>
+      <div class="skill">UI/UX Basics</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="work">
+    <h3>Projects</h3>
+
+    <div class="projects-grid">
+
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800" />
+        <h4>Expense Tracker</h4>
+        <p class="lead">Simple web app to track daily expenses.</p>
+        <a href="#" class="btn">Live</a>
+        <a href="#" class="btn">Code</a>
       </div>
 
-      <div class="hero-right">
-        <div class="profile-card glass" id="profileCard">
-          <div class="frame">
-            <!-- Big square image the user provided: my image.png -->
-            <img src="my image.png" alt="Abhishek Pandey" id="profileImg"/>
-          </div>
-        </div>
-        <div class="floating-shapes" aria-hidden>
-          <div class="spark" style="width:180px;height:180px;left:8%;top:4%;background:radial-gradient(circle at 20% 30%,var(--accent1),transparent 40%)"></div>
-          <div class="spark" style="width:120px;height:120px;right:4%;bottom:6%;background:radial-gradient(circle at 20% 30%,var(--accent2),transparent 40%)"></div>
-          <div class="spark" style="width:100px;height:100px;left:20%;bottom:10%;background:radial-gradient(circle at 20% 30%,var(--accent3),transparent 40%)"></div>
-          <canvas id="particlesCanvas" style="position:absolute;inset:0;z-index:0"></canvas>
-        </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1523475496153-3d6cc80f4b5f?w=800" />
+        <h4>AI Resume Screener</h4>
+        <p class="lead">AI tool to analyze resumes.</p>
+        <a href="#" class="btn">Live</a>
+        <a href="#" class="btn">Code</a>
       </div>
-    </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="glass">
-        <h3>About Me</h3>
-        <p class="muted">I am a B.Tech CS student passionate about building full-stack applications and integrating AI to make products smarter and more helpful. I love good UI, clear architecture, and code that serves real users.</p>
-        <div class="counters" style="margin-top:18px">
-          <div class="counter glass">
-            <div class="muted">Years of Experience</div>
-            <h3 id="yearsCount">0</h3>
-          </div>
-          <div class="counter glass">
-            <div class="muted">Projects Completed</div>
-            <h3 id="projectsCount">0</h3>
-          </div>
-          <div class="counter glass">
-            <div class="muted">Happy Clients</div>
-            <h3 id="clientsCount">0</h3>
-          </div>
-        </div>
-
-        <div class="timeline" id="timeline">
-          <div class="timeline-item">
-            <strong>2024 — Started serious web dev</strong>
-            <div class="muted">Built multiple small projects, learning full-stack fundamentals.</div>
-          </div>
-          <div class="timeline-item">
-            <strong>2025 — Focus on AI integration</strong>
-            <div class="muted">Experimented with APIs and automation to add smart features.</div>
-          </div>
-          <div class="timeline-item">
-            <strong>2025 — Looking for internships</strong>
-            <div class="muted">Ready to contribute to product teams and learn from experienced engineers.</div>
-          </div>
-        </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=800" />
+        <h4>Portfolio Website</h4>
+        <p class="lead">Personal developer portfolio.</p>
+        <a href="#" class="btn">Live</a>
+        <a href="#" class="btn">Code</a>
       </div>
-    </section>
 
-    <!-- SKILLS -->
-    <section id="skills">
-      <h3>Skills</h3>
-      <p class="muted">Core strengths in modern front-end frameworks, backend, and AI-driven automation.</p>
-      <div class="skills-grid" style="margin-top:18px">
-        <div class="skill glass">
-          <strong>React</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="react" style="background:linear-gradient(90deg,var(--accent1),var(--accent2))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>Angular</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="angular" style="background:linear-gradient(90deg,var(--accent3),var(--accent1))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>Vue</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="vue" style="background:linear-gradient(90deg,var(--accent2),var(--accent3))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>Svelte</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="svelte" style="background:linear-gradient(90deg,var(--accent1),var(--accent3))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>HTML / CSS / JS</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="frontend" style="background:linear-gradient(90deg,var(--accent2),var(--accent1))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>Node.js</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="node" style="background:linear-gradient(90deg,var(--accent3),var(--accent2))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>UI/UX & Branding</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="ux" style="background:linear-gradient(90deg,var(--accent1),var(--accent2))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>AI Automation</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="ai" style="background:linear-gradient(90deg,var(--accent2),var(--accent3))"></i></div>
-        </div>
-        <div class="skill glass">
-          <strong>Branding & Strategy</strong>
-          <div class="bar" style="margin-top:8px"><i data-skill="brand" style="background:linear-gradient(90deg,var(--accent1),var(--accent3))"></i></div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- WORK / Portfolio -->
-    <section id="work">
-      <h3>Selected Work</h3>
-      <p class="muted">Only a small selection for now — focusing on quality and learning.</p>
-      <div style="margin-top:16px;display:flex;gap:12px;align-items:center">
-        <div class="chip">Filter:</div>
-        <div>
-          <button class="btn" data-filter="all">All</button>
-          <button class="btn" data-filter="ecommerce">E-Commerce</button>
-          <button class="btn" data-filter="fullstack">Full-Stack</button>
-        </div>
-      </div>
-      <div class="projects-grid" style="margin-top:18px" id="projectsGrid">
-        <!-- Project 1: E-commerce -->
-        <div class="project glass" data-type="ecommerce">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1523475496153-3d6cc80f4b5f?q=80&w=1400&auto=format&fit=crop')"></div>
-          <div class="overlay">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <strong>E‑Commerce Store</strong>
-                <div class="muted">React • Node • Stripe • AI product recommendations</div>
-              </div>
-              <div>
-                <button class="btn">Live</button>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h3>Contact</h3>
+    <p class="lead">
+      Email: abhishekpade16@gmail.com<br>
+      Phone: +91 9301708816
+    </p>
+  </section>
 
-        <!-- Project 2: Full-stack learning project -->
-        <div class="project glass" data-type="fullstack">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1400&auto=format&fit=crop')"></div>
-          <div class="overlay">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <strong>Learning Platform (MVP)</strong>
-                <div class="muted">Vue • Express • AI Driven Quizzes</div>
-              </div>
-              <div>
-                <button class="btn">Repo</button>
-              </div>
-            </div>
-          </div>
-        </div>
+</main>
 
-        <!-- Project 3 placeholder -->
-        <div class="project glass" data-type="fullstack">
-          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=1400&auto=format&fit=crop')"></div>
-          <div class="overlay">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <strong>AI Chat Integration</strong>
-                <div class="muted">Svelte • Node • Chat APIs • Smart flows</div>
-              </div>
-              <div>
-                <button class="btn">Code</button>
-              </div>
-            </div>
-          </div>
-        </div>
+<footer>
+  © 2026 Abhishek Pandey
+</footer>
 
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials">
-      <h3>Testimonials</h3>
-      <div class="testimonials" style="margin-top:12px">
-        <div class="testimonial glass">
-          <strong>Mentor — Prof. X</strong>
-          <div class="muted">"Abhishek is an eager learner. Rapidly picks up new technologies and delivers clean work."</div>
-        </div>
-        <div class="testimonial glass">
-          <strong>Client — Small Business</strong>
-          <div class="muted">"Delivered a simple and elegant e‑commerce prototype quickly."</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <h3>Contact</h3>
-      <p class="muted">I'm currently open to internships and collaborations. Send a message or use the links below.</p>
-      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px">
-        <div class="glass">
-          <form id="contactForm">
-            <input type="text" name="name" placeholder="Your name" required />
-            <input type="email" name="email" placeholder="Your email" required />
-            <input type="text" name="phone" placeholder="Phone (optional)" />
-            <textarea name="message" placeholder="How can I help?" required></textarea>
-            <div style="display:flex;gap:8px;justify-content:flex-end">
-              <button type="submit" class="btn primary">Send Message</button>
-            </div>
-          </form>
-        </div>
-        <div class="glass">
-          <h4>Direct</h4>
-          <p class="muted">📞 +91 9301708816<br/>📧 abhishekpade16@gmail.com</p>
-          <div style="margin-top:12px">
-            <div class="socials">
-              <a href="https://www.instagram.com/imabhishekkp/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
-              <a href="mailto:abhishekpade16@gmail.com"><i class="fa-regular fa-envelope"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="muted">© <span id="year"></span> Abhishek Pandey — All rights reserved.</div>
-      <div>
-        <a href="#home" class="muted" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</a>
-      </div>
-    </footer>
-
-  </main>
-
-  <script>
-    // Basic helpers
-    const qs = s => document.querySelector(s);
-    const qsa = s => document.querySelectorAll(s);
-
-    // year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Custom cursor
-    const cursor = qs('.cursor');
-    const cursorFollower = qs('.cursor-follower');
-    
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      
-      setTimeout(() => {
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-      }, 100);
-    });
-    
-    // Add hover effects for interactive elements
-    const interactiveElements = qsa('a, button, .btn, .project, .skill, .counter');
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(1.5)';
-        cursorFollower.style.transform = 'scale(1.3)';
-      });
-      
-      el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursorFollower.style.transform = 'scale(1)';
-      });
-    });
-
-    // Theme toggle
-    const themeBtn = qs('#themeToggle');
-    themeBtn.addEventListener('click', ()=>{
-      const body = document.body;
-      const t = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', t);
-      themeBtn.innerHTML = t === 'dark' ? '<i class="fa-regular fa-sun"></i>' : '<i class="fa-regular fa-moon"></i>';
-    });
-
-    // Smooth internal link scrolling
-    document.querySelectorAll('a[data-scroll]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        const id = a.getAttribute('href').replace('#','');
-        const el = document.getElementById(id);
-        if(el) gsap.to(window, {duration:1.1, scrollTo: el, ease:'power2'});
-      })
-    })
-
-    // Advanced particles system
-    (function(){
-      const canvas = document.getElementById('particlesCanvas');
-      const ctx = canvas.getContext('2d');
-      let w=canvas.width=canvas.offsetWidth, h=canvas.height=canvas.offsetHeight;
-      const particles = [];
-      
-      function onResize(){
-        w=canvas.width=canvas.offsetWidth;
-        h=canvas.height=canvas.offsetHeight;
-      }
-      window.addEventListener('resize', onResize);
-      
-      function rand(min,max){return Math.random()*(max-min)+min}
-      
-      // Create particles with different properties
-      for(let i=0;i<60;i++){
-        particles.push({
-          x:rand(0,w), 
-          y:rand(0,h), 
-          r:rand(1,4), 
-          vx:rand(-0.5,0.5), 
-          vy:rand(-0.5,0.5), 
-          alpha:rand(0.1,0.8),
-          color: i % 3 === 0 ? '124,58,237' : i % 3 === 1 ? '6,182,212' : '249,115,22'
-        })
-      }
-      
-      function draw(){
-        ctx.clearRect(0,0,w,h);
-        
-        // Create gradient background
-        const gradient = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, Math.max(w, h)/2);
-        gradient.addColorStop(0, 'rgba(11, 16, 32, 0.1)');
-        gradient.addColorStop(1, 'rgba(11, 16, 32, 0.8)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, w, h);
-        
-        for(const p of particles){
-          p.x += p.vx; 
-          p.y += p.vy;
-          
-          // Bounce off edges
-          if(p.x > w) p.vx = -Math.abs(p.vx);
-          if(p.x < 0) p.vx = Math.abs(p.vx);
-          if(p.y > h) p.vy = -Math.abs(p.vy);
-          if(p.y < 0) p.vy = Math.abs(p.vy);
-          
-          // Draw particle with glow effect
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-          
-          // Inner particle
-          ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
-          ctx.fill();
-          
-          // Outer glow
-          const gradient = ctx.createRadialGradient(p.x, p.y, p.r, p.x, p.y, p.r*3);
-          gradient.addColorStop(0, `rgba(${p.color}, ${p.alpha*0.7})`);
-          gradient.addColorStop(1, `rgba(${p.color}, 0)`);
-          ctx.fillStyle = gradient;
-          ctx.fill();
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
-    // Advanced text animation for name
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Animated name typing effect
-    const nameElement = document.getElementById('animated-name');
-    const nameText = nameElement.textContent;
-    nameElement.textContent = '';
-    
-    let nameTimeline = gsap.timeline({delay: 0.5});
-    nameTimeline.to(nameElement, {
-      duration: 2,
-      text: {
-        value: nameText,
-        delimiter: ""
-      },
-      ease: "power2.inOut"
-    });
-
-    // Counters using GSAP with advanced effects
-    gsap.to('#yearsCount',{
-      innerText:2,
-      duration:2,
-      roundProps:'innerText',
-      scrollTrigger:{
-        trigger:'#about',
-        start:'top 70%',
-        onEnter: () => {
-          // Add pulse effect to counters
-          gsap.to('#yearsCount, #projectsCount, #clientsCount', {
-            scale: 1.2,
-            duration: 0.3,
-            yoyo: true,
-            repeat: 1
-          });
-        }
-      }
-    });
-    
-    gsap.to('#projectsCount',{
-      innerText:6,
-      duration:2,
-      roundProps:'innerText',
-      scrollTrigger:{trigger:'#about',start:'top 70%'}
-    });
-    
-    gsap.to('#clientsCount',{
-      innerText:3,
-      duration:2,
-      roundProps:'innerText',
-      scrollTrigger:{trigger:'#about',start:'top 70%'}
-    });
-
-    // Timeline animation
-    ScrollTrigger.create({
-      trigger: "#timeline",
-      start: "top 70%",
-      onEnter: () => {
-        document.getElementById('timeline').classList.add('animated');
-        
-        // Animate timeline items one by one
-        gsap.to('.timeline-item', {
-          opacity: 1,
-          x: 0,
-          stagger: 0.3,
-          duration: 0.8,
-          ease: "power2.out",
-          onComplete: () => {
-            document.querySelectorAll('.timeline-item').forEach(item => {
-              item.classList.add('animated');
-            });
-          }
-        });
-      }
-    });
-
-    // Skill bars animation with shimmer effect
-    qsa('.skill .bar i').forEach((el,idx)=>{
-      const widths = {react:95,angular:70,vue:80,svelte:55,frontend:95,node:82,ux:78,ai:68,brand:72};
-      const name = el.getAttribute('data-skill');
-      const w = widths[name] || 60;
-      
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 80%",
-        onEnter: () => {
-          gsap.to(el, {
-            width: w+'%',
-            duration: 1.5,
-            ease: "power2.out",
-            delay: idx * 0.1
-          });
-        }
-      });
-    });
-
-    // Advanced project hover effects with 3D tilt
-    qsa('.project').forEach((p,i)=>{
-      // Mouse move tilt effect
-      p.addEventListener('mousemove', (e) => {
-        const rect = p.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateY = (x - centerX) / 20;
-        const rotateX = (centerY - y) / 20;
-        
-        gsap.to(p, {
-          rotationY: rotateY,
-          rotationX: rotateX,
-          transformPerspective: 1000,
-          duration: 0.5
-        });
-      });
-      
-      p.addEventListener('mouseleave', () => {
-        gsap.to(p, {
-          rotationY: 0,
-          rotationX: 0,
-          duration: 0.5
-        });
-      });
-    });
-
-    // Filter projects with advanced animation
-    const projectsGrid = qs('#projectsGrid');
-    qsa('[data-filter]').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        // Remove active class from all buttons
-        qsa('[data-filter]').forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
-        btn.classList.add('active');
-        
-        const mode = btn.getAttribute('data-filter');
-        qsa('.project').forEach(p=>{
-          if(mode==='all' || p.dataset.type===mode){
-            p.style.display='block'; 
-            gsap.fromTo(p, 
-              {autoAlpha:0, scale:0.8, y:20}, 
-              {autoAlpha:1, scale:1, y:0, duration:0.6, ease:"back.out(1.7)"}
-            );
-          }
-          else{
-            gsap.to(p,{
-              autoAlpha:0, 
-              scale:0.8, 
-              y:20, 
-              duration:0.4, 
-              onComplete:()=>p.style.display='none'
-            });
-          }
-        });
-      });
-    });
-
-    // Contact form (demo handler only) with animation
-    qs('#contactForm').addEventListener('submit', e=>{
-      e.preventDefault();
-      const data = new FormData(e.target);
-      const payload = {};
-      data.forEach((v,k)=>payload[k]=v);
-      
-      // Animate form submission
-      gsap.to('#contactForm button', {
-        scale: 0.9,
-        duration: 0.1,
-        yoyo: true,
-        repeat: 1,
-        onComplete: () => {
-          // In a real site, send to serverless function or email service
-          alert('Thanks, '+payload.name+"! Message sent (demo). I'll contact you at " + payload.email);
-          e.target.reset();
-        }
-      });
-    });
-
-    // Sticky nav highlight on scroll with advanced animation
-    const sections = ['home','about','skills','work','contact'];
-    sections.forEach(id=>{
-      ScrollTrigger.create({
-        trigger: '#'+id,
-        start: 'top center',
-        onEnter: ()=> setActive(id),
-        onEnterBack: ()=> setActive(id)
-      })
-    });
-    
-    function setActive(id){
-      qsa('nav li').forEach(li=>li.classList.remove('active'));
-      const li = Array.from(qsa('nav li')).find(n=>{
-        const link = n.querySelector('a');
-        return link && link.getAttribute('href') === `#${id}`;
-      });
-      if(li) {
-        li.classList.add('active');
-        
-        // Add a subtle animation to the active nav item
-        gsap.fromTo(li, 
-          {scale: 0.9}, 
-          {scale: 1, duration: 0.3, ease: "back.out(1.7)"}
-        );
-      }
-    }
-
-    // Advanced entrance animations with staggered effects
-    const heroTimeline = gsap.timeline();
-    
-    heroTimeline
-      .from('.hero-left .eyebrow', {y:20, opacity:0, duration:0.8, ease:"power2.out"})
-      .from('.hero-title', {y:40, opacity:0, duration:1, ease:"power2.out"}, "-=0.5")
-      .from('.lead', {y:30, opacity:0, duration:1, ease:"power2.out"}, "-=0.7")
-      .from('.hero-ctas', {y:20, opacity:0, duration:0.8, ease:"power2.out"}, "-=0.5")
-      .from('.chip', {scale:0, opacity:0, duration:0.6, ease:"back.out(1.7)"}, "-=0.3")
-      .from('#profileCard', {
-        scale:0.8, 
-        opacity:0, 
-        rotationY: 180,
-        duration:1.5, 
-        ease:"power3.out"
-      }, "-=1");
-
-    // Advanced 3D tilt on profile card
-    (function(){
-      const card = qs('#profileCard');
-      const img = qs('#profileImg');
-      
-      card.addEventListener('mousemove', (e)=>{
-        const r = card.getBoundingClientRect();
-        const dx = e.clientX - (r.left + r.width/2);
-        const dy = e.clientY - (r.top + r.height/2);
-        const rx = dy / 20; 
-        const ry = -dx / 20;
-        
-        gsap.to(card, {
-          rotationX: rx, 
-          rotationY: ry, 
-          duration: 0.5, 
-          transformPerspective: 800, 
-          ease: 'power2.out'
-        });
-        
-        // Also move the image slightly for parallax effect
-        gsap.to(img, {
-          x: dx/30, 
-          y: dy/30, 
-          duration: 0.5, 
-          ease: 'power2.out'
-        });
-      });
-      
-      card.addEventListener('mouseleave', ()=> {
-        gsap.to(card, {
-          rotationX:0,
-          rotationY:0,
-          duration:0.8,
-          ease:'power3.out'
-        });
-        
-        gsap.to(img, {
-          x:0,
-          y:0,
-          duration:0.8,
-          ease:'power3.out'
-        });
-      });
-    })();
-
-    // Add scroll-triggered animations to all sections
-    gsap.utils.toArray('section').forEach(section => {
-      gsap.from(section, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
-      });
-    });
-
-    // Add floating animation to profile card
-    gsap.to('#profileCard', {
-      y: -20,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut"
-    });
-
-    // Accessibility: focus outlines
-    document.addEventListener('keydown', e=>{
-      if(e.key==='Tab') document.body.classList.add('show-focus');
-    })
-
-    // small utility: make sure internal nav links work even when user clicks top CTA
-    document.querySelectorAll('.btn[onclick]').forEach(b=>b.addEventListener('click', ()=>{}));
-
-  </script>
-
-  <!-- JSON-LD for schema.org (simple person) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Abhishek Pandey",
-    "jobTitle": "Full-Stack Developer",
-    "url": "https://your-portfolio.example.com",
-    "sameAs": ["https://www.linkedin.com/in/abhishekpandey0","https://www.instagram.com/imabhishekkp/"],
-    "email": "abhishekpade16@gmail.com",
-    "telephone": "+91 9301708816"
-  }
-  </script>
 </body>
 </html>
-
-
