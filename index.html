@@ -1,901 +1,375 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhishek Pandey — Full-Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek Pandey — Premium Creative Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body {
+            background-color: #08080a;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-/* Lenis Integration Hardware Acceleration Core */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { scroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
-.lenis.lenis-scrolling iframe { pointer-events: none; }
+        /* 3D WebGL Canvas Layer Container */
+        #webgl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none; /* Allows scrolling through the canvas seamlessly */
+        }
 
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: #070708;
-  color: #F4F4F5;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  perspective: 1200px;
-}
-a { text-decoration: none; color: inherit; }
-img { display: block; max-width: 100%; }
+        /* Smooth Scroll Engine Fixes */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
-:root {
-  --amber: #F5A623;
-  --amber-deep: #E8941A;
-  --dark-base: #070708;
-  --card-glass: rgba(18, 18, 22, 0.65);
-  --border-glass: rgba(255, 255, 255, 0.07);
-  --t2: #A1A1AA;
-  --t3: #71717A;
-  --r: 32px;
-}
+        /* DOM Content Layout Layer */
+        .content-overlay {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
 
-/* Base structural layout wrapper */
-.page { padding: 24px; display: flex; flex-direction: column; gap: 20px; max-width: 1600px; margin: 0 auto; position: relative; z-index: 2; }
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            position: relative;
+        }
 
-/* Premium Glassmorphism Foundations */
-.wc {
-  background: var(--card-glass);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--r);
-  overflow: hidden;
-}
+        /* Typography & Layout elements mimicking Claude-style web structures */
+        .tagline {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #ffaa44;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
 
-/* ===================== PREMIUM NAVBAR ===================== */
-.navbar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 24px 40px; background: rgba(13, 13, 16, 0.8); backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border-glass); border-radius: var(--r);
-  position: relative; z-index: 100;
-}
-.nav-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.01em; }
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { font-size: 13px; font-weight: 600; color: var(--t2); transition: color .4s, transform 0.3s; display: inline-block; }
-.nav-links a:hover { color: var(--amber); transform: translateY(-1px); }
-.nav-resume { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--amber); transition: color .3s; }
-.nav-resume:hover { color: #fff; }
+        h1, h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(40px, 7vw, 90px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+            opacity: 0;
+            transform: translateY(40px);
+        }
 
-/* ===================== HERO CINEMATIC SYSTEM ===================== */
-.hero-viewport {
-  position: relative; min-height: 85vh; border-radius: var(--r);
-  overflow: hidden; background: #0c0c0f; display: flex; align-items: center;
-  border: 1px solid var(--border-glass);
-}
-.hero-card { width: 100%; height: 100%; min-height: 85vh; position: relative; display: flex; align-items: center; }
+        h1 span, h2 span {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+        }
 
-/* Continuous active background emitter layers */
-.particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
-.pt { position: absolute; border-radius: 50%; background: rgba(245, 166, 23, 0.15); animation: ptrise linear infinite; }
-@keyframes ptrise {
-  0% { transform: translateY(110%) scale(0.3); opacity: 0; }
-  20% { opacity: 0.8; }
-  80% { opacity: 0.4; }
-  100% { transform: translateY(-120%) scale(1.4); opacity: 0; }
-}
+        .desc {
+            font-size: clamp(16px, 1.5vw, 20px);
+            color: #a1a1aa;
+            max-width: 500px;
+            margin-top: 30px;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(30px);
+        }
 
-.hero-blob {
-  position: absolute; top: -20%; right: -10%; width: 65%; height: 140%;
-  background: radial-gradient(circle, rgba(245, 166, 35, 0.12) 0%, transparent 65%);
-  border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%; z-index: 1; pointer-events: none;
-}
+        /* Grid elements mimicking the split components in the clip */
+        .bento-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin-top: 40px;
+        }
 
-.hero-grid { position: relative; z-index: 5; display: grid; grid-template-columns: 1.1fr 0.9fr; width: 100%; height: 100%; }
-.hero-left { padding: 80px 40px 80px 64px; display: flex; flex-direction: column; justify-content: center; }
-.hero-role { font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); margin-bottom: 20px; transform: translateY(30px); opacity: 0; }
+        .bento-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 24px;
+            opacity: 0;
+            transform: translateY(50px);
+        }
 
-/* Wrapped text layouts optimized for GSAP line parsing animations */
-.hero-h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 5vw, 68px); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; color: #fff; overflow: hidden; }
-.hero-h1 span { display: block; transform: translateY(100px); opacity: 0; }
-.hero-h1 em { font-style: italic; color: var(--amber); font-weight: 800; }
-.hero-desc { font-size: 15px; line-height: 1.8; color: var(--t2); max-width: 460px; margin-bottom: 36px; transform: translateY(30px); opacity: 0; }
-.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; transform: translateY(30px); opacity: 0; }
+        .bento-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
 
-.btn {
-  display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border-radius: 100px;
-  font-size: 13px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; border: none; cursor: pointer; transition: all 0.3s;
-}
-.btn-amber { background: var(--amber); color: var(--dark-base); font-weight: 800; box-shadow: 0 10px 25px rgba(245, 166, 35, 0.25); }
-.btn-amber:hover { background: var(--amber-deep); transform: translateY(-2px); box-shadow: 0 14px 35px rgba(245, 166, 35, 0.4); }
-.btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); }
-.btn-outline:hover { background: rgba(255, 255, 255, 0.05); border-color: #fff; transform: translateY(-2px); }
-
-.hero-stats { display: flex; gap: 48px; margin-top: 48px; border-top: 1px solid var(--border-glass); padding-top: 32px; transform: translateY(30px); opacity: 0; }
-.hstat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 800; line-height: 1; color: #fff; }
-.hstat-lbl { font-size: 11px; color: var(--t3); font-weight: 600; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
-
-.hero-right { position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
-.hero-right::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 140px; background: linear-gradient(to top, #0c0c0f, transparent); z-index: 4; }
-.hero-img { width: auto; height: 560px; max-width: 100%; object-fit: cover; object-position: top center; display: block; position: relative; z-index: 3; filter: drop-shadow(0 25px 50px rgba(0,0,0,0.85)); transform: translateY(120px) scale(0.9); opacity: 0; }
-.hero-img-fb { width: 280px; height: 460px; background: linear-gradient(160deg, #1b1b22, #0d0d10); border: 1px solid var(--border-glass); border-radius: 140px 140px 60px 60px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 3; }
-.hero-img-fb span { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 800; color: rgba(255,255,255,.05); }
-
-/* ===================== LUXURY TEXT TICKER ===================== */
-.marquee-wrap { background: #040405; border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); padding: 26px 0; overflow: hidden; }
-.marquee-track { display: flex; gap: 44px; white-space: nowrap; width: max-content; }
-.mi { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--t3); display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-.mi.hi { color: #fff; }
-.msep { width: 5px; height: 5px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
-
-/* ===================== ADVANCED BENTO GRID STRUCTURE ===================== */
-.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; transform-style: preserve-3d; }
-.bc {
-  background: var(--card-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glass); border-radius: var(--r); padding: 32px;
-  position: relative; overflow: hidden; transform-origin: center bottom; opacity: 0; transform: translateY(60px);
-}
-
-.bc-bio    { grid-column: span 7 }
-.bc-stat   { grid-column: span 5; background: linear-gradient(135deg, rgba(245, 166, 35, 0.08) 0%, rgba(12,12,15,0.4) 100%); border: 1px solid rgba(245,166,35,0.2); }
-.bc-edu    { grid-column: span 5; background: #0c0c0f; }
-.bc-photo  { grid-column: span 4; padding: 0; }
-.bc-achv   { grid-column: span 3; }
-.bc-mini1  { grid-column: span 3; padding: 24px; }
-.bc-mini2  { grid-column: span 4; padding: 24px; }
-.bc-skills { grid-column: span 12; padding: 44px; }
-
-/* Bio layout specifics */
-.bio-inner { display: flex; align-items: flex-start; gap: 28px; }
-.word-ring { width: 130px; height: 130px; position: relative; flex-shrink: 0; }
-.word-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.ring-img, .ring-fb {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 86px; height: 86px; border-radius: 50%; object-fit: cover;
-  border: 1px solid var(--border-glass); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-}
-.ring-fb { background: #131317; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800; color: var(--amber); }
-.bio-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2vw, 26px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 12px; color: #fff; }
-.bio-text p { font-size: 13.5px; line-height: 1.8; color: var(--t2); }
-.bio-text p strong { color: #fff; font-weight: 600; }
-.bio-socials { display: flex; gap: 10px; margin-top: 20px; }
-.bsoc { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; color: var(--t2); font-size: 14px; transition: all 0.3s; }
-.bsoc:hover { background: var(--amber); border-color: var(--amber); color: var(--dark-base); transform: scale(1.1); }
-
-/* Counter configurations */
-.stat-n { font-family: 'Playfair Display', serif; font-size: clamp(55px, 6vw, 84px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--amber); margin-bottom: 10px; }
-.stat-l { font-size: 12px; color: var(--t2); font-weight: 600; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.08em; }
-
-/* Education panel items */
-.edu-chips { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.echip { background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 10px; padding: 9px 14px; }
-.echip-n { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 800; color: var(--amber); margin-bottom: 2px; }
-.echip-l { font-size: 9px; color: var(--t3); letter-spacing: .06em; text-transform: uppercase; }
-.edu-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-.edu-sub { font-size: 11px; color: var(--t3); }
-
-/* Creative photocard layers */
-.bc-photo { display: flex; flex-direction: column; }
-.photo-img-wrap { flex: 1; min-height: 220px; position: relative; overflow: hidden; }
-.photo-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transform: scale(1.1); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-.bc-photo:hover .photo-img { transform: scale(1); }
-.photo-fb { width: 100%; min-height: 220px; flex: 1; background: #121216; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 800; color: rgba(255,255,255,.03); }
-.photo-caption { padding: 18px 20px; background: rgba(14, 14, 18, 0.6); border-top: 1px solid var(--border-glass); }
-.photo-caption h4 { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 800; margin-bottom: 2px; color: #fff; }
-.photo-caption p { font-size: 11px; color: var(--t3); }
-
-/* Highlight configurations */
-.achv-label { font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; }
-.ach-list { display: flex; flex-direction: column; gap: 12px; }
-.ach-row { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--t2); line-height: 1.6; }
-.ach-row i { color: var(--amber); font-size: 10px; margin-top: 4px; flex-shrink: 0; }
-
-.mini-info h4 { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 800; margin-bottom: 4px; color: #fff; }
-.mini-info p { font-size: 11px; color: var(--t3); }
-
-/* Skills Panel Blueprint */
-.skills-header { margin-bottom: 36px; }
-.sec-label { font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
-.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3vw, 36px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 8px; color: #fff; }
-.sec-title em { font-style: italic; color: var(--amber); font-weight: 800; }
-.sec-sub { font-size: 14px; color: var(--t2); }
-
-.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.skill-rows { display: flex; flex-direction: column; gap: 16px; }
-.skill-row { display: flex; align-items: center; gap: 14px; }
-.skill-name { font-size: 13px; font-weight: 600; color: var(--t2); width: 140px; flex-shrink: 0; }
-.skill-track { flex: 1; height: 5px; background: rgba(255,255,255,0.05); border-radius: 100px; overflow: hidden; position: relative; }
-.skill-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--amber-deep), var(--amber)); transform: scaleX(0); transform-origin: left; }
-.skill-pct { font-size: 11px; font-weight: 700; color: var(--t3); width: 34px; text-align: right; flex-shrink: 0; }
-
-.pills-col { display: flex; flex-direction: column; gap: 24px; }
-.pill-group-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--t3); margin-bottom: 10px; }
-.pills { display: flex; flex-wrap: wrap; gap: 8px; }
-.pill { padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); color: var(--t2); }
-
-/* ===================== ADVANCED PROJECT HORIZON CARD TRACKS ===================== */
-.proj-section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; padding: 0 4px; }
-.proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; perspective: 2000px; }
-
-/* The container transforms on scroll while maintaining internal spatial depth layout */
-.proj-card {
-  background: var(--card-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glass); border-radius: var(--r); overflow: hidden;
-  display: flex; flex-direction: column; transform-style: preserve-3d;
-  opacity: 0; transform: translateY(80px) rotateX(15deg);
-}
-
-.proj-thumb { height: 200px; display: flex; align-items: center; justify-content: center; padding: 24px; position: relative; overflow: hidden; }
-.pt-amber { background: #16120b; border-bottom: 1px solid rgba(245,166,35,0.1); }
-.pt-dark { background: #0b0b0e; border-bottom: 1px solid var(--border-glass); }
-.pt-cream { background: #121216; border-bottom: 1px solid var(--border-glass); }
-
-/* Canvas architecture representing internal UI modules layout positioning inside space mapping */
-.mock { background: #0e0e11; border: 1px solid var(--border-glass); border-radius: 12px; padding: 14px; box-shadow: 0 20px 45px rgba(0,0,0,0.6); width: 100%; max-width: 220px; transform: translateZ(40px) scale(0.95); transition: transform 0.5s; }
-.proj-card:hover .mock { transform: translateZ(60px) scale(1); }
-.mock-head { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin-bottom: 8px; }
-.mock-big { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-.mock-big-w { color: var(--amber); }
-.mock-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 100px; overflow: hidden; margin-bottom: 6px; }
-.mock-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--amber-deep), var(--amber)); }
-.mock-fill-p { background: linear-gradient(90deg, #6344fd, #a244fd); }
-.mock-tag { display: inline-flex; align-items: center; gap: 5px; background: rgba(245, 166, 35, 0.08); border-radius: 100px; padding: 4px 10px; font-size: 9px; font-weight: 700; color: var(--amber); margin-bottom: 8px; }
-.mock-ai { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: 8px; padding: 8px 12px; font-size: 9px; line-height: 1.65; color: var(--t2); margin-top: 6px; }
-.mock-row { display: flex; justify-content: space-between; margin-top: 8px; }
-.mock-small { font-size: 9px; color: var(--t3); }
-.mock-val-w { font-size: 11px; font-weight: 700; color: #fff; }
-
-.proj-body { padding: 26px; flex: 1; display: flex; flex-direction: column; transform: translateZ(20px); }
-.proj-num { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
-.proj-name { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 10px; line-height: 1.25; color: #fff; }
-.proj-desc { font-size: 13px; line-height: 1.7; color: var(--t2); flex: 1; margin-bottom: 20px; }
-.proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-.ptag { font-size: 10px; font-weight: 600; padding: 4px 11px; border-radius: 100px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); color: var(--t2); }
-.proj-links { display: flex; gap: 10px; }
-.plink { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 100px; font-size: 12px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; border: none; cursor: pointer; }
-.plink-a { background: var(--amber); color: var(--dark-base); }
-.plink-g { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--t2); }
-
-/* ===================== PERFORMANCE PANEL LAYOUTS ===================== */
-.ach-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.ach-card {
-  background: var(--card-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glass); border-radius: var(--r); padding: 32px 24px;
-  position: relative; overflow: hidden; opacity: 0; transform: translateY(50px);
-}
-.ach-icon { font-size: 28px; margin-bottom: 16px; }
-.ach-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 800; margin-bottom: 8px; line-height: 1.35; color: #fff; }
-.ach-desc { font-size: 12.5px; line-height: 1.7; color: var(--t2); }
-
-/* ===================== CINEMATIC CONTACT MODULE ===================== */
-.contact-viewport { border-radius: var(--r); overflow: hidden; background: #09090c; border: 1px solid var(--border-glass); }
-.contact-card {
-  background: radial-gradient(circle at 50% 100%, rgba(245, 166, 35, 0.15) 0%, transparent 60%);
-  padding: 92px 60px; text-align: center; position: relative;
-}
-.contact-title { font-family: 'Playfair Display', serif; font-size: clamp(34px, 5.5vw, 66px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: #fff; margin-bottom: 20px; }
-.contact-title em { font-style: italic; color: var(--amber); font-weight: 800; }
-.contact-sub { font-size: 16px; color: var(--t2); max-width: 480px; margin: 0 auto 36px; line-height: 1.8; }
-.contact-chips { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-.cchip { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 100px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.02); font-size: 13.5px; color: var(--t2); }
-.cchip i { color: var(--amber); }
-
-/* ===================== FOOTER PLATFORM MODULES ===================== */
-footer { background: var(--card-glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-glass); border-radius: var(--r); padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--t3); }
-.footer-logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 15px; color: #fff; }
-.footer-icons { display: flex; gap: 16px; }
-.footer-icons a { color: var(--t3); font-size: 15px; transition: color .3s; }
-.footer-icons a:hover { color: var(--amber); }
-
-/* ===================== HIGH END RESPONSIVE LAYOUT MATRIX ===================== */
-@media(max-width:960px){
-  .hero-grid { grid-template-columns: 1fr; min-height: auto; }
-  .hero-left { padding: 60px 32px 40px; }
-  .hero-right { min-height: 400px; }
-  .bc-bio { grid-column: span 12; }
-  .bc-stat, .bc-edu { grid-column: span 6; }
-  .bc-photo, .bc-achv { grid-column: span 6; }
-  .bc-mini1, .bc-mini2 { grid-column: span 6; }
-  .bc-skills { grid-column: span 12; }
-  .skills-grid { grid-template-columns: 1fr; gap: 40px; }
-  .proj-grid { grid-template-columns: 1fr 1fr; }
-  .ach-grid-4 { grid-template-columns: 1fr 1fr; }
-  .contact-card { padding: 64px 24px; }
-  footer { flex-direction: column; gap: 16px; text-align: center; }
-}
-@media(max-width:640px){
-  .page { padding: 14px; gap: 14px; }
-  .nav-links { display: none; }
-  .bc-stat, .bc-edu, .bc-photo, .bc-achv, .bc-mini1, .bc-mini2 { grid-column: span 12; }
-  .bio-inner { flex-direction: column; align-items: center; text-align: center; }
-  .proj-grid { grid-template-columns: 1fr; }
-  .ach-grid-4 { grid-template-columns: 1fr; }
-  .hero-img { height: 380px; }
-}
-</style>
+        .bento-card p {
+            color: #a1a1aa;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
 
-<div class="page">
+    <div id="webgl-container"></div>
 
-<nav class="navbar">
-  <div class="nav-logo">Abhishek Pandey</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#achievements">Achievements</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="Abhishek_Pande1__1_.docx" download class="nav-resume">
-    <i class="fas fa-arrow-up-right-from-square" style="font-size:11px"></i> Resume
-  </a>
-</nav>
+    <div class="content-overlay">
+        <section id="hero">
+            <div class="tagline" id="hero-tag">Next-Gen Digital Experience</div>
+            <h1 id="hero-title">Shaping Realities<br>Through <span>Creative Code</span></h1>
+            <p class="desc" id="hero-desc">B.Tech CS (AIML) Student & Full-Stack Developer creating interactive, cinema-grade immersive layouts.</p>
+        </section>
 
-<div class="hero-viewport" id="hero-trigger">
-  <div class="hero-card" id="hero-layer-bg">
-    <div class="particles" id="particles"></div>
-    <div class="hero-blob" id="hero-layer-blob"></div>
+        <section id="about">
+            <div class="tagline">Data Dynamics</div>
+            <h2>Fluid Form, <span>Solid Logic</span></h2>
+            
+            <div class="bento-showcase">
+                <div class="bento-card">
+                    <h3>01 / Intelligence</h3>
+                    <p>Harnessing machine learning algorithms and computer vision datasets to generate responsive web structures natively.</p>
+                </div>
+                <div class="bento-card">
+                    <h3>02 / Performance</h3>
+                    <p>Writing GPU-accelerated WebGL shader layers that run consistently at fluid 60 frames per second directly inside web layout DOM configurations.</p>
+                </div>
+            </div>
+        </section>
 
-    <div class="hero-grid">
-      <div class="hero-left" id="hero-layer-text">
-        <div class="hero-role" id="h-role">Full-Stack Developer · B.Tech AIML</div>
-        <h1 class="hero-h1" id="h-title">
-          <span>Hello, my name</span>
-          <span>is <em>Abhishek</em></span>
-          <span>Pandey</span>
-        </h1>
-        <p class="hero-desc" id="h-desc">
-          B.Tech CS (AIML) student at TIT Excellence, Bhopal. I build modern web apps,
-          AI-powered tools, and solve DSA on LeetCode every day.
-        </p>
-        <div class="hero-btns" id="h-btns">
-          <a href="#projects" class="btn btn-amber">Projects</a>
-          <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank" class="btn btn-outline">LinkedIn</a>
-        </div>
-        <div class="hero-stats" id="h-stats">
-          <div>
-            <div class="hstat-num" id="counter" data-target="3">0</div>
-            <div class="hstat-lbl">Projects</div>
-          </div>
-          <div>
-            <div class="hstat-num">AIML</div>
-            <div class="hstat-lbl">Specialization</div>
-          </div>
-          <div>
-            <div class="hstat-num">2026</div>
-            <div class="hstat-lbl">Open to Hire</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-right" id="hero-layer-img">
-        <img src="about.png" alt="Abhishek Pandey" class="hero-img" id="h-main-img"
-             onerror="this.style.display='none';document.getElementById('hfb').style.display='flex'">
-        <div class="hero-img-fb" id="hfb" style="display:none"><span>AP</span></div>
-      </div>
+        <section id="contact">
+            <div class="tagline">Get In Touch</div>
+            <h2>Let's build something <span>extraordinary.</span></h2>
+            <p class="desc">Open for elite full-stack engineering collaborations and experimental interface concepts.</p>
+        </section>
     </div>
 
-  </div>
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
 
-<div class="marquee-wrap">
-  <div class="marquee-track" id="m-track">
-    <span class="mi hi">React.js <span class="msep"></span></span>
-    <span class="mi">Node.js <span class="msep"></span></span>
-    <span class="mi hi">JavaScript ES6+ <span class="msep"></span></span>
-    <span class="mi">Java &amp; DSA <span class="msep"></span></span>
-    <span class="mi hi">MongoDB <span class="msep"></span></span>
-    <span class="mi">Express.js <span class="msep"></span></span>
-    <span class="mi hi">Tailwind CSS <span class="msep"></span></span>
-    <span class="mi">PostgreSQL <span class="msep"></span></span>
-    <span class="mi">REST APIs <span class="msep"></span></span>
-    <span class="mi hi">GitHub <span class="msep"></span></span>
-    <span class="mi">Vercel · Netlify <span class="msep"></span></span>
-    <span class="mi hi">Full-Stack Dev <span class="msep"></span></span>
-  </div>
-</div>
+            /* =========================================================================
+               1. SMOOTH INERTIAL SCROLL ENGINE (LENIS)
+            ========================================================================= */
+            const lenis = new Lenis({
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smoothWheel: true
+            });
 
-<section id="about">
-<div class="bento" id="bento-container">
+            function raf(time) {
+                lenis.tick(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+            lenis.on('scroll', ScrollTrigger.update);
 
-  <div class="bc bc-bio">
-    <div class="bio-inner">
-      <div class="word-ring">
-        <svg viewBox="0 0 140 140">
-          <defs><path id="rp" d="M70,70 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs>
-          <text fill="rgba(255,255,255,.12)" font-size="9.5" font-family="'Plus Jakarta Sans',sans-serif" letter-spacing="3.8" font-weight="700" id="rotating-text">
-            <textPath href="#rp">FULL STACK · DEV · AIML · </textPath>
-          </text>
-        </svg>
-        <img src="profile.png" alt="Abhishek" class="ring-img"
-             onerror="this.style.display='none';document.getElementById('rfb').style.display='flex'">
-        <div class="ring-fb" id="rfb" style="display:none">AP</div>
-      </div>
-      <div class="bio-text">
-        <h2>Hi, I'm Abhishek.<br>Full-Stack Dev &amp; AIML Student.</h2>
-        <p>
-          Currently pursuing <strong>B.Tech at TIT Excellence, Bhopal</strong> (Jul 2024 – Present),
-          specialising in CS with AIML. I build <strong>full-stack web apps</strong>,
-          integrate <strong>AI APIs</strong>, and practise <strong>DSA on LeetCode &amp; GFG</strong> daily.
-          Actively looking for <strong>internship opportunities in 2026</strong>.
-        </p>
-        <div class="bio-socials">
-          <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank" class="bsoc"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com" target="_blank" class="bsoc"><i class="fab fa-github"></i></a>
-          <a href="mailto:abhishekpade16@gmail.com" class="bsoc"><i class="fas fa-envelope"></i></a>
-          <a href="tel:+919301708816" class="bsoc"><i class="fas fa-phone"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="bc bc-stat">
-    <div class="stat-n" id="counter2" data-target="3">0</div>
-    <div class="stat-l">Projects Built<br>&amp; Deployed</div>
-  </div>
+            /* =========================================================================
+               2. THREE.JS ADVANCED PARTICLE MESH ENGINE
+            ========================================================================= */
+            const container = document.getElementById('webgl-container');
+            const scene = new THREE.Scene();
+            
+            // Camera configuration setup
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.z = 30;
 
-  <div class="bc bc-edu">
-    <div class="edu-chips">
-      <div class="echip"><div class="echip-n">~7.0</div><div class="echip-l">Current GPA</div></div>
-      <div class="echip"><div class="echip-n">~8.1</div><div class="echip-l">12th GPA</div></div>
-      <div class="echip"><div class="echip-n">AIML</div><div class="echip-l">Specialization</div></div>
-    </div>
-    <div class="edu-name">TIT Excellence, Bhopal</div>
-    <div class="edu-sub">B.Tech CS &amp; Engineering (AIML) · Jul 2024 – Present</div>
-  </div>
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
 
-  <div class="bc bc-photo">
-    <div class="photo-img-wrap">
-      <img src="profile.png" alt="Abhishek Pandey" class="photo-img"
-           onerror="this.style.display='none';document.getElementById('pfb').style.display='flex'">
-      <div class="photo-fb" id="pfb" style="display:none">AP</div>
-    </div>
-    <div class="photo-caption">
-      <h4>Abhishek Pandey</h4>
-      <p>Full-Stack Developer · TIT Excellence, Bhopal</p>
-    </div>
-  </div>
+            // Create a mathematical high-density Grid Plane Geometry of points
+            const particleCount = 25000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            
+            let i = 0;
+            const width = 120;
+            const segments = Math.sqrt(particleCount); // 158 rows, 158 columns
 
-  <div class="bc bc-achv">
-    <div class="achv-label">Highlights</div>
-    <div class="ach-list">
-      <div class="ach-row"><i class="fas fa-check"></i>DSA on LeetCode &amp; GFG (Java)</div>
-      <div class="ach-row"><i class="fas fa-check"></i>Portfolio deployed on GitHub Pages</div>
-      <div class="ach-row"><i class="fas fa-check"></i>~8.1 GPA in Higher Secondary (2023)</div>
-      <div class="ach-row"><i class="fas fa-check"></i>Organised college fest event</div>
-      <div class="ach-row"><i class="fas fa-check"></i>Built AI Resume Screener tool</div>
-    </div>
-  </div>
+            for (let x = 0; x < segments; x++) {
+                for (let y = 0; y < segments; y++) {
+                    // Spread points evenly across a 2D plane grid system inside 3D environment layout
+                    const posX = (x / segments - 0.5) * width;
+                    const posY = (y / segments - 0.5) * width;
+                    const posZ = 0;
 
-  <div class="bc bc-mini1">
-    <div class="mini-ico">🧠</div>
-    <div class="mini-info">
-      <h4>DSA Focus</h4>
-      <p>Java · LeetCode · GFG</p>
-    </div>
-  </div>
+                    positions[i] = posX;
+                    positions[i + 1] = posY;
+                    positions[i + 2] = posZ;
+                    i += 3;
+                }
+            }
 
-  <div class="bc bc-mini2">
-    <div class="mini-ico">☁️</div>
-    <div class="mini-info">
-      <h4>Deployed On</h4>
-      <p>GitHub Pages · Vercel · Netlify</p>
-    </div>
-  </div>
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-  <div class="bc bc-skills" id="skills-trigger-context">
-    <div class="skills-header">
-      <div class="sec-label">What I Know</div>
-      <h2 class="sec-title">Skills &amp; <em>Technologies</em></h2>
-      <p class="sec-sub">From pixel-perfect UIs to scalable backends and AI integrations.</p>
-    </div>
-    <div class="skills-grid">
-      <div>
-        <div class="skill-rows" id="skill-rows">
-          <div class="skill-row" data-p="0.88"><span class="skill-name">JavaScript (ES6+)</span><div class="skill-track"><div class="skill-fill"></div></div><span class="skill-pct">88%</span></div>
-          <div class="skill-row" data-p="0.85"><span class="skill-name">React.js &amp; Redux</span><div class="skill-track"><div class="skill-fill"></div></div><span class="skill-pct">85%</span></div>
-          <div class="skill-row" data-p="0.82"><span class="skill-name">Java &amp; DSA</span><div class="skill-track"><div class="skill-fill"></div></div><span class="skill-pct">82%</span></div>
-          <div class="skill-row" data-p="0.80"><span class="skill-name">Node.js &amp; Express</span><div class="skill-track"><div class="skill-fill"></div></div><span class="skill-pct">80%</span></div>
-          <div class="skill-row" data-p="0.75"><span class="skill-name">MongoDB &amp; MySQL</span><div class="skill-track"><div class="skill-fill"></div></div><span class="skill-pct">75%</span></div>
-          <div class="skill-row" data-p="0.92"><span class="skill-name">HTML5 &amp; CSS3</span><div class="skill-track"><div class="skill-fill"></div></div><span class="skill-pct">92%</span></div>
-          <div class="skill-row" data-p="0.72"><span class="skill-name">Cloud &amp; Deploy</span><div class="skill-track"><div class="skill-fill"></div></div><span class="skill-pct">72%</span></div>
-        </div>
-      </div>
-      <div class="pills-col">
-        <div>
-          <div class="pill-group-label">Frontend</div>
-          <div class="pills">
-            <span class="pill">React.js</span><span class="pill">Redux</span>
-            <span class="pill">HTML5</span><span class="pill">CSS3</span>
-            <span class="pill">Tailwind CSS</span><span class="pill">Bootstrap</span>
-          </div>
-        </div>
-        <div>
-          <div class="pill-group-label">Backend &amp; Databases</div>
-          <div class="pills">
-            <span class="pill">Node.js</span><span class="pill">Express.js</span>
-            <span class="pill">MongoDB</span><span class="pill">MySQL</span>
-            <span class="pill">PostgreSQL</span><span class="pill">REST APIs</span>
-          </div>
-        </div>
-        <div>
-          <div class="pill-group-label">Tools &amp; Cloud</div>
-          <div class="pills">
-            <span class="pill">Git &amp; GitHub</span><span class="pill">VS Code</span>
-            <span class="pill">Netlify</span><span class="pill">Vercel</span>
-            <span class="pill">Render</span><span class="pill">AWS Basic</span>
-          </div>
-        </div>
-        <div>
-          <div class="pill-group-label">Languages</div>
-          <div class="pills">
-            <span class="pill">JavaScript</span><span class="pill">Java</span><span class="pill">SQL</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+            // Create a custom material that makes particles glow softly like the reels show
+            const material = new THREE.PointsMaterial({
+                color: 0xffa533, // Premium Liquid Amber glow color code
+                size: 0.15,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
 
-</div>
-</section>
+            const particleMesh = new THREE.Points(geometry, material);
+            scene.add(particleMesh);
 
-<section id="projects" style="padding: 40px 0;">
-  <div class="proj-section-header" id="proj-title-trigger">
-    <div>
-      <div class="sec-label">My Work</div>
-      <h2 class="sec-title" style="margin-bottom:0">Projects I'm <em>proud of</em></h2>
-    </div>
-  </div>
-  
-  <div class="proj-grid" id="proj-cards-container">
-    <div class="proj-card">
-      <div class="proj-thumb pt-cream">
-        <div class="mock">
-          <div class="mock-head">AI System</div>
-          <div class="mock-big">Resume</div>
-          <div class="mock-tag">Screener</div>
-          <div class="mock-ai">Analyzing profile benchmarks...</div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-num">Project 01</div>
-        <h3 class="proj-name">AI Resume Screener</h3>
-        <p class="proj-desc">Smart parsing matching algorithm engineered to evaluate technical developer resumes against precise modern industry tech-stacks.</p>
-        <div class="proj-tags">
-          <span class="ptag">React</span><span class="ptag">Node</span><span class="ptag">AI API</span>
-        </div>
-        <div class="proj-links">
-          <button class="plink plink-a">Live Link</button>
-          <button class="plink plink-g">GitHub</button>
-        </div>
-      </div>
-    </div>
+            // Variables for fluid mouse wave tracking logic variations
+            let targetMouseX = 0, targetMouseY = 0;
+            let currentMouseX = 0, currentMouseY = 0;
 
-    <div class="proj-card">
-      <div class="proj-thumb pt-dark">
-        <div class="mock mock-dk">
-          <div class="mock-head">Database Cloud</div>
-          <div class="mock-big mock-big-w">Taskify</div>
-          <div class="mock-bar"><div class="mock-fill mock-fill-p" style="width:75%"></div></div>
-          <div class="mock-row"><span class="mock-small">Status</span><span class="mock-val-w">Active</span></div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-num">Project 02</div>
-        <h3 class="proj-name">Taskify Cloud Platform</h3>
-        <p class="proj-desc">High-performance project dashboard environment implementing robust relational schemas and real-time safe transactional workflows.</p>
-        <div class="proj-tags">
-          <span class="ptag">NodeJS</span><span class="ptag">PostgreSQL</span><span class="ptag">Express</span>
-        </div>
-        <div class="proj-links">
-          <button class="plink plink-a">Live Link</button>
-          <button class="plink plink-g">GitHub</button>
-        </div>
-      </div>
-    </div>
+            window.addEventListener('mousemove', (e) => {
+                targetMouseX = (e.clientX / window.innerWidth - 0.5) * 4;
+                targetMouseY = -(e.clientY / window.innerHeight - 0.5) * 4;
+            });
 
-    <div class="proj-card">
-      <div class="proj-thumb pt-amber">
-        <div class="mock">
-          <div class="mock-head">Algorithm Engine</div>
-          <div class="mock-big" style="font-size:18px">Visualizer</div>
-          <div class="mock-bar"><div class="mock-fill" style="width:90%"></div></div>
-          <div class="mock-row"><span class="mock-small">Array Loops</span><span class="mock-val-w" style="color:#fff">O(N log N)</span></div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-num">Project 03</div>
-        <h3 class="proj-name">Data Structures Visualizer</h3>
-        <p class="proj-desc">Interactive execution engine designed to visually step through and demonstrate core computing sort and search algorithms natively.</p>
-        <div class="proj-tags">
-          <span class="ptag">JavaScript ES6</span><span class="ptag">Algorithms</span><span class="ptag">UX</span>
-        </div>
-        <div class="proj-links">
-          <button class="plink plink-a">Live Link</button>
-          <button class="plink plink-g">GitHub</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="achievements" style="padding: 40px 0;">
-  <div class="proj-section-header" id="ach-title-trigger">
-    <div>
-      <div class="sec-label">Milestones</div>
-      <h2 class="sec-title" style="margin-bottom:0">Key Achievements</h2>
-    </div>
-  </div>
-  <div class="ach-grid-4" id="ach-cards-container">
-    <div class="ach-card">
-      <div class="ach-icon">🏆</div>
-      <div class="ach-title">Daily DSA Practice</div>
-      <div class="ach-desc">Solved complex algorithmic challenges consistently across core platform networks.</div>
-    </div>
-    <div class="ach-card">
-      <div class="ach-icon">🌐</div>
-      <div class="ach-title">Global Architectures</div>
-      <div class="ach-desc">Maintained multiple performance platforms deployed securely to live edge systems.</div>
-    </div>
-    <div class="ach-card">
-      <div class="ach-icon">⚡</div>
-      <div class="ach-title">Academic Merit</div>
-      <div class="ach-desc">Secured foundational records and technical focus tracks with distinctions.</div>
-    </div>
-    <div class="ach-card">
-      <div class="ach-icon">✨</div>
-      <div class="ach-title">Event Operations</div>
-      <div class="ach-desc">Spearheaded and scaled core collaborative cross-college technical operations.</div>
-    </div>
-  </div>
-</section>
+            /* =========================================================================
+               3. SCROLL-DRIVEN PARAMETRIC MODULATION (GSAP + SCROLLTRIGGER)
+            ========================================================================= */
+            // Global parameter object that GSAP will mutate dynamically on scroll actions
+            const webglParams = {
+                waveIntensity: 1.5,
+                waveFrequency: 0.1,
+                rotationSpeed: 0.05,
+                meshRotationZ: 0,
+                meshPositionX: 0
+            };
 
-<section id="contact" class="contact-viewport">
-  <div class="contact-card" id="contact-scroll-trigger">
-    <h2 class="contact-title" id="c-title">Let's build something<br><em>extraordinary</em> together</h2>
-    <p class="contact-sub" id="c-sub">Currently seeking direct engineering opportunities for 2026. Get in touch directly.</p>
-    <div class="contact-chips" id="c-chips">
-      <a href="mailto:abhishekpade16@gmail.com" class="cchip"><i class="fas fa-envelope"></i> abhishekpade16@gmail.com</a>
-      <a href="tel:+919301708816" class="cchip"><i class="fas fa-phone"></i> +91 9301708816</a>
-    </div>
-    <div class="contact-cta" id="c-btn">
-      <a href="mailto:abhishekpade16@gmail.com" class="btn btn-amber">Get In Touch <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
-</section>
+            // Scroll Animation State 1: Morph into erratic wave when transitioning to section 2
+            gsap.to(webglParams, {
+                waveIntensity: 6.0,
+                waveFrequency: 0.25,
+                rotationSpeed: 0.3,
+                meshRotationZ: Math.PI * 0.25,
+                meshPositionX: -10,
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top bottom",
+                    end: "top top",
+                    scrub: true
+                }
+            });
 
-<footer>
-  <div class="footer-logo">Abhishek Pandey</div>
-  <div>&copy; 2026 Personal Brand Architecture. All Rights Reserved.</div>
-  <div class="footer-icons">
-    <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-  </div>
-</footer>
+            // Scroll Animation State 2: Expand mesh layout wide across screen for contact closure
+            gsap.to(webglParams, {
+                waveIntensity: 12.0,
+                waveFrequency: 0.05,
+                meshRotationZ: -Math.PI * 0.2,
+                meshPositionX: 10,
+                scrollTrigger: {
+                    trigger: "#contact",
+                    start: "top bottom",
+                    end: "top top",
+                    scrub: true
+                }
+            });
 
-</div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(ScrollTrigger);
+            /* =========================================================================
+               4. RENDER LOOP (ANIMATION TICKER RUNNING AT 60FPS)
+            ========================================================================= */
+            const clock = new THREE.Clock();
 
-  /* ===================== 1. SMOOTH INERTIA TRACKER (LENIS) ===================== */
-  const lenis = new Lenis({
-    duration: 1.4,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: 'vertical',
-    smoothWheel: true,
-    wheelMultiplier: 1.1,
-    smoothTouch: false
-  });
+            function tick() {
+                const elapsedTime = clock.getElapsedTime();
 
-  function raf(time) {
-    lenis.tick(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-  lenis.on('scroll', ScrollTrigger.update);
+                // Get current updated positions array allocation
+                const positionAttribute = geometry.attributes.position;
+                const array = positionAttribute.array;
 
-  /* ===================== 2. CINEMATIC HERO ASSEMBLY TIMELINE ===================== */
-  const heroTL = gsap.timeline();
-  
-  heroTL.to("#h-role", { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" })
-        .to("#h-title span", { opacity: 1, y: 0, duration: 0.8, ease: "power4.out", stagger: 0.15 }, "-=0.4")
-        .to("#h-desc", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5")
-        .to("#h-btns", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5")
-        .to("#h-stats", { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.5")
-        .to("#h-main-img", { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power4.out" }, "0");
+                // Smoothly interpolate mouse vectors to avoid jittering
+                currentMouseX += (targetMouseX - currentMouseX) * 0.05;
+                currentMouseY += (targetMouseY - currentMouseY) * 0.05;
 
-  /* ===================== 3. OVER-THE-TOP ADVANCED SCROLL PARALLAX SYSTEM ===================== */
-  // Background gradient liquid shift based on absolute viewport position tracking
-  gsap.to("#hero-layer-blob", {
-    yPercent: 35,
-    xPercent: -10,
-    scale: 1.2,
-    ease: "none",
-    scrollTrigger: {
-      trigger: "#hero-trigger",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    }
-  });
+                // Re-calculate the Z-position of every single point using a combined math wave function framework
+                for (let k = 0; k < particleCount; k++) {
+                    const i3 = k * 3;
+                    const x = array[i3];
+                    const y = array[i3 + 1];
 
-  // Text group anti-gravity lift matching camera displacement speed matrix
-  gsap.to("#hero-layer-text", {
-    yPercent: -15,
-    opacity: 0.2,
-    ease: "none",
-    scrollTrigger: {
-      trigger: "#hero-trigger",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    }
-  });
+                    // Combined multi-layered Sine/Cosine ripple logic linked to parameter vectors controlled by GSAP scroll actions
+                    const waveA = Math.sin(x * webglParams.waveFrequency + elapsedTime * webglParams.rotationSpeed) * webglParams.waveIntensity;
+                    const waveB = Math.cos(y * webglParams.waveFrequency + elapsedTime * webglParams.rotationSpeed) * webglParams.waveIntensity;
+                    
+                    // Mouse proximity distortion tracking calculation variations
+                    const distToMouse = Math.sqrt(Math.pow(x - currentMouseX * 10, 2) + Math.pow(y - currentMouseY * 10, 2));
+                    const mouseForce = Math.sin(distToMouse * 0.2 - elapsedTime * 2) * 2.5 / (distToMouse * 0.1 + 1);
 
-  // Main portrait graphic compression tracking
-  gsap.to("#h-main-img", {
-    yPercent: 20,
-    scale: 1.05,
-    ease: "none",
-    scrollTrigger: {
-      trigger: "#hero-trigger",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    }
-  });
+                    array[i3 + 2] = waveA + waveB + mouseForce;
+                }
 
-  /* ===================== 4. INFINITE TEXT TICKER LOGIC ===================== */
-  const marqueeTrack = document.getElementById('m-track');
-  const initialWidth = marqueeTrack.scrollWidth;
-  marqueeTrack.innerHTML += marqueeTrack.innerHTML + marqueeTrack.innerHTML;
-  
-  gsap.to(marqueeTrack, {
-    x: -initialWidth,
-    duration: 20,
-    ease: "none",
-    repeat: -1
-  });
+                // Tell Three.js the points positions changed so it updates on screen frame allocations
+                positionAttribute.needsUpdate = true;
 
-  // Link marquee scroll motion tracking directly to scrolling speed vectors
-  gsap.to(marqueeTrack, {
-    timeScale: 3,
-    scrollTrigger: {
-      trigger: ".marquee-wrap",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 0.5
-    }
-  });
+                // Apply global layout transitions shifted smoothly by our GSAP Scroll-Triggers
+                particleMesh.rotation.z = webglParams.meshRotationZ;
+                particleMesh.position.x = webglParams.meshPositionX;
+                particleMesh.rotation.y = elapsedTime * 0.02; // Slow perpetual turn orbit loop
 
-  /* ===================== 5. BENTO BOX GRID SCROLL STAGGER CASCADES ===================== */
-  // Targets every bento layout cell with independent spatial rotations as it breaks into frame view boundaries
-  gsap.to("#bento-container .bc", {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    duration: 1,
-    ease: "power4.out",
-    stagger: {
-      amount: 0.4
-    },
-    scrollTrigger: {
-      trigger: "#bento-container",
-      start: "top 82%",
-      toggleActions: "play none none none"
-    }
-  });
+                renderer.render(scene, camera);
+                requestAnimationFrame(tick);
+            }
+            
+            tick(); // Execute high performance WebGL engine runtime
 
-  // Decorative ring text rotation tracker tied directly to scroll mechanics
-  gsap.to("#rotating-text", {
-    attr: { startOffset: 100 },
-    scrollTrigger: {
-      trigger: "#bento-container",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1
-    }
-  });
 
-  /* ===================== 6. SKILL TRACK LOADING SYSTEM ===================== */
-  ScrollTrigger.create({
-    trigger: "#skills-trigger-context",
-    start: "top 75%",
-    onEnter: () => {
-      document.querySelectorAll('.skill-row').forEach(row => {
-        const fill = row.querySelector('.skill-fill');
-        const targetPercent = row.getAttribute('data-p');
-        gsap.to(fill, { scaleX: targetPercent, duration: 1.8, ease: "power4.out" });
-      });
-    }
-  });
+            /* =========================================================================
+               5. DOM TYPOGRAPHY ENTER INTRO REVEALS
+            ========================================================================= */
+            const introTL = gsap.timeline();
+            introTL.to("#hero-tag", { opacity: 1, y: 0, duration: 0.6 })
+                   .to("#hero-title", { opacity: 1, y: 0, duration: 0.8 }, "-=0.3")
+                   .to("#hero-desc", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4");
 
-  /* ===================== 7. 3D PROJECT MATRIX FLY-IN CHANNELS ===================== */
-  gsap.to("#proj-cards-container .proj-card", {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    duration: 1.2,
-    ease: "power4.out",
-    stagger: 0.2,
-    scrollTrigger: {
-      trigger: "#proj-cards-container",
-      start: "top 80%",
-      toggleActions: "play none none none"
-    }
-  });
+            // Reveal scroll section elements as they track inside view boundary maps
+            document.querySelectorAll('section:not(#hero)').forEach(sec => {
+                gsap.to(sec.querySelectorAll('h2, .tagline, .bento-card, .desc'), {
+                    opacity: 1,
+                    y: 0,
+                    stagger: 0.15,
+                    duration: 0.8,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: sec,
+                        start: "top 70%"
+                    }
+                });
+            });
 
-  /* ===================== 8. MILESTONES CASCADE TIMELINES ===================== */
-  gsap.to("#ach-cards-container .ach-card", {
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: "power3.out",
-    stagger: 0.15,
-    scrollTrigger: {
-      trigger: "#ach-cards-container",
-      start: "top 85%",
-      toggleActions: "play none none none"
-    }
-  });
-
-  /* ===================== 9. REAL-TIME SMOOTH MATH COUNTERS ===================== */
-  const runCounter = (elementId) => {
-    const el = document.getElementById(elementId);
-    if (!el) return;
-    const finalVal = parseInt(el.getAttribute('data-target'), 10) || 0;
-    
-    gsap.to(el, {
-      innerText: finalVal,
-      duration: 2.5,
-      snap: { innerText: 1 },
-      ease: "power4.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-        toggleActions: "play none none none"
-      },
-      onUpdate: function() {
-        el.innerHTML = Math.floor(this.targets()[0].innerText) + "+";
-      }
-    });
-  };
-  runCounter('counter');
-  runCounter('counter2');
-
-  /* ===================== 10. CINEMATIC FOOTER SECTION UNFOLD TIMELINE ===================== */
-  const contactTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#contact-scroll-trigger",
-      start: "top 80%",
-      toggleActions: "play none none none"
-    }
-  });
-
-  contactTL.from("#c-title", { opacity: 0, y: 50, duration: 0.8, ease: "power4.out" })
-           .from("#c-sub", { opacity: 0, y: 30, duration: 0.6, ease: "power3.out" }, "-=0.4")
-           .from("#c-chips a", { opacity: 0, y: 20, stagger: 0.1, duration: 0.5, ease: "power3.out" }, "-=0.3")
-           .from("#c-btn", { opacity: 0, scale: 0.9, duration: 0.5, ease: "back.out(1.7)" }, "-=0.2");
-
-  /* ===================== 11. LIGHTWEIGHT NATURAL BACKGROUND EMITTERS ===================== */
-  const container = document.getElementById('particles');
-  const spawnLimit = 20;
-  for (let i = 0; i < spawnLimit; i++) {
-    const spark = document.createElement('div');
-    spark.classList.add('pt');
-    spark.style.left = Math.random() * 100 + '%';
-    spark.style.width = spark.style.height = Math.random() * 6 + 3 + 'px';
-    spark.style.animationDuration = Math.random() * 5 + 5 + 's';
-    spark.style.animationDelay = Math.random() * 6 + 's';
-    container.appendChild(spark);
-  }
-});
-</script>
+            /* =========================================================================
+               6. WINDOW RESIZE COMPLIANCE DISPATCHER
+            ========================================================================= */
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            });
+        });
+    </script>
 </body>
 </html>
-
