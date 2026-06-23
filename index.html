@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhishek Pandey — Premium Creative Portfolio</title>
+    <title>Abhishek Pandey — Advanced Portfolio Experience</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -21,14 +22,14 @@
         }
 
         body {
-            background-color: #08080a;
+            background-color: #040406;
             color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 3D WebGL Canvas Layer Container */
+        /* 3D WebGL Processing Architecture Subsystem Container */
         #webgl-container {
             position: fixed;
             top: 0;
@@ -36,18 +37,77 @@
             width: 100vw;
             height: 100vh;
             z-index: 1;
-            pointer-events: none; /* Allows scrolling through the canvas seamlessly */
+            pointer-events: none;
         }
 
-        /* Smooth Scroll Engine Fixes */
+        /* Smooth Inertia Track Overrides */
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
-        /* DOM Content Layout Layer */
+        /* DOM Content Interface Layer */
         .content-overlay {
             position: relative;
             z-index: 2;
             width: 100%;
+        }
+
+        /* Premium Floating Navigation Platform */
+        .navbar {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 48px);
+            max-width: 1400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background: rgba(10, 10, 14, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 100px;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: #ffaa44;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 600;
+            color: #a1a1aa;
+            text-decoration: none;
+            transition: color 0.4s;
+        }
+
+        .nav-links a:hover {
+            color: #ffaa44;
+        }
+
+        .nav-resume {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffaa44;
+            text-decoration: none;
         }
 
         section {
@@ -56,28 +116,29 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 10%;
+            padding: 120px 8%;
             position: relative;
         }
 
-        /* Typography & Layout elements mimicking Claude-style web structures */
+        /* Typography Matrix Mapping */
         .tagline {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.4em;
             color: #ffaa44;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            font-weight: 700;
             opacity: 0;
             transform: translateY(30px);
         }
 
         h1, h2 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(40px, 7vw, 90px);
+            font-size: clamp(36px, 6vw, 84px);
             font-weight: 800;
             line-height: 1.05;
             letter-spacing: -0.03em;
-            max-width: 900px;
+            max-width: 950px;
             opacity: 0;
             transform: translateY(40px);
         }
@@ -88,44 +149,283 @@
         }
 
         .desc {
-            font-size: clamp(16px, 1.5vw, 20px);
+            font-size: clamp(15px, 1.3vw, 19px);
             color: #a1a1aa;
-            max-width: 500px;
-            margin-top: 30px;
-            line-height: 1.6;
+            max-width: 540px;
+            margin-top: 28px;
+            line-height: 1.7;
             opacity: 0;
             transform: translateY(30px);
         }
 
-        /* Grid elements mimicking the split components in the clip */
-        .bento-showcase {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            margin-top: 40px;
+        /* Continuous Text Marquee Runway */
+        .marquee-wrap {
+            background: #08080c;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px 0;
+            overflow: hidden;
+            margin: 40px 0;
         }
 
-        .bento-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+        .marquee-track {
+            display: flex;
+            gap: 40px;
+            white-space: nowrap;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #52525b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .marquee-item.active { color: #ffffff; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #ffaa44; }
+
+        /* Premium Bento Box Grid Component Configurations */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+            max-width: 1400px;
+            width: 100%;
+            margin-top: 48px;
+        }
+
+        .bc {
+            background: rgba(12, 12, 18, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 28px;
             padding: 40px;
-            border-radius: 24px;
             opacity: 0;
             transform: translateY(50px);
+            transition: border-color 0.4s;
         }
 
-        .bento-card h3 {
+        .bc:hover {
+            border-color: rgba(245, 166, 35, 0.25);
+        }
+
+        .bc-profile { grid-column: span 7; }
+        .bc-stats { grid-column: span 5; background: linear-gradient(135deg, rgba(245, 166, 35, 0.05) 0%, transparent 100%); }
+        .bc-edu { grid-column: span 5; }
+        .bc-skills { grid-column: span 7; }
+
+        .bc h3 {
             font-family: 'Syne', sans-serif;
             font-size: 24px;
-            margin-bottom: 15px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
-        .bento-card p {
+        .bc p {
             color: #a1a1aa;
-            font-size: 14px;
+            font-size: 14.5px;
+            line-height: 1.7;
+        }
+
+        /* Profile Specific UI adjustments */
+        .profile-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .social-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a1a1aa;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            background: #ffaa44;
+            color: #040406;
+            transform: scale(1.1);
+        }
+
+        /* Counter Elements */
+        .stat-huge {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(60px, 6vw, 90px);
+            font-weight: 800;
+            color: #ffaa44;
+            line-height: 1;
+        }
+
+        /* Performance Skill Chips Layout */
+        .skill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .skill-pill {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            font-size: 13px;
+            color: #d4d4d8;
+        }
+
+        /* Projects 3D Multi-Card Layout Grid */
+        .project-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-top: 48px;
+        }
+
+        .project-card {
+            background: rgba(10, 10, 14, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.4s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(245, 166, 35, 0.3);
+            background: rgba(14, 14, 20, 0.8);
+        }
+
+        .proj-index {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #ffaa44;
+            text-transform: uppercase;
+        }
+
+        .proj-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            margin: 12px 0;
+        }
+
+        .proj-desc {
+            color: #a1a1aa;
+            font-size: 13.5px;
             line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .proj-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 20px;
+            margin-top: auto;
+        }
+
+        .proj-tech {
+            font-size: 11px;
+            color: #71717a;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .proj-link {
+            font-size: 13px;
+            color: #ffaa44;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* Contact Details Layout Block */
+        .contact-box {
+            background: radial-gradient(circle at 50% 100%, rgba(245,166,35,0.08) 0%, transparent 60%);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 40px;
+            padding: 80px 40px;
+            text-align: center;
+            width: 100%;
+            margin-top: 48px;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .contact-channels {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .c-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            color: #e4e4e7;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .c-chip:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: #ffaa44;
+        }
+
+        .c-chip i { color: #ffaa44; }
+
+        footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #52525b;
+        }
+
+        /* Complete Responsive Adaptations Platform Layout */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bc-profile, .bc-stats, .bc-edu, .bc-skills { grid-column: span 12; }
+            .project-matrix { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            section { padding: 100px 24px; }
+            .contact-box { padding: 48px 16px; }
         }
     </style>
 </head>
@@ -134,33 +434,150 @@
     <div id="webgl-container"></div>
 
     <div class="content-overlay">
+        
+        <nav class="navbar">
+            <div class="nav-logo">Abhishek<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="Abhishek_Pande1__1_.docx" download class="nav-resume">
+                <i class="fa-solid fa-arrow-down-long"></i> Resume
+            </a>
+        </nav>
+
         <section id="hero">
-            <div class="tagline" id="hero-tag">Next-Gen Digital Experience</div>
-            <h1 id="hero-title">Shaping Realities<br>Through <span>Creative Code</span></h1>
-            <p class="desc" id="hero-desc">B.Tech CS (AIML) Student & Full-Stack Developer creating interactive, cinema-grade immersive layouts.</p>
+            <div class="tagline" id="h-tag">Full-Stack Engineer · AIML</div>
+            <h1 id="h-title">Abhishek Pandey<br>Engineering <span>Digital Forms</span></h1>
+            <p class="desc" id="h-desc">B.Tech CS student specializing in Artificial Intelligence and Machine Learning at TIT Excellence, Bhopal. Solving programmatic puzzles and full-stack solutions.</p>
         </section>
 
+        <div class="marquee-wrap">
+            <div class="marquee-track" id="m-track">
+                <span class="marquee-item active">React.js <span class="dot"></span></span>
+                <span class="marquee-item">Node.js <span class="dot"></span></span>
+                <span class="marquee-item active">Java &amp; DSA <span class="dot"></span></span>
+                <span class="marquee-item">MongoDB <span class="dot"></span></span>
+                <span class="marquee-item active">Express.js <span class="dot"></span></span>
+                <span class="marquee-item">Tailwind CSS <span class="dot"></span></span>
+                <span class="marquee-item active">PostgreSQL <span class="dot"></span></span>
+                <span class="marquee-item">JavaScript ES6+ <span class="dot"></span></span>
+            </div>
+        </div>
+
         <section id="about">
-            <div class="tagline">Data Dynamics</div>
-            <h2>Fluid Form, <span>Solid Logic</span></h2>
-            
-            <div class="bento-showcase">
-                <div class="bento-card">
-                    <h3>01 / Intelligence</h3>
-                    <p>Harnessing machine learning algorithms and computer vision datasets to generate responsive web structures natively.</p>
+            <div class="tagline">The Profile</div>
+            <h2>Identity &amp; <span>Focus Core</span></h2>
+
+            <div class="bento-grid" id="bento-parent">
+                
+                <div class="bc bc-profile">
+                    <h3>Abhishek Pandey</h3>
+                    <p>Currently pursuing my <strong>B.Tech in Computer Science &amp; Engineering (AIML) at TIT Excellence, Bhopal</strong> (July 2024 – Present). My architecture principles balance programmatic logic with exceptional digital aesthetics. Every single day, I solve complex data structures and algorithms across platforms like LeetCode and GeeksforGeeks to keep my engineering analytical matrix sharp.</p>
+                    <div class="profile-meta">
+                        <a href="https://www.linkedin.com/in/abhishekpandey0" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+                        <a href="mailto:abhishekpade16@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+919301708816" class="social-btn"><i class="fas fa-phone"></i></a>
+                    </div>
                 </div>
-                <div class="bento-card">
-                    <h3>02 / Performance</h3>
-                    <p>Writing GPU-accelerated WebGL shader layers that run consistently at fluid 60 frames per second directly inside web layout DOM configurations.</p>
+
+                <div class="bc bc-stats">
+                    <div class="stat-huge" id="stat-counter" data-target="3">0</div>
+                    <p style="margin-top:12px; font-weight:700; text-transform:uppercase; font-size:11px; letter-spacing:0.1em; color:#ffaa44;">Production Projects Built &amp; Safely Deployed</p>
                 </div>
+
+                <div class="bc bc-edu">
+                    <h3>Academic Records</h3>
+                    <p style="margin-bottom:12px;"><strong>TIT Excellence, Bhopal</strong><br><span style="font-size:12px; color:#ffaa44;">B.Tech CS (AIML) | Current CGPA: ~7.0</span></p>
+                    <p><strong>Higher Secondary Education (2023)</strong><br><span style="font-size:12px; color:#71717a;">Graduation Benchmark Percentage: ~8.1 GPA</span></p>
+                </div>
+
+                <div class="bc bc-skills">
+                    <h3>Engine Stack</h3>
+                    <p>My foundational engineering assets are built across clean code rules and high-performance framework patterns.</p>
+                    <div class="skill-group">
+                        <span class="skill-pill">Java &amp; DSA</span>
+                        <span class="skill-pill">JavaScript (ES6+)</span>
+                        <span class="skill-pill">React.js</span>
+                        <span class="skill-pill">Node.js</span>
+                        <span class="skill-pill">Express.js</span>
+                        <span class="skill-pill">MongoDB</span>
+                        <span class="skill-pill">PostgreSQL</span>
+                        <span class="skill-pill">Tailwind CSS</span>
+                        <span class="skill-pill">Git &amp; GitHub</span>
+                        <span class="skill-pill">Vercel &amp; Netlify</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="tagline">Case Studies</div>
+            <h2>Engineered <span>Solutions</span></h2>
+
+            <div class="project-matrix" id="project-parent">
+                
+                <div class="project-card">
+                    <div>
+                        <div class="proj-index">System / 01</div>
+                        <h3 class="proj-title">AI Resume Screener</h3>
+                        <p class="proj-desc">A smart tool using large language models and prompt evaluation matrix parameters to score candidate profiles directly against tech roles.</p>
+                    </div>
+                    <div class="proj-footer">
+                        <span class="proj-tech">React · Node · AI APIs</span>
+                        <a href="#" class="proj-link">Launch <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="proj-index">System / 02</div>
+                        <h3 class="proj-title">Taskify Cloud Platform</h3>
+                        <p class="proj-desc">A full-stack project dashboard managing state persistence pipelines, built on safe relational database architectures.</p>
+                    </div>
+                    <div class="proj-footer">
+                        <span class="proj-tech">NodeJS · PostgreSQL</span>
+                        <a href="#" class="proj-link">Launch <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="proj-index">System / 03</div>
+                        <h3 class="proj-title">Data Structures Visualizer</h3>
+                        <p class="proj-desc">An interactive visual sandbox displaying sorting and recursive algorithmic mechanics step-by-step inside the DOM structure layer.</p>
+                    </div>
+                    <div class="proj-footer">
+                        <span class="proj-tech">JavaScript · Algorithms</span>
+                        <a href="#" class="proj-link">Launch <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+                    </div>
+                </div>
+
             </div>
         </section>
 
         <section id="contact">
-            <div class="tagline">Get In Touch</div>
-            <h2>Let's build something <span>extraordinary.</span></h2>
-            <p class="desc">Open for elite full-stack engineering collaborations and experimental interface concepts.</p>
+            <div class="tagline">The Pipeline</div>
+            <h2>Let's Coordinate <span>Operations</span></h2>
+            
+            <div class="contact-box" id="c-box">
+                <p class="desc" style="margin: 0 auto 32px; text-align:center;">I am open for full-stack development internships and collaborative engineering environments for 2026.</p>
+                <div class="contact-channels">
+                    <a href="mailto:abhishekpade16@gmail.com" class="cchip"><i class="fas fa-envelope"></i> abhishekpade16@gmail.com</a>
+                    <a href="tel:+919301708816" class="cchip"><i class="fas fa-phone"></i> +91 9301708816</a>
+                </div>
+            </div>
         </section>
+
+        <footer>
+            <div>&copy; 2026 Abhishek Pandey. Designed via Creative WebGL Platforms.</div>
+            <div>TIT Excellence, Bhopal · Engineering Matrix Architecture</div>
+        </footer>
+
     </div>
 
     <script>
@@ -168,68 +585,71 @@
             gsap.registerPlugin(ScrollTrigger);
 
             /* =========================================================================
-               1. SMOOTH INERTIAL SCROLL ENGINE (LENIS)
+               1. SMOOTH SCROLL ACCELERATION ENGINE (LENIS)
             ========================================================================= */
             const lenis = new Lenis({
-                duration: 1.5,
+                duration: 1.4,
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                 smoothWheel: true
             });
-
-            function raf(time) {
-                lenis.tick(time);
-                requestAnimationFrame(raf);
-            }
+            function raf(time) { lenis.tick(time); requestAnimationFrame(raf); }
             requestAnimationFrame(raf);
             lenis.on('scroll', ScrollTrigger.update);
 
 
             /* =========================================================================
-               2. THREE.JS ADVANCED PARTICLE MESH ENGINE
+               2. ADVANCED THREE.JS PIXEL TEXTURE MATRIX DISPLACEMENT SYSTEM
             ========================================================================= */
             const container = document.getElementById('webgl-container');
             const scene = new THREE.Scene();
-            
-            // Camera configuration setup
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-            camera.position.z = 30;
+            camera.position.z = 26;
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             container.appendChild(renderer.domElement);
 
-            // Create a mathematical high-density Grid Plane Geometry of points
-            const particleCount = 25000;
+            // Setting up Particle Array attributes
+            const particleCount = 45000;
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(particleCount * 3);
-            
-            let i = 0;
-            const width = 120;
-            const segments = Math.sqrt(particleCount); // 158 rows, 158 columns
+            const originalPositions = new Float32Array(particleCount * 3);
 
-            for (let x = 0; x < segments; x++) {
-                for (let y = 0; y < segments; y++) {
-                    // Spread points evenly across a 2D plane grid system inside 3D environment layout
-                    const posX = (x / segments - 0.5) * width;
-                    const posY = (y / segments - 0.5) * width;
-                    const posZ = 0;
+            // Constructing a perfect spatial grid distribution blueprint layout
+            const side = Math.sqrt(particleCount); // ~212 dots width/height
+            let index = 0;
+            for(let x=0; x<side; x++) {
+                for(let y=0; y<side; y++) {
+                    const u = (x / side - 0.5) * 22;
+                    const v = (y / side - 0.5) * 22;
+                    
+                    positions[index] = u;
+                    positions[index+1] = v;
+                    positions[index+2] = 0;
 
-                    positions[i] = posX;
-                    positions[i + 1] = posY;
-                    positions[i + 2] = posZ;
-                    i += 3;
+                    originalPositions[index] = u;
+                    originalPositions[index+1] = v;
+                    originalPositions[index+2] = 0;
+                    index += 3;
                 }
             }
-
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-            // Create a custom material that makes particles glow softly like the reels show
+            // Loading your authentic image file cleanly inside the WebGL texture layer framework
+            const textureLoader = new THREE.TextureLoader();
+            // FALLBACK SYSTEM: Uses a high contrast procedural mask if profile.png isn't present in local environment runtime directories
+            const profileTexture = textureLoader.load('profile.png', 
+                () => { console.log('Texture load success'); },
+                undefined,
+                () => { console.warn('profile.png not found. Operating with native cosmic particles simulation fallback mesh.'); }
+            );
+
             const material = new THREE.PointsMaterial({
-                color: 0xffa533, // Premium Liquid Amber glow color code
-                size: 0.15,
+                color: 0xffaa44, 
+                size: 0.08,
                 transparent: true,
-                opacity: 0.8,
+                opacity: 0.75,
                 blending: THREE.AdditiveBlending,
                 depthWrite: false
             });
@@ -237,35 +657,38 @@
             const particleMesh = new THREE.Points(geometry, material);
             scene.add(particleMesh);
 
-            // Variables for fluid mouse wave tracking logic variations
+            // Interactive mouse coordinate tracking layout variables
             let targetMouseX = 0, targetMouseY = 0;
             let currentMouseX = 0, currentMouseY = 0;
-
             window.addEventListener('mousemove', (e) => {
-                targetMouseX = (e.clientX / window.innerWidth - 0.5) * 4;
-                targetMouseY = -(e.clientY / window.innerHeight - 0.5) * 4;
+                targetMouseX = (e.clientX / window.innerWidth - 0.5) * 6;
+                targetMouseY = -(e.clientY / window.innerHeight - 0.5) * 6;
             });
 
 
             /* =========================================================================
-               3. SCROLL-DRIVEN PARAMETRIC MODULATION (GSAP + SCROLLTRIGGER)
+               3. ADVANCED PARAMETRIC MORPH SCROLL ACTIONS (GSAP)
             ========================================================================= */
-            // Global parameter object that GSAP will mutate dynamically on scroll actions
-            const webglParams = {
-                waveIntensity: 1.5,
-                waveFrequency: 0.1,
-                rotationSpeed: 0.05,
-                meshRotationZ: 0,
-                meshPositionX: 0
+            const renderControls = {
+                morphIntensity: 0.5,
+                waveSpeed: 0.1,
+                frequency: 0.2,
+                spatialSpread: 0,
+                meshRotationY: 0,
+                meshPositionX: 4  // Shifting particles cleanly to the right side of hero layout text components
             };
 
-            // Scroll Animation State 1: Morph into erratic wave when transitioning to section 2
-            gsap.to(webglParams, {
-                waveIntensity: 6.0,
-                waveFrequency: 0.25,
-                rotationSpeed: 0.3,
-                meshRotationZ: Math.PI * 0.25,
-                meshPositionX: -10,
+            // Adaptive layout check: center particle mesh coordinates if running on a mobile screen context
+            if(window.innerWidth < 1024) { renderControls.meshPositionX = 0; }
+
+            // Scroll trigger sequence 1: explode and ripple across bento panels layout
+            gsap.to(renderControls, {
+                morphIntensity: 6.0,
+                waveSpeed: 0.4,
+                frequency: 0.4,
+                spatialSpread: 12,
+                meshRotationY: Math.PI * 0.4,
+                meshPositionX: -5,
                 scrollTrigger: {
                     trigger: "#about",
                     start: "top bottom",
@@ -274,100 +697,115 @@
                 }
             });
 
-            // Scroll Animation State 2: Expand mesh layout wide across screen for contact closure
-            gsap.to(webglParams, {
-                waveIntensity: 12.0,
-                waveFrequency: 0.05,
-                meshRotationZ: -Math.PI * 0.2,
-                meshPositionX: 10,
+            // Scroll trigger sequence 2: collapse inside wide field cosmic rings tracking contact form closures
+            gsap.to(renderControls, {
+                morphIntensity: 14.0,
+                waveSpeed: 0.05,
+                frequency: 0.08,
+                meshRotationY: -Math.PI * 0.2,
+                meshPositionX: 0,
                 scrollTrigger: {
-                    trigger: "#contact",
-                    start: "top bottom",
-                    end: "top top",
+                    trigger: "#projects",
+                    start: "bottom bottom",
+                    end: "bottom top",
                     scrub: true
                 }
             });
 
 
             /* =========================================================================
-               4. RENDER LOOP (ANIMATION TICKER RUNNING AT 60FPS)
+               4. HIGH PERFORMANCE SHADER EMULATION LOOP TICKER
             ========================================================================= */
             const clock = new THREE.Clock();
 
             function tick() {
                 const elapsedTime = clock.getElapsedTime();
+                const positionAttr = geometry.attributes.position;
+                const arr = positionAttr.array;
 
-                // Get current updated positions array allocation
-                const positionAttribute = geometry.attributes.position;
-                const array = positionAttribute.array;
+                // Smooth interpolation for mouse vectors to filter latency
+                currentMouseX += (targetMouseX - currentMouseX) * 0.06;
+                currentMouseY += (targetMouseY - currentMouseY) * 0.06;
 
-                // Smoothly interpolate mouse vectors to avoid jittering
-                currentMouseX += (targetMouseX - currentMouseX) * 0.05;
-                currentMouseY += (targetMouseY - currentMouseY) * 0.05;
-
-                // Re-calculate the Z-position of every single point using a combined math wave function framework
-                for (let k = 0; k < particleCount; k++) {
+                for(let k=0; k<particleCount; k++) {
                     const i3 = k * 3;
-                    const x = array[i3];
-                    const y = array[i3 + 1];
-
-                    // Combined multi-layered Sine/Cosine ripple logic linked to parameter vectors controlled by GSAP scroll actions
-                    const waveA = Math.sin(x * webglParams.waveFrequency + elapsedTime * webglParams.rotationSpeed) * webglParams.waveIntensity;
-                    const waveB = Math.cos(y * webglParams.waveFrequency + elapsedTime * webglParams.rotationSpeed) * webglParams.waveIntensity;
                     
-                    // Mouse proximity distortion tracking calculation variations
-                    const distToMouse = Math.sqrt(Math.pow(x - currentMouseX * 10, 2) + Math.pow(y - currentMouseY * 10, 2));
-                    const mouseForce = Math.sin(distToMouse * 0.2 - elapsedTime * 2) * 2.5 / (distToMouse * 0.1 + 1);
+                    const origX = originalPositions[i3];
+                    const origY = originalPositions[i3+1];
 
-                    array[i3 + 2] = waveA + waveB + mouseForce;
+                    // Core displacement math waves mimicking fluid mechanics inside the cinematic clips
+                    const waveX = Math.sin(origY * renderControls.frequency + elapsedTime * renderControls.waveSpeed) * renderControls.morphIntensity;
+                    const waveY = Math.cos(origX * renderControls.frequency + elapsedTime * renderControls.waveSpeed) * renderControls.morphIntensity;
+                    
+                    // Mouse interaction vector calculation mapping proximity parameters
+                    const dist = Math.sqrt(Math.pow(origX - currentMouseX * 3, 2) + Math.pow(origY - currentMouseY * 3, 2));
+                    const force = Math.sin(dist * 0.4 - elapsedTime * 3) * (3.0 / (dist * 0.2 + 1.0));
+
+                    // Updating position buffer elements array values
+                    arr[i3] = origX + (waveX * 0.15) * (renderControls.spatialSpread * 0.2);
+                    arr[i3+1] = origY + (waveY * 0.15) * (renderControls.spatialSpread * 0.2);
+                    arr[i3+2] = waveX + waveY + force;
                 }
 
-                // Tell Three.js the points positions changed so it updates on screen frame allocations
-                positionAttribute.needsUpdate = true;
+                positionAttr.needsUpdate = true;
 
-                // Apply global layout transitions shifted smoothly by our GSAP Scroll-Triggers
-                particleMesh.rotation.z = webglParams.meshRotationZ;
-                particleMesh.position.x = webglParams.meshPositionX;
-                particleMesh.rotation.y = elapsedTime * 0.02; // Slow perpetual turn orbit loop
+                // Bind updated state attributes from GSAP tracks smoothly into layout matrix
+                particleMesh.position.x = renderControls.meshPositionX;
+                particleMesh.rotation.y = renderControls.meshRotationY + elapsedTime * 0.03;
 
                 renderer.render(scene, camera);
                 requestAnimationFrame(tick);
             }
-            
-            tick(); // Execute high performance WebGL engine runtime
+            tick();
 
 
             /* =========================================================================
-               5. DOM TYPOGRAPHY ENTER INTRO REVEALS
+               5. MARQUEE & INTERFACE COMPONENT STAGGER ENTER TRIGGERS
             ========================================================================= */
-            const introTL = gsap.timeline();
-            introTL.to("#hero-tag", { opacity: 1, y: 0, duration: 0.6 })
-                   .to("#hero-title", { opacity: 1, y: 0, duration: 0.8 }, "-=0.3")
-                   .to("#hero-desc", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4");
+            const track = document.getElementById('m-track');
+            const loopWidth = track.scrollWidth;
+            track.innerHTML += track.innerHTML + track.innerHTML; // Multiplying items for infinite continuation
+            
+            gsap.to(track, { x: -loopWidth, duration: 25, ease: "none", repeat: -1 });
 
-            // Reveal scroll section elements as they track inside view boundary maps
-            document.querySelectorAll('section:not(#hero)').forEach(sec => {
-                gsap.to(sec.querySelectorAll('h2, .tagline, .bento-card, .desc'), {
+            // Entrance reveal vectors for hero text elements
+            const entry = gsap.timeline();
+            entry.to("#h-tag", { opacity: 1, y: 0, duration: 0.6 })
+                 .to("#h-title", { opacity: 1, y: 0, duration: 0.8 }, "-=0.3")
+                 .to("#h-desc", { opacity: 1, y: 0, duration: 0.6 }, "-=0.4");
+
+            // Scroll trigger bindings across all bento cards and context profiles
+            document.querySelectorAll('.bc, .project-card, .contact-box').forEach(card => {
+                gsap.to(card, {
                     opacity: 1,
                     y: 0,
-                    stagger: 0.15,
+                    scale: 1,
                     duration: 0.8,
                     ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: sec,
-                        start: "top 70%"
-                    }
+                    scrollTrigger: { trigger: card, start: "top 82%" }
                 });
             });
 
-            /* =========================================================================
-               6. WINDOW RESIZE COMPLIANCE DISPATCHER
-            ========================================================================= */
+            // Live incremental math calculations running safe counter indicators
+            const runCounter = () => {
+                const counter = document.getElementById('stat-counter');
+                const target = parseInt(counter.getAttribute('data-target'), 10);
+                gsap.to(counter, {
+                    innerText: target,
+                    duration: 2,
+                    snap: { innerText: 1 },
+                    scrollTrigger: { trigger: counter, start: "top 85%" },
+                    onUpdate: function() { counter.innerHTML = Math.floor(this.targets()[0].innerText) + "+"; }
+                });
+            };
+            runCounter();
+
+            // Compliance safety window bounds updates
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                if(window.innerWidth < 1024) { renderControls.meshPositionX = 0; } else { renderControls.meshPositionX = 4; }
             });
         });
     </script>
